@@ -1,0 +1,66 @@
+﻿<Window x:Class="GreenTrail.Forms.Welcome.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GreenTrail.Forms.Welcome"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="450" Width="515" Background="{DynamicResource PrimaryColor}" WindowStyle="None" MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Source/Style/StyleElemets.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Viewbox>
+        <Grid>
+            <Grid.Background>
+                <DynamicResource ResourceKey="PrimaryColor" />
+            </Grid.Background>
+            <StackPanel x:Name="sp_dragMove" Margin="0,0,0,216">
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
+
+                    <Button Click="MinimizeClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_minimaze" Source="/Source/Image/Assets/img_minimaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                    <Button Click="MaximizeClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_maximaze" Source="/Source/Image/Assets/img_maximaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                    <Button Click="CloseClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_close" Source="/Source/Image/Assets/img_close.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <Image Source="/Source/Image/App/flowertree_welcome_window.png" Height="150" Width="200" Margin="0,13,160,83"/>
+            <StackPanel Margin="20,40,20,20">
+                <Label Content="С возвращением" FontSize="24" Foreground="{DynamicResource Text0}" Margin="24,0,0,10"/>
+                <!-- Элементы -->
+                <TextBox Width="270" x:Name="tb_login" Text="Логин" Style="{StaticResource TextBoxInputStyle}" GotFocus="tb_GotFocus" LostFocus="tb_LostFocus" TextChanged="tb_TextChanged"/>
+                <StackPanel Margin="24,0,0,0" Orientation="Horizontal">
+                    <Grid Width="250" Height="30">
+                        <TextBox x:Name="tb_pass" Text="Пароль" Style="{StaticResource TextBoxInputStyle}" GotFocus="tb_GotFocus" LostFocus="tb_LostFocus" TextChanged="tb_TextChanged" Margin="0,0,25,0"/>
+                        <PasswordBox x:Name="pb_pass" Visibility="Hidden" Style="{StaticResource PasswordBoxInputStyle}" LostFocus="pb_LostFocus" PasswordChanged="pb_PasswordChanged" Margin="0,0,25,0"/>
+                    </Grid>
+
+                    <Button Click="show_pass" Style="{StaticResource WindowStateStyle}" HorizontalAlignment="Right">
+                        <Image x:Name="im_pass" Source="/Source/Image/Assets/eye-slash.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                </StackPanel>
+
+               
+
+                <Grid Margin="24,25,24,0">
+                    <CheckBox Foreground="{DynamicResource Gray1}" Content="Запомнить пароль"  x:Name="cb_terms" VerticalAlignment="Center" />
+                    <Button x:Name="btn_forgotPass" Visibility="Visible"  Content="Забыли Пароль?" Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" HorizontalAlignment="Right" Margin="0,0,15,0" Click="btn_forgotPass_Click"/>
+                </Grid>
+
+                <Button x:Name="btn_login" Content="Войти" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Click="btn_login_Click" Opacity="0.6" Margin="0,15,0,20"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label Content="ещё нет аккаунта?" Style="{StaticResource LabelInputStyle}"/>
+                    <Button x:Name="btn_reginWindow" Content="Зарегистрироваться" Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Click="btn_reginWindow_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Viewbox>
+</Window>

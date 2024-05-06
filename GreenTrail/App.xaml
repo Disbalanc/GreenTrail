@@ -1,0 +1,15 @@
+﻿<Application x:Class="GreenTrail.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GreenTrail"
+             StartupUri="/Forms/MainWindow.xaml" >
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Source/Theme/LigthTheme.xaml"/>
+                <!-- подключение файла цветовой темы -->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,96 @@
+﻿<Window x:Class="GreenTrail.Forms.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GreenTrail.Forms"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}" WindowStyle="None" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" PreviewMouseWheel="Window_PreviewMouseWheel">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Source/Style/StyleElemets.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Viewbox>
+        <Grid Height="450" Width="800">
+            <StackPanel x:Name="sp_dragMove" VerticalAlignment="Top" Background="{DynamicResource SecondaryColor}" Panel.ZIndex="100">
+                
+                <Grid>
+                    <Label Content="GreanTrail: Экологическое слежение" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
+                    <Button Click="MinimizeClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_minimaze" Source="/Source/Image/Assets/img_minimaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                    <Button Click="MaximizeClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_maximaze" Source="/Source/Image/Assets/img_maximaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                    <Button Click="CloseClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_close" Source="/Source/Image/Assets/img_close.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                        <Button Click="SettingsClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_settings" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_settings.png"/>
+                        </Button>
+                        <Button Click="LogOutClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_logOut" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_logOut.png"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <Grid Margin="0,40,0,0">
+                <ScrollBar x:Name="scrollBar" HorizontalAlignment="Right" Margin="0,10,0,0" Style="{StaticResource ScrollBar}"/>
+
+                <StackPanel x:Name="StackPanelMain">
+                    <!-- Элементы -->
+                    <Image Height="200" Width="600" Margin="0,20,0,0" Source="/Source/Image/App/img_MainWin.png"/>
+                    <StackPanel Margin="100,0,99,20">
+                        <StackPanel>
+                            <Label Content="Меню" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Left"/>
+                            <UniformGrid Columns="4">
+                                <Button Click="DataEcologicalClick" Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50">
+                                    <StackPanel>
+                                        <Image Source="/Source/Image/Assets/img_dataEcological.png" Style="{StaticResource WindowStateStyleImage}"/>
+                                        <Label Content="Данные экологии"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Click="MapClick" Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50">
+                                    <StackPanel>
+                                        <Image Source="/Source/Image/Assets/img_map.png" Style="{StaticResource WindowStateStyleImage}"/>
+                                        <Label Content="Карта"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Click="ExportClick" Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50">
+                                    <StackPanel>
+                                        <Image Source="/Source/Image/Assets/img_export.png" Style="{StaticResource WindowStateStyleImage}"/>
+                                        <Label Content="Экспорт репортов"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Click="AddClick" Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50">
+                                    <StackPanel>
+                                        <Image Source="/Source/Image/Assets/img_addData.png" Style="{StaticResource WindowStateStyleImage}"/>
+                                        <Label Content="Добавление"/>
+                                    </StackPanel>
+                                </Button>
+                            </UniformGrid>
+                        </StackPanel>
+
+                        <StackPanel Margin="0,20,0,0">
+                            <Label Content="Экологические новости" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Left"/>
+
+                        </StackPanel>
+
+                        <StackPanel Margin="0,30,0,0">
+                            <Label Content="Экологические мероприятия" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Left"/>
+
+                        </StackPanel>
+                        <StackPanel Margin="0,20,0,0">
+                            <Label Content="Экологические Советы" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Left"/>
+
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</Window>
