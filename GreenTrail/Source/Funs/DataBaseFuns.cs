@@ -22,15 +22,16 @@ namespace GreenTrail.Source.Funs
             try
             {
                 Users user = GreanTrailEntities.GetContext().Users.FirstOrDefault(u => u.login == username && u.password == password);
-                if (user == null)
+                if (user != null)
                 {
-                    MessageBox.Show("Упс, ваш аккаунт не найден!","Упс!",MessageBoxButton.OK,MessageBoxImage.Information);
-                    return;
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    window.Close();
                 }
-
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
-                window.Close();
+                else
+                {
+                    MessageBox.Show("Упс, ваш аккаунт не найден!", "Упс!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             catch (Exception ex)
             {
@@ -45,7 +46,13 @@ namespace GreenTrail.Source.Funs
                 // Создание нового объекта пользователя
                 Users user = new Users
                 {
-
+                    full_name = fullName,
+                    email = email,
+                    login = login,
+                    phoneNumber = phoneNumber,
+                    dateOfBirth = dateOfBirth,
+                    address = address,
+                    password = password
                 };
 
                 // Добавление нового пользователя в контекст базы данных

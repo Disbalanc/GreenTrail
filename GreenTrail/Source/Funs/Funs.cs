@@ -186,5 +186,10 @@ namespace GreenTrail.Source.Funs
         {
 
         }
+
+        public static void Sample()
+        {
+
+        }
     }
 }

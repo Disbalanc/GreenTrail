@@ -22,6 +22,36 @@ namespace GreenTrail.Forms.Data.ViewData
         public ViewDataWindow()
         {
             InitializeComponent();
+
+            dg_sample.ItemsSource = GreanTrailEntities.GetContext().Sample.ToList();
+            
+
+
+        }
+
+        private void createPollution()
+        {
+            cartesianChart.Series = new SeriesCollection
+                {
+                    new LineSeries
+                    {
+                        Title = "Результат",
+                        Values = query.Select(q => q.Result)
+                    }
+                };
+
+            // Создание осей
+            cartesianChart.AxisX = new Axis
+            {
+                Title = "Пробы",
+                Labels = query.Select(q => q.FullName)
+            };
+
+            cartesianChart.AxisY = new Axis
+            {
+                Title = "Норма",
+                LabelFormatter = value => value.ToString("N2")
+            };
         }
     }
 }

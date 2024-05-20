@@ -5,8 +5,84 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenTrail.Forms.Data.ViewData"
         mc:Ignorable="d"
-        Title="ViewDataWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="ViewDataWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Source/Style/StyleElemets.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Viewbox>
+        <Grid Height="450" Width="800">
+            <TabControl Margin="10 10 10 10" FontWeight="DemiBold" FontSize="18" Style="{StaticResource TabControl}">
+                <TabItem Header="Пробы">
+                    <Grid Height="350" Width="700">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <DataGrid Grid.Row="0" AutoGenerateColumns="False" x:Name="dg_sample">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Сборщик пробы" Binding="{Binding Users.full_name}"/>
+                                <DataGridTextColumn Header="регион" Binding="{Binding Region.name}"/>
+                                <DataGridTextColumn Header="Координаты региона" Binding="{Binding Region.geographical_coordinates}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="1" x:Name="btn_createSamle" Content="Создать пробу" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Лаборатория">
+                    <Grid Height="350" Width="700">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <DataGrid Grid.Row="0" AutoGenerateColumns="False" x:Name="dg_contemplation">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="" Binding="{Binding Users.full_name}"/>
+                                <DataGridTextColumn Header="регион" Binding="{Binding Region.name}"/>
+                                <DataGridTextColumn Header="Координаты региона" Binding="{Binding Region.geographical_coordinates}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="1" x:Name="btn_createContemplation" Content="Создать Иследование" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                    </Grid>
+                </TabItem>
+                
+                <TabItem Header="Загрязнения">
+                    <Grid Height="350" Width="700">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="dg_pollution">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Сборщик пробы" Binding="{Binding Users.full_name}"/>
+                                <DataGridTextColumn Header="регион" Binding="{Binding Region.name}"/>
+                                <DataGridTextColumn Header="Координаты региона" Binding="{Binding Region.geographical_coordinates}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createPollution" Content="Создать пробу" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Мероприятия">
+                    <TextBlock Text="Содержимое вкладки 3"/>
+                </TabItem>
+
+                <TabItem Header="Места">
+                    <TextBlock Text="Содержимое вкладки 4"/>
+                </TabItem>
+
+                <TabItem Header="Пользователи">
+                    <TextBlock Text="Содержимое вкладки 5"/>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Viewbox>
 </Window>
