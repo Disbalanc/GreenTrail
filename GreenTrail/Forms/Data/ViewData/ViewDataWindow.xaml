@@ -38,17 +38,20 @@
                     <Grid Height="350" Width="700">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3*"/>
+                            <RowDefinition Height="3*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <DataGrid Grid.Row="0" AutoGenerateColumns="False" x:Name="dg_contemplation">
+                        <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="dg_contemplation">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="" Binding="{Binding Users.full_name}"/>
-                                <DataGridTextColumn Header="регион" Binding="{Binding Region.name}"/>
-                                <DataGridTextColumn Header="Координаты региона" Binding="{Binding Region.geographical_coordinates}"/>
+                                <DataGridTextColumn Header="Лаборант" Binding="{Binding Users.full_name}"/>
+                                <DataGridTextColumn Header="Проба" Binding="{Binding id_sample}"/>
+                                <DataGridTextColumn Header="Тип на ислледование" Binding="{Binding type_contemplation}"/>
+                                <DataGridTextColumn Header="Норма" Binding="{Binding Norm.name}"/>
+                                <DataGridTextColumn Header="Результат" Binding="{Binding result}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="1" x:Name="btn_createContemplation" Content="Создать Иследование" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                        <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createContemplation" Content="Создать Иследование" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
                     </Grid>
                 </TabItem>
                 
@@ -62,7 +65,10 @@
 
                         <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="dg_pollution">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Сборщик пробы" Binding="{Binding Users.full_name}"/>
+                                <DataGridTextColumn Header="Иследование" Binding="{Binding Contemplation.id_contemplation}"/>
+                                <DataGridTextColumn Header="Уровень" Binding="{Binding Pollution.levels}"/>
+                                <DataGridTextColumn Header="Источник" Binding="{Binding Pollution.source}"/>
+                                <DataGridTextColumn Header="Время фиксакции" Binding="{Binding Pollution.data_time}"/>
                                 <DataGridTextColumn Header="регион" Binding="{Binding Region.name}"/>
                                 <DataGridTextColumn Header="Координаты региона" Binding="{Binding Region.geographical_coordinates}"/>
                             </DataGrid.Columns>
