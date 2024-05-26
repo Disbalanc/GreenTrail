@@ -3,10 +3,244 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GreenTrail.Forms.Data.ViewData"
+        xmlns:local="clr-namespace:GreenTrail.Forms.Data.ViewData" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="ViewDataWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="ViewDataWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}" WindowStyle="None" MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Source/Style/StyleElemets.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Viewbox>
+        <Grid Height="450" Width="800">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="12*"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="sp_dragMove" VerticalAlignment="Center" Background="{DynamicResource SecondaryColor}" Panel.ZIndex="100" Height="34">
+
+            <Grid>
+                <Label Content="GreanTrail: Экологическое слежение" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
+                    <Button Click="MinimizeClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_minimaze" Source="/Source/Image/Assets/img_minimaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                    <Button Click="MaximizeClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_maximaze" Source="/Source/Image/Assets/img_maximaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                    <Button Click="CloseClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_close" Source="/Source/Image/Assets/img_close.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                        <Button Click="SettingsClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_settings" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_settings.png"/>
+                        </Button>
+                    </StackPanel>
+            </Grid>
+        </StackPanel>
+        <TabControl Grid.Row="1" Margin="0,10,0,0">
+            <TabItem x:Name="ti_Employees" Header="Сотрудники" Background="{DynamicResource SecondaryColor}">
+                    <Grid Background="{DynamicResource PrimaryColor}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+                            <TextBlock>Фильтр:</TextBlock>
+                            <TextBox x:Name="FilterEmployeesTextBox" Width="100"  TextChanged="EmployeesFilterTextBoxSelectionChanged"/>
+                            <TextBlock>Сортировка:</TextBlock>
+                            <ComboBox x:Name="SortEmployeesComboBox" SelectionChanged="EmployeesSortComboBoxSelectionChanged"/>
+                        </StackPanel>
+                        <DataGrid Grid.Row="1" Background="{DynamicResource SecondaryColor}" AutoGenerateColumns="False" x:Name="dg_employees">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ФИО" Width="100">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="full_name" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Email" Width="100">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="email" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Дата рождения" Width="100">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="dateOfBirth" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Телефонный номер">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="phoneNumber" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="адресс" Width="100">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="address" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Роль" Width="100">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="role.name" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createEmployees" Content="Создать пробу" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                    </Grid>
+                </TabItem>
+            <TabItem x:Name="ti_samples" Header="Пробы" Background="{DynamicResource SecondaryColor}">
+                <Grid Background="{DynamicResource PrimaryColor}">
+                    <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+                            <TextBlock>Фильтр:</TextBlock>
+                            <TextBox x:Name="FilterSampleTextBox" Width="100" TextChanged="SampleFilterTextBoxSelectionChanged"/>
+                            <TextBlock>Сортировка:</TextBlock>
+                            <ComboBox x:Name="SortSampleComboBox" SelectionChanged="SampleSortComboBoxSelectionChanged"/>
+                        </StackPanel>
+
+                        <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="dg_sample" Background="{DynamicResource SecondaryColor}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Сборщик пробы" Binding="{Binding Users.full_name}"/>
+                            <DataGridTextColumn Header="регион" Binding="{Binding Region.name}"/>
+                            <DataGridTextColumn Header="Координаты региона" Binding="{Binding Region.geographical_coordinates}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createSamle" Content="Создать пробу" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="ti_sampleStudies" Header="Изучения проб" Background="{DynamicResource SecondaryColor}">
+                <Grid Background="{DynamicResource PrimaryColor}">
+                    <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                        <StackPanel Grid.Column="0" Margin="10" Orientation="Horizontal">
+                            <TextBlock>Фильтр:</TextBlock>
+                            <ComboBox x:Name="StudyFilterComboBox" SelectionChanged="StudyFilterComboBoxSelectionChanged" MinWidth="100"/>
+                            <TextBlock>Сортировка:</TextBlock>
+                            <ComboBox x:Name="StudySortComboBox" SelectionChanged="StudySortComboBoxSelectionChanged"/>
+                        </StackPanel>
+                        <lvc:CartesianChart Grid.Row="1" x:Name="StudyChart"/>
+                        <DataGrid Grid.Row="2" AutoGenerateColumns="False" x:Name="dg_contemplation" Background="{DynamicResource SecondaryColor}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Лаборант" Binding="{Binding Users.full_name}"/>
+                            <DataGridTextColumn Header="Проба" Binding="{Binding id_sample}"/>
+                            <DataGridTextColumn Header="Тип на ислледование" Binding="{Binding type_contemplation}"/>
+                            <DataGridTextColumn Header="Норма" Binding="{Binding Norm.name}"/>
+                            <DataGridTextColumn Header="Результат" Binding="{Binding result}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="3" x:Name="btn_createContemplation" Content="Создать Иследование" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="ti_Pollution" Header="Загрязнения" Background="{DynamicResource SecondaryColor}">
+                <Grid Background="{DynamicResource PrimaryColor}">
+                    <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                        <StackPanel Grid.Column="0" Margin="10" Orientation="Horizontal">
+                            <TextBlock>Фильтр:</TextBlock>
+                            <ComboBox x:Name="PollutionFilterComboBox" SelectionChanged="PollutionFilterComboBoxSelectionChanged"  MinWidth="100"/>
+                            <TextBlock>Сортировка:</TextBlock>
+                            <ComboBox x:Name="PollutionSortComboBox" SelectionChanged="PollutionSortComboBoxSelectionChanged"/>
+                        </StackPanel>
+                        <lvc:CartesianChart Grid.Row="1" x:Name="PollutionChart"/>
+
+                        <DataGrid Grid.Row="2" AutoGenerateColumns="False" x:Name="dg_pollution"  Background="{DynamicResource SecondaryColor}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Иследование" Binding="{Binding Contemplation.id_contemplation}"/>
+                            <DataGridTextColumn Header="Уровень" Binding="{Binding Pollution.levels}"/>
+                            <DataGridTextColumn Header="Источник" Binding="{Binding Pollution.source}"/>
+                            <DataGridTextColumn Header="Время фиксакции" Binding="{Binding Pollution.data_time}"/>
+                            <DataGridTextColumn Header="регион" Binding="{Binding Region.name}"/>
+                            <DataGridTextColumn Header="Координаты региона" Binding="{Binding Region.geographical_coordinates}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="3" x:Name="btn_createPollution" Content="Создать загрязнение" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="ti_news" Header="Новости" Background="{DynamicResource SecondaryColor}">
+                    <Grid Background="{DynamicResource SecondaryColor}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+                            <TextBlock>Фильтр:</TextBlock>
+                            <TextBox x:Name="FilterNewsTextBox" Width="100" TextChanged="NewsFilterTextBoxSelectionChanged"/>
+                            <TextBlock>Сортировка:</TextBlock>
+                            <ComboBox x:Name="SortNewsComboBox" SelectionChanged="NewsSortComboBoxSelectionChanged"/>
+                        </StackPanel>
+                        <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="dg_news"  Background="{DynamicResource SecondaryColor}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Заголовок" Binding="{Binding heading}"/>
+                                <DataGridTextColumn Header="Текст" Binding="{Binding text}" Width="300"/>
+                                <DataGridTextColumn Header="Время поста" Binding="{Binding date_time}"/>
+                                <DataGridTextColumn Header="Редактор" Binding="{Binding Users.full_name}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createNews" Content="Создать новость" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                    </Grid>
+            </TabItem>
+            <TabItem x:Name="ti_Events" Header="Мероприятия" Background="{DynamicResource SecondaryColor}">
+                    <Grid Background="{DynamicResource SecondaryColor}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+                            <TextBlock>Фильтр:</TextBlock>
+                            <TextBox x:Name="FilterEventTextBox" Width="100" TextChanged="EventsFilterTextBoxSelectionChanged"/>
+                           
+                        </StackPanel>
+                        <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="dg_events"  Background="{DynamicResource SecondaryColor}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Binding="{Binding Event.name}" Width="200"/>
+                                <DataGridTextColumn Header="Время мероприятия" Binding="{Binding Event.date_time}"/>
+                                <DataGridTextColumn Header="Регион" Binding="{Binding Regin.name}"/>
+                                <DataGridTextColumn Header="Местоположение" Binding="{Binding Region.geographical_coordinates}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createEvents" Content="Создать мероприятие" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="ti_Region" Header="Регионы" Background="{DynamicResource SecondaryColor}">
+                    <Grid Background="{DynamicResource SecondaryColor}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+                            <TextBlock>Фильтр:</TextBlock>
+                            <TextBox x:Name="FilterRegionTextBox" Width="100"  TextChanged="RegionFilterTextBoxSelectionChanged"/>
+                           
+                        </StackPanel>
+                        <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="dg_region" Background="{DynamicResource SecondaryColor}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Регион" Binding="{Binding name}" Width="100"/>
+                                <DataGridTextColumn Header="Местоположение" Binding="{Binding geographical_coordinates}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createRegion" Content="Создать регион" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                    </Grid>
+                </TabItem>
+
+            </TabControl>
+
     </Grid>
+    </Viewbox>
 </Window>

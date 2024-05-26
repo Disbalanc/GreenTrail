@@ -7,8 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Source/Theme/LigthTheme.xaml"/>
                 <!-- подключение файла цветовой темы -->
+                <ResourceDictionary Source="/Source/Theme/LigthTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

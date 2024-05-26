@@ -121,11 +121,29 @@ namespace GreenTrail.Forms
 
         }
 
-        private void AddClick(object sender, RoutedEventArgs e)
+        private void AddSample_Click(object sender, RoutedEventArgs e)
         {
-            AddDataWindow addDataWindow = new AddDataWindow();
-            addDataWindow.Show();
+
         }
 
+        private void AddRegion_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddContemplation_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddNorm_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

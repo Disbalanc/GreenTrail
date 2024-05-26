@@ -23,5 +23,10 @@ namespace GreenTrail.Forms
         {
             InitializeComponent();
         }
+
+        public void Maps()
+        {
+
+        }
     }
 }

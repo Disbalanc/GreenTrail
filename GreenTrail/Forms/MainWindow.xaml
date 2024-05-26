@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenTrail.Forms"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}" WindowStyle="None" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" PreviewMouseWheel="Window_PreviewMouseWheel">
+        Title="MainWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}" MouseDown="Window_MouseDown" WindowStyle="None" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" PreviewMouseWheel="Window_PreviewMouseWheel">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -66,11 +66,20 @@
                                         <Label Content="Экспорт репортов"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Click="AddClick" Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50">
+                                <Button Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50">
                                     <StackPanel>
                                         <Image Source="/Source/Image/Assets/img_addData.png" Style="{StaticResource WindowStateStyleImage}"/>
                                         <Label Content="Добавление"/>
                                     </StackPanel>
+                                    <Button.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Пробы" Click="AddSample_Click" />
+                                            <MenuItem Header="Регионы" Click="AddRegion_Click" />
+                                            <MenuItem Header="Изучение проб" Click="AddContemplation_Click" />
+                                            <MenuItem Header="Нормы" Click="AddNorm_Click" />
+                                            <MenuItem Header="Пользователи" Click="AddUser_Click" />
+                                        </ContextMenu>
+                                    </Button.ContextMenu>
                                 </Button>
                             </UniformGrid>
                         </StackPanel>

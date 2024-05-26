@@ -45,8 +45,16 @@ namespace GreenTrail.Source.Funs
                 // Создание нового объекта пользователя
                 Users user = new Users
                 {
-
+                    full_name = fullName,
+                    email = email,
+                    login = login,
+                    dateOfBirth = dateOfBirth,
+                    phoneNumber = phoneNumber,
+                    address = address,
+                    password = password,
+                    id_roles = 3
                 };
+                
 
                 // Добавление нового пользователя в контекст базы данных
                 GreanTrailEntities.GetContext().Users.Add(user);

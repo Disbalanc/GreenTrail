@@ -119,8 +119,8 @@ namespace GreenTrail.Forms.Welcome
 
         private void show_pass(object sender, RoutedEventArgs e)
         {
-            Uri imageUriSlash = new Uri("G:\\VS\\GreenTrail\\GreenTrail\\Source\\Image\\Assets\\eye-slash.png", UriKind.Absolute);
-            Uri imageUri = new Uri("G:\\VS\\GreenTrail\\GreenTrail\\Source\\Image\\Assets\\eye.png", UriKind.Absolute);
+            Uri imageUriSlash = new Uri("G:\\VS\\GreenTrail\\GreenTrail\\Source\\Image\\Assets\\eye-slash.png");
+            Uri imageUri = new Uri("C:\\VS\\GreenTrail\\GreenTrail\\Source\\Image\\Assets\\eye.png");
 
             if (_isShowingPassword)
             {
