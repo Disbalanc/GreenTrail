@@ -5,8 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenTrail.Forms.Data.AddData"
         mc:Ignorable="d"
-        Title="AddDataWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="AddDataWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}" WindowStyle="None" MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Source/Style/StyleElemets.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Viewbox>
+        <StackPanel Height="450" Width="800">
+            <StackPanel x:Name="sp_dragMove" VerticalAlignment="Top" Background="{DynamicResource SecondaryColor}" Panel.ZIndex="100">
+
+                <Grid>
+                    <Label Content="GreanTrail: Экологическое слежение" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
+                        <Button Click="MinimizeClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_minimaze" Source="/Source/Image/Assets/img_minimaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                        </Button>
+                        <Button Click="MaximizeClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_maximaze" Source="/Source/Image/Assets/img_maximaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                        </Button>
+                        <Button Click="CloseClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_close" Source="/Source/Image/Assets/img_close.png" Style="{StaticResource WindowStateStyleImage}"/>
+                        </Button>
+                        <Button Click="SettingsClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_settings" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_settings.png"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <TextBlock x:Name="tblock_entity" Text="Сущность: " />
+
+                <TextBlock Name="SampleRegionTextBlock" Text="Регион:" Visibility="Collapsed" Margin="10,10,0,0" />
+                <ComboBox Name="SampleRegionComboBox" Visibility="Collapsed" Margin="10,0,0,0" />
+                <Button Name="AddRegionButton" Content="Добавить регион" Visibility="Collapsed" Margin="10,0,0,0" Click="AddRegionButton_Click" />
+
+                <TextBlock Name="ContemplationSampleTextBlock" Text="Образец:" Visibility="Collapsed" Margin="10,10,0,0" />
+                <ComboBox Name="ContemplationSampleComboBox" Visibility="Collapsed" Margin="10,0,0,0" />
+                <TextBlock Name="ContemplationNormTextBlock" Text="Норма:" Visibility="Collapsed" Margin="10,10,0,0" />
+                <ComboBox Name="ContemplationNormComboBox" Visibility="Collapsed" Margin="10,0,0,0" />
+                <Button Name="AddNormButton" Content="Добавить норму" Visibility="Collapsed" Margin="10,0,0,0" Click="AddNormButton_Click" />
+
+                <Button Name="AddButton" Content="Добавить" Margin="10,0,0,0" Click="AddButton_Click" />
+            </StackPanel>
+        </StackPanel>
+    </Viewbox>
 </Window>

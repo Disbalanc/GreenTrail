@@ -177,4 +177,21 @@
         <Setter Property="Width" Value="10" />
     </Style>
 
+    <!-- TabControl  -->
+    <Style x:Key="TabControl" TargetType="TabControl">
+        <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Black}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Black}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="10"/>
+    </Style>
+
+    <Style TargetType="TabItem">
+        <Setter Property="Background" Value="{DynamicResource AdditionalColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Black}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Black}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
 </ResourceDictionary>

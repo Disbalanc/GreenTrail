@@ -1,0 +1,31 @@
+﻿<Window x:Class="GreenTrail.Forms.Data.AddData.AddNormDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GreenTrail.Forms.Data.AddData"
+        mc:Ignorable="d"
+             Title="Добавление нормы" Height="250" Width="400" Background="{DynamicResource PrimaryColor}" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Source/Style/StyleElemets.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock Text="Название:" />
+            <TextBox Name="NameTextBox" />
+
+            <TextBlock Text="Норма:" />
+            <TextBox Name="NormaTextBox" />
+            
+            <TextBlock Text="Тип нормы:" />
+            <ComboBox Name="TypeNormComboBox" />
+
+            <Button Name="OkButton" Content="OK" Margin="10,0,0,0" Click="OkButton_Click" />
+            <Button Name="CancelButton" Content="Отмена" Margin="10,0,0,0" Click="CancelButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

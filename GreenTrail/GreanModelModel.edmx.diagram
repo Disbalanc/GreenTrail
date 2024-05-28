@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ce796adf86674201aa8101ddf5132935" Name="Diagram1">
+        <EntityTypeShape EntityType="spirkin_kpModel.Event" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.Event_Region" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.News" Width="1.5" PointX="6" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.Norm" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.Organization" Width="1.5" PointX="3.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.Organization_Event" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.Pollution" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.Region" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.Region_Pollution" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.Roles" Width="1.5" PointX="1.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.Sample" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.Type_Examination" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.Type_organization" Width="1.5" PointX="1.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="spirkin_kpModel.User" Width="1.5" PointX="3.75" PointY="10.25" IsExpanded="true" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Event_Region_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Organization_Event_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Event_Region_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_News_User" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Norm_Sample" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Norm_Type_Examination" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Organization_Type_organization" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Organization_Event_Organization" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Pollution_Sample" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Region_Pollution_Pollution" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Region_Pollution_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Sample_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_User_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Sample_Type_Examination" ManuallyRouted="false" />
+        <AssociationConnector Association="spirkin_kpModel.FK_Sample_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

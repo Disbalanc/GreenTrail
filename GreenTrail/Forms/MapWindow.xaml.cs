@@ -22,9 +22,11 @@ namespace GreenTrail.Forms
         public MapWindow()
         {
             InitializeComponent();
+
+            SetMaps();
         }
 
-        public void Maps()
+        public void SetMaps()
         {
 
         }

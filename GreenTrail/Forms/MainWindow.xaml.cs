@@ -123,27 +123,38 @@ namespace GreenTrail.Forms
 
         private void AddSample_Click(object sender, RoutedEventArgs e)
         {
-
+            AddDataWindow addDataWindow = new AddDataWindow();
+            addDataWindow.table = "Образец";
+            addDataWindow.Show();
+            this.Close();
         }
 
         private void AddRegion_Click(object sender, RoutedEventArgs e)
         {
-
+            AddRegionDialog addRegionDialog = new AddRegionDialog();
+            addRegionDialog.ShowDialog();
         }
 
         private void AddContemplation_Click(object sender, RoutedEventArgs e)
         {
-
+            AddDataWindow addDataWindow = new AddDataWindow();
+            addDataWindow.table = "Изучение пробы";
+            addDataWindow.Show();
+            this.Close();
         }
 
         private void AddNorm_Click(object sender, RoutedEventArgs e)
         {
-
+            AddNormDialog addNormDialog = new AddNormDialog();
+            addNormDialog.ShowDialog();
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-
+            AddDataWindow addDataWindow = new AddDataWindow();
+            addDataWindow.table = "Пользователи";
+            addDataWindow.Show();
+            this.Close();
         }
     }
 }
