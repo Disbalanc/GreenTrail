@@ -1,4 +1,5 @@
 ﻿using GreenTrail.Forms.Data.AddData;
+using GreenTrail.Forms.Data.ExportData;
 using GreenTrail.Forms.Data.ViewData;
 using GreenTrail.Forms.Settings;
 using GreenTrail.Source.Funs;
@@ -105,6 +106,8 @@ namespace GreenTrail.Forms
             this.Close();
         }
 
+
+        // Просмотр
         private void DataEcologicalClick(object sender, RoutedEventArgs e)
         {
             ViewDataWindow viewDataWindow = new ViewDataWindow();
@@ -112,6 +115,8 @@ namespace GreenTrail.Forms
             this.Close();
         }
 
+
+        // Карта
         private void MapClick(object sender, RoutedEventArgs e)
         {
             MapWindow mapWindow = new MapWindow();
@@ -119,11 +124,8 @@ namespace GreenTrail.Forms
             this.Close();
         }
 
-        private void ExportClick(object sender, RoutedEventArgs e)
-        {
 
-        }
-
+        // Добавление
         private void AddSample_Click(object sender, RoutedEventArgs e)
         {
             AddDataWindow addDataWindow = new AddDataWindow();
@@ -157,6 +159,32 @@ namespace GreenTrail.Forms
             AddDataWindow addDataWindow = new AddDataWindow();
             addDataWindow.table = "Пользователи";
             addDataWindow.Show();
+            this.Close();
+        }
+
+
+        //Экспорт
+        private void ExportExel_Click(object sender, RoutedEventArgs e)
+        {
+            ExportDataWindow exportDataWindow = new ExportDataWindow();
+            exportDataWindow.ExportType = "Exel";
+            exportDataWindow.Show();
+            this.Close();
+        }
+
+        private void ExportWord_Click(object sender, RoutedEventArgs e)
+        {
+            ExportDataWindow exportDataWindow = new ExportDataWindow();
+            exportDataWindow.ExportType = "Word";
+            exportDataWindow.Show();
+            this.Close();
+        }
+
+        private void ExportPDF_Click(object sender, RoutedEventArgs e)
+        {
+            ExportDataWindow exportDataWindow = new ExportDataWindow();
+            exportDataWindow.ExportType = "PDF";
+            exportDataWindow.Show();
             this.Close();
         }
     }

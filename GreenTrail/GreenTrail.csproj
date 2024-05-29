@@ -112,6 +112,9 @@
       <DependentUpon>AddRegionDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\Data\DataClass.cs" />
+    <Compile Include="Forms\Data\ExportData\ExportDataWindow.xaml.cs">
+      <DependentUpon>ExportDataWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Data\ViewData\ViewDataWindow.xaml.cs">
       <DependentUpon>ViewDataWindow.xaml</DependentUpon>
     </Compile>
@@ -189,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Data\AddData\AddRegionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Data\ExportData\ExportDataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -305,7 +312,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\Data\ExportData\" />
     <Folder Include="Source\Fonts\" />
     <Folder Include="Source\Image\User\" />
   </ItemGroup>

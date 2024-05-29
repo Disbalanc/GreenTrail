@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -25,6 +26,8 @@ namespace GreenTrail.Forms.Data.AddData
     public partial class AddDataWindow : Window
     {
         public string table { get; set; }
+
+        private double _verticalOffset;
 
         private GreanTrailEntities _context = new GreanTrailEntities();
 
@@ -60,9 +63,42 @@ namespace GreenTrail.Forms.Data.AddData
             this.Close();
         }
 
-        public AddDataWindow()
+    private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        // Вычисление высоты пустого пространства
+        double emptySpaceHeight = scrollBar.ActualHeight - scrollBar.ViewportSize;
+
+        // Установка максимального значения прокрутки
+        scrollBar.Maximum = StackPanelMain.ActualHeight - scrollBar.ViewportSize - emptySpaceHeight;
+    }
+
+    private void ScrollBar_Scroll(object sender, ScrollEventArgs e)
+    {
+        // Обновление вертикального смещения
+        _verticalOffset = e.NewValue;
+
+        // Применение вертикального смещения к контенту
+        StackPanelMain.Margin = new Thickness(0, -_verticalOffset, 0, 0);
+    }
+
+    private void Window_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        // Обновление вертикального смещения
+        _verticalOffset -= e.Delta / 5;
+
+        // Ограничение вертикального смещения максимальным и минимальным значениями
+        _verticalOffset = Math.Min(Math.Max(_verticalOffset, scrollBar.Minimum), scrollBar.Maximum);
+
+        // Применение вертикального смещения к StackPanel
+        StackPanelMain.Margin = new Thickness(0, -_verticalOffset, 0, 0);
+    }
+
+    public AddDataWindow()
         {
             InitializeComponent();
+
+            // Обработчик события прокрутки для ScrollBar
+            scrollBar.Scroll += ScrollBar_Scroll;
         }
 
         private void Entity_SelectionChanged()
@@ -350,6 +386,12 @@ namespace GreenTrail.Forms.Data.AddData
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Entity_SelectionChanged();
+
+            // Вычисление высоты пустого пространства
+            double emptySpaceHeight = scrollBar.ActualHeight - scrollBar.ViewportSize;
+
+            // Установка максимального значения прокрутки
+            scrollBar.Maximum = StackPanelMain.ActualHeight - scrollBar.ViewportSize - emptySpaceHeight;
         }
     }
 }

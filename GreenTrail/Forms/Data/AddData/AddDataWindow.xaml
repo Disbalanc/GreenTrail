@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenTrail.Forms.Data.AddData"
         mc:Ignorable="d"
-        Title="AddDataWindow" Height="950" Width="1080" Background="{DynamicResource PrimaryColor}" WindowStyle="None" MouseDown="Window_MouseDown" Loaded="Window_Loaded">
+        Title="AddDataWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}" SizeChanged="Window_SizeChanged" PreviewMouseWheel="Window_PreviewMouseWheel" WindowStyle="None" MouseDown="Window_MouseDown" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,9 +14,8 @@
         </ResourceDictionary>
     </Window.Resources>
     <Viewbox>
-        <StackPanel Height="450" Width="800">
+        <Grid Height="450" Width="800">
             <StackPanel x:Name="sp_dragMove" VerticalAlignment="Top" Background="{DynamicResource SecondaryColor}" Panel.ZIndex="100">
-
                 <Grid>
                     <Label Content="GreanTrail: Экологическое слежение" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Center"/>
                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
@@ -38,7 +37,9 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <StackPanel Margin="10">
+            <ScrollBar x:Name="scrollBar" HorizontalAlignment="Right" Margin="0,10,0,0" Style="{StaticResource ScrollBar}"/>
+            <StackPanel Margin="10,40,10,0" x:Name="StackPanelMain">
+
                 <TextBlock x:Name="tblock_entity" Text="Сущность: " Style="{StaticResource TextBlockStyle}"/>
                 <TextBlock Name="SampleArticulTextBlock" Text="Артикуль пробы:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
                 <TextBox x:Name="SampleArticulTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
@@ -62,21 +63,21 @@
                 <TextBox x:Name="UserFullNameTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
                 <TextBlock Name="UserLoginTextBlock" Text="Логин:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
                 <TextBox x:Name="UserLoginTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
-                <TextBlock Name="UserPassTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBlock Name="UserPassTextBlock" Text="Пароль:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
                 <TextBox x:Name="UserPassTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
-                <TextBlock x:Name="UserRolesTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}" />
+                <TextBlock x:Name="UserRolesTextBlock" Text="Роль:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}" />
                 <ComboBox x:Name="UserRolesComboBox" Visibility="Collapsed" Style="{StaticResource ComboBoxStyle}" />
-                <TextBlock Name="UserDateOfBirthTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBlock Name="UserDateOfBirthTextBlock" Text="Дата рождения:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
                 <TextBox x:Name="UserDateOfBirthTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
-                <TextBlock Name="UserPhoneNumberTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}" />
+                <TextBlock Name="UserPhoneNumberTextBlock" Text="Телефонный номер:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}" />
                 <TextBox x:Name="UserPhoneNumberTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
-                <TextBlock Name="UserAddressTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBlock Name="UserAddressTextBlock" Text="Адресс:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
                 <TextBox x:Name="UserAddressTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
-                <TextBlock Name="UserEmailTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBlock Name="UserEmailTextBlock" Text="Почта:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
                 <TextBox x:Name="UserEmailTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
 
                 <Button x:Name="AddButton" Content="Добавить" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Click="AddButton_Click" />
             </StackPanel>
-        </StackPanel>
+        </Grid>
     </Viewbox>
 </Window>
