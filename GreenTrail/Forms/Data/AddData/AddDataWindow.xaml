@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenTrail.Forms.Data.AddData"
         mc:Ignorable="d"
-        Title="AddDataWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}" WindowStyle="None" MouseDown="Window_MouseDown">
+        Title="AddDataWindow" Height="950" Width="1080" Background="{DynamicResource PrimaryColor}" WindowStyle="None" MouseDown="Window_MouseDown" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -32,23 +32,50 @@
                         <Button Click="SettingsClick" Style="{StaticResource WindowStateStyle}">
                             <Image x:Name="i_settings" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_settings.png"/>
                         </Button>
+                        <Button Click="LogOutClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_logOut" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_logOut.png"/>
+                        </Button>
                     </StackPanel>
                 </Grid>
             </StackPanel>
             <StackPanel Margin="10">
-                <TextBlock x:Name="tblock_entity" Text="Сущность: " />
+                <TextBlock x:Name="tblock_entity" Text="Сущность: " Style="{StaticResource TextBlockStyle}"/>
+                <TextBlock Name="SampleArticulTextBlock" Text="Артикуль пробы:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox x:Name="SampleArticulTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
+                <TextBlock Name="SampleTypeTextBlock" Text="Тип пробы:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <ComboBox Name="SampleTypeComboBox" Visibility="Collapsed" Style="{StaticResource ComboBoxStyle}" />
+                <TextBlock Name="SampleRegionTextBlock" Text="Регион:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <ComboBox Name="SampleRegionComboBox" Visibility="Collapsed" Style="{StaticResource ComboBoxStyle}" />
+                <Button Name="AddRegionButton" Content="Добавить регион" Visibility="Collapsed" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Click="AddRegionButton_Click" />
 
-                <TextBlock Name="SampleRegionTextBlock" Text="Регион:" Visibility="Collapsed" Margin="10,10,0,0" />
-                <ComboBox Name="SampleRegionComboBox" Visibility="Collapsed" Margin="10,0,0,0" />
-                <Button Name="AddRegionButton" Content="Добавить регион" Visibility="Collapsed" Margin="10,0,0,0" Click="AddRegionButton_Click" />
+                <TextBlock Name="ContemplationSampleTextBlock" Text="Образец:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <ComboBox Name="ContemplationSampleComboBox" Visibility="Collapsed" Style="{StaticResource ComboBoxStyle}"/>
+                <TextBlock Name="ContemplationTypeContemplationTextBlock" Text="Тип нахождения:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}" />
+                <TextBox x:Name="ContemplationTypeContemplationTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
+                <TextBlock Name="ContemplationNormTextBlock" Text="Норма:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <ComboBox Name="ContemplationNormComboBox" Visibility="Collapsed" Style="{StaticResource ComboBoxStyle}"/>
+                <Button Name="AddNormButton" Content="Добавить норму" Visibility="Collapsed" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Click="AddNormButton_Click" />
+                <TextBlock Name="ContemplationResultTextBlock" Text="Результат:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox x:Name="ContemplationResultTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
 
-                <TextBlock Name="ContemplationSampleTextBlock" Text="Образец:" Visibility="Collapsed" Margin="10,10,0,0" />
-                <ComboBox Name="ContemplationSampleComboBox" Visibility="Collapsed" Margin="10,0,0,0" />
-                <TextBlock Name="ContemplationNormTextBlock" Text="Норма:" Visibility="Collapsed" Margin="10,10,0,0" />
-                <ComboBox Name="ContemplationNormComboBox" Visibility="Collapsed" Margin="10,0,0,0" />
-                <Button Name="AddNormButton" Content="Добавить норму" Visibility="Collapsed" Margin="10,0,0,0" Click="AddNormButton_Click" />
+                <TextBlock Name="UserFullNameTextBlock" Text="ФИО:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox x:Name="UserFullNameTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
+                <TextBlock Name="UserLoginTextBlock" Text="Логин:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox x:Name="UserLoginTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
+                <TextBlock Name="UserPassTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox x:Name="UserPassTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
+                <TextBlock x:Name="UserRolesTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}" />
+                <ComboBox x:Name="UserRolesComboBox" Visibility="Collapsed" Style="{StaticResource ComboBoxStyle}" />
+                <TextBlock Name="UserDateOfBirthTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox x:Name="UserDateOfBirthTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
+                <TextBlock Name="UserPhoneNumberTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}" />
+                <TextBox x:Name="UserPhoneNumberTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
+                <TextBlock Name="UserAddressTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox x:Name="UserAddressTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
+                <TextBlock Name="UserEmailTextBlock" Text="Pass:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox x:Name="UserEmailTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
 
-                <Button Name="AddButton" Content="Добавить" Margin="10,0,0,0" Click="AddButton_Click" />
+                <Button x:Name="AddButton" Content="Добавить" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Click="AddButton_Click" />
             </StackPanel>
         </StackPanel>
     </Viewbox>

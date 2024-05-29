@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace GreenTrail.Forms.Welcome.LoadingWindows
     public partial class BootWindow : Window
     {
         public static bool hasShownAboutAppWindow = false;
+
         public BootWindow()
         {
             InitializeComponent();
@@ -50,9 +52,32 @@ namespace GreenTrail.Forms.Welcome.LoadingWindows
                 ((DispatcherTimer)sender).Stop();
                 if (hasShownAboutAppWindow)
                 {
-
-                    LoginWindow loginWindow = new LoginWindow();
-                    loginWindow.Show();
+                    // Считываем значение флага показа из реестра
+                    RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", true);
+                    if (key != null)
+                    {
+                        if (bool.Parse((string)key.GetValue("RememberMe")) == null)
+                        {
+                            key.SetValue("RememberMe", false);
+                            return;
+                        }
+                        if (bool.Parse((string)key.GetValue("RememberMe")))
+                        {
+                            MainWindow mainWindow = new MainWindow();
+                            mainWindow.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            LoginWindow loginWindow = new LoginWindow();
+                            loginWindow.Show();
+                        }
+                    }
+                    else
+                    {
+                        LoginWindow loginWindow = new LoginWindow();
+                        loginWindow.Show();
+                    }
                 }
                 else
                 {

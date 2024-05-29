@@ -36,6 +36,9 @@
                         <Button Click="SettingsClick" Style="{StaticResource WindowStateStyle}">
                             <Image x:Name="i_settings" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_settings.png"/>
                         </Button>
+                        <Button Click="LogOutClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_logOut" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_logOut.png"/>
+                        </Button>
                     </StackPanel>
             </Grid>
         </StackPanel>

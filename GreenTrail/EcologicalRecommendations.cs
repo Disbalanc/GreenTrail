@@ -12,18 +12,13 @@ namespace GreenTrail
     using System;
     using System.Collections.Generic;
     
-    public partial class Type_organization
+    public partial class EcologicalRecommendations
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Type_organization()
-        {
-            this.Organization = new HashSet<Organization>();
-        }
+        public long id_recommendations { get; set; }
+        public Nullable<long> id_user { get; set; }
+        public string heading { get; set; }
+        public string text { get; set; }
     
-        public long id_type { get; set; }
-        public string name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Organization> Organization { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

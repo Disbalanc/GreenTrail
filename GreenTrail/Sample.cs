@@ -23,10 +23,13 @@ namespace GreenTrail
         public long id_sample { get; set; }
         public Nullable<long> id_region { get; set; }
         public Nullable<long> id_user { get; set; }
+        public string articul { get; set; }
+        public Nullable<long> id_type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contemplation> Contemplation { get; set; }
         public virtual Region Region { get; set; }
+        public virtual Type Type { get; set; }
         public virtual Users Users { get; set; }
     }
 }

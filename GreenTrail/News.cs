@@ -19,7 +19,6 @@ namespace GreenTrail
         public string heading { get; set; }
         public string text { get; set; }
         public Nullable<System.DateTime> data_time { get; set; }
-        public string image { get; set; }
     
         public virtual Users Users { get; set; }
     }

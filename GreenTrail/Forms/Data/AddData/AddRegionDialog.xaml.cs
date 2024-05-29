@@ -19,9 +19,7 @@ namespace GreenTrail.Forms.Data.AddData
     /// </summary>
     public partial class AddRegionDialog : Window
     {
-        public string RegionName { get; set; }
-        public string RegionGeographicalCoordinates { get; set; }
-        public bool DialogResult { get; set; }
+        private GreanTrailEntities _context = new GreanTrailEntities();
 
         public AddRegionDialog()
         {
@@ -30,12 +28,17 @@ namespace GreenTrail.Forms.Data.AddData
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            // Получение введенных данных
-            RegionName = NameTextBox.Text;
-            RegionGeographicalCoordinates = GeographicalCoordinatesTextBox.Text;
 
-            // Установка результата диалогового окна на "OK"
-            DialogResult = true;
+            // Создание нового региона
+            Region region = new Region
+            {
+                name = NameTextBox.Text,
+                geographical_coordinates = GeographicalCoordinatesTextBox.Text
+            };
+
+            // Добавление региона в БД
+            _context.Region.Add(region);
+            _context.SaveChanges();
 
             // Закрытие диалогового окна
             this.Close();

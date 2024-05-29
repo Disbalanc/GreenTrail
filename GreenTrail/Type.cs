@@ -12,21 +12,21 @@ namespace GreenTrail
     using System;
     using System.Collections.Generic;
     
-    public partial class Organization
+    public partial class Type
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Organization()
+        public Type()
         {
-            this.Organization_Event = new HashSet<Organization_Event>();
+            this.Norm = new HashSet<Norm>();
+            this.Sample = new HashSet<Sample>();
         }
     
-        public long id_organization { get; set; }
+        public long id_type { get; set; }
         public string name { get; set; }
-        public Nullable<long> id_type { get; set; }
-        public string contact_information { get; set; }
     
-        public virtual Type_organization Type_organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Organization_Event> Organization_Event { get; set; }
+        public virtual ICollection<Norm> Norm { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sample> Sample { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using GreenTrail.Forms.Welcome.ForgotPasswprdPage;
 using GreenTrail.Source.Funs;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,9 +30,25 @@ namespace GreenTrail.Forms.Welcome
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-                string hashedPassword = Funs.ComputeSHA256Hash(pb_pass.Password);
+            string hashedPassword;
+            if (_isShowingPassword)
+            {
+                hashedPassword = Funs.ComputeSHA256Hash(tb_pass.Text);
 
                 DataBaseFuns.AuthenticateUser(tb_login.Text, hashedPassword, this);
+            }
+            else
+            {
+                hashedPassword = Funs.ComputeSHA256Hash(pb_pass.Password);
+
+                DataBaseFuns.AuthenticateUser(tb_login.Text, hashedPassword, this);
+            }
+            if (cb_rememberMe.IsChecked.Value)
+            {
+                // Сохраняем флаг показа в реестр
+                RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", true);
+                key.SetValue("RememberMe", cb_rememberMe.IsChecked.Value);
+            }
         }
 
         private void btn_reginWindow_Click(object sender, RoutedEventArgs e)
@@ -119,8 +137,8 @@ namespace GreenTrail.Forms.Welcome
 
         private void show_pass(object sender, RoutedEventArgs e)
         {
-            Uri imageUriSlash = new Uri("G:\\VS\\GreenTrail\\GreenTrail\\Source\\Image\\Assets\\eye-slash.png");
-            Uri imageUri = new Uri("C:\\VS\\GreenTrail\\GreenTrail\\Source\\Image\\Assets\\eye.png");
+            Uri imageUriSlash = new Uri("Image/Assets/eye-slash.png", UriKind.RelativeOrAbsolute);
+            Uri imageUri = new Uri("Image/Assets/eye.png", UriKind.RelativeOrAbsolute);
 
             if (_isShowingPassword)
             {

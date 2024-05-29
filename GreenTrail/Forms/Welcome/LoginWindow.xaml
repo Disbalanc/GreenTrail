@@ -51,7 +51,7 @@
                
 
                 <Grid Margin="24,25,24,0">
-                    <CheckBox Foreground="{DynamicResource Gray1}" Content="Запомнить пароль"  x:Name="cb_terms" VerticalAlignment="Center" />
+                    <CheckBox Foreground="{DynamicResource Gray1}" Content="Запомнить пароль"  x:Name="cb_rememberMe" VerticalAlignment="Center" />
                     <Button x:Name="btn_forgotPass" Visibility="Visible"  Content="Забыли Пароль?" Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" HorizontalAlignment="Right" Margin="0,0,15,0" Click="btn_forgotPass_Click"/>
                 </Grid>
 

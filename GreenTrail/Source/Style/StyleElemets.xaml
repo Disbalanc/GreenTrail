@@ -12,6 +12,7 @@
         <Setter Property="Width" Value="20"/>
         <Setter Property="Height" Value="20"/>
         <Setter Property="Margin" Value="0,0,10,0"/>
+        
         <Setter Property="Background" Value="{DynamicResource AdditionalColor}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -38,6 +39,7 @@
         <Setter Property="Foreground" Value="{DynamicResource Gray1}" />
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Inter"/>
         <Setter Property="Padding" Value="10,0,0,0"/>
         <Setter Property="Margin" Value="25,0,25,10"/>
         <Setter Property="Template">
@@ -67,6 +69,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource AdditionalColor}"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Margin" Value="25,0,25,0"/>
+        <Setter Property="FontFamily" Value="Inter"/>
         <Setter Property="Padding" Value="10,0,0,0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -115,6 +118,7 @@
         <Setter Property="Foreground" Value="{DynamicResource White}"/>
         <Setter Property="Width" Value="240"/>
         <Setter Property="Height" Value="30"/>
+        <Setter Property="FontFamily" Value="Inter"/>
         <Setter Property="Margin" Value="0,40,0,20"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Template">
@@ -136,6 +140,7 @@
     <!-- Label -->
     <Style x:Key="LabelInputStyle" TargetType="Label">
         <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontFamily" Value="Inter"/>
         <Setter Property="Foreground" Value="{DynamicResource Gray1}"/>
     </Style>
 
@@ -144,6 +149,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource AdditionalColor}"/>
         <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontFamily" Value="Inter"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -183,6 +189,7 @@
         <Setter Property="Foreground" Value="{DynamicResource Black}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Black}"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontFamily" Value="Inter"/>
         <Setter Property="Padding" Value="10"/>
     </Style>
 
@@ -194,4 +201,30 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
+    <!-- OtherWindow -->
+    <!-- ComboBox  -->
+    <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Foreground" Value="{DynamicResource Black}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource AdditionalColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="ScrollViewer.Background" Value="{DynamicResource White}"/>
+            <Setter Property="Background" Value="{DynamicResource White}"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="MinHeight" Value="26"/>
+            <Setter Property="FontFamily" Value="Inter"/>
+        <Setter Property="Padding" Value="10,0,0,0"/>
+        <Setter Property="Margin" Value="10,10,10,0"/>
+    </Style>
+
+
+    <!-- TextBlock  -->
+    <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="FontFamily" Value="Inter"/>
+        <Setter Property="Foreground" Value="{DynamicResource Gray1}" />
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Margin" Value="10,10,10,0"/>
+    </Style>
 </ResourceDictionary>

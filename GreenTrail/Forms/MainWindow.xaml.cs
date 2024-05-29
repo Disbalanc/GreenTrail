@@ -4,6 +4,7 @@ using GreenTrail.Forms.Settings;
 using GreenTrail.Source.Funs;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -100,7 +101,7 @@ namespace GreenTrail.Forms
 
         private void LogOutClick(object sender, RoutedEventArgs e)
         {
-
+            Funs.SaveRememberMe();
             this.Close();
         }
 
@@ -108,12 +109,14 @@ namespace GreenTrail.Forms
         {
             ViewDataWindow viewDataWindow = new ViewDataWindow();
             viewDataWindow.ShowDialog();
+            this.Close();
         }
 
         private void MapClick(object sender, RoutedEventArgs e)
         {
             MapWindow mapWindow = new MapWindow();
             mapWindow.Show();
+            this.Close();
         }
 
         private void ExportClick(object sender, RoutedEventArgs e)

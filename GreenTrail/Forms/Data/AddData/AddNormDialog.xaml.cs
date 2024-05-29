@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,8 @@ namespace GreenTrail.Forms.Data.AddData
     /// </summary>
     public partial class AddNormDialog : Window
     {
-        public string NormName { get; set; }
-        public string Norma { get; set; }
-        public string TypeNorma { get; set; }
-        public bool DialogResult { get; set; }
+
+        private GreanTrailEntities _context = new GreanTrailEntities();
 
         public AddNormDialog()
         {
@@ -31,13 +30,18 @@ namespace GreenTrail.Forms.Data.AddData
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            // Получение введенных данных
-            NormName = NameTextBox.Text;
-            Norma = NormaTextBox.Text;
-            TypeNorma = TypeNormComboBox.SelectedIndex.ToString()+1;
 
-            // Установка результата диалогового окна на "OK"
-            DialogResult = true;
+            // Создание новой нормы
+            Norm norm = new Norm
+            {
+                name = NameTextBox.Text,
+                norma = NormaTextBox.Text,
+                id_norm = (int)TypeNormComboBox.SelectedIndex
+            };
+
+            // Добавление региона в БД
+            _context.Norm.Add(norm);
+            _context.SaveChanges();
 
             // Закрытие диалогового окна
             this.Close();

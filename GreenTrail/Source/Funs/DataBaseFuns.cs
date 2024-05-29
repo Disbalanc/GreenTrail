@@ -53,6 +53,7 @@ namespace GreenTrail.Source.Funs
                     phoneNumber = phoneNumber,
                     address = address,
                     password = password,
+                    id_roles = 2,
                 };
 
                 // Добавление нового пользователя в контекст базы данных
@@ -112,7 +113,7 @@ namespace GreenTrail.Source.Funs
                 // Создание сообщения электронной почты
                 MailMessage message = new MailMessage
                 {
-                    From = new MailAddress(ConfigurationManager.AppSettings["mailApp"]),
+                    From = new MailAddress(smtpUsername),
                     To = { new MailAddress(email) },
                     Subject = "OTP код для сброса пароля",
                     Body = $"Ваш OTP код: {OTP}"

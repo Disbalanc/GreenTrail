@@ -106,12 +106,12 @@ namespace GreenTrail.Forms.Welcome
                         }
                     case ("tb_email"):
                         {
-                            textBox.Text = "Логин";
+                            textBox.Text = "Email";
                             break;
                         }
                     case ("tb_login"):
                         {
-                            textBox.Text = "Email";
+                            textBox.Text = "Логин";
                             break;
                         }
                     case ("tb_Date_Birth"):
@@ -222,18 +222,6 @@ namespace GreenTrail.Forms.Welcome
                 }
             }
 
-            foreach (var passwordBox in passwordBoxes)
-            {
-                if (passwordBox != null)
-                {
-                    if (string.IsNullOrEmpty(passwordBox.Password))
-                    {
-                        areAllFieldsFilled = false;
-                        return;
-                    }
-                }
-            }
-
             if (btn_regin != null)
             {
                 // Проверяем, установлен ли CheckBox
@@ -281,8 +269,8 @@ namespace GreenTrail.Forms.Welcome
 
         private void show_pass(object sender, RoutedEventArgs e)
         {
-            Uri imageUriSlash = new Uri("G:\\VS\\GreenTrail\\GreenTrail\\Source\\Image\\Assets\\eye-slash.png", UriKind.Absolute);
-            Uri imageUri = new Uri("G:\\VS\\GreenTrail\\GreenTrail\\Source\\Image\\Assets\\eye.png", UriKind.Absolute);
+            Uri imageUriSlash = new Uri("Image/Assets/eye-slash.png", UriKind.RelativeOrAbsolute);
+            Uri imageUri = new Uri("Image/Assets/eye.png", UriKind.RelativeOrAbsolute);
 
             if (_isShowingPassword)
             {
@@ -311,8 +299,8 @@ namespace GreenTrail.Forms.Welcome
 
         private void show_confim_pass(object sender, RoutedEventArgs e)
         {
-            Uri imageUriSlash = new Uri("G:\\VS\\GreenTrail\\GreenTrail\\Source\\Image\\Assets\\eye-slash.png", UriKind.Absolute);
-            Uri imageUri = new Uri("G:\\VS\\GreenTrail\\GreenTrail\\Source\\Image\\Assets\\eye.png", UriKind.Absolute);
+            Uri imageUriSlash = new Uri("Image/Assets/eye-slash.png", UriKind.RelativeOrAbsolute);
+            Uri imageUri = new Uri("Image/Assets/eye.png", UriKind.RelativeOrAbsolute);
 
             if (_isShowingPassword)
             {

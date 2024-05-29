@@ -18,6 +18,7 @@ namespace GreenTrail
         public Users()
         {
             this.Contemplation = new HashSet<Contemplation>();
+            this.EcologicalRecommendations = new HashSet<EcologicalRecommendations>();
             this.News = new HashSet<News>();
             this.Sample = new HashSet<Sample>();
         }
@@ -35,6 +36,8 @@ namespace GreenTrail
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contemplation> Contemplation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EcologicalRecommendations> EcologicalRecommendations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<News> News { get; set; }
         public virtual Roles Roles { get; set; }

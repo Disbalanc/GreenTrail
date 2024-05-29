@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
+using System.Configuration;
 
 namespace GreenTrail.Forms.Data.ViewData
 {
@@ -363,7 +364,7 @@ namespace GreenTrail.Forms.Data.ViewData
 
         private void LogOutClick(object sender, RoutedEventArgs e)
         {
-
+            Funs.SaveRememberMe();
             this.Close();
         }
     }

@@ -18,7 +18,6 @@ namespace GreenTrail
         public Event()
         {
             this.Event_Region = new HashSet<Event_Region>();
-            this.Organization_Event = new HashSet<Organization_Event>();
         }
     
         public long id_event { get; set; }
@@ -27,7 +26,5 @@ namespace GreenTrail
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event_Region> Event_Region { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Organization_Event> Organization_Event { get; set; }
     }
 }

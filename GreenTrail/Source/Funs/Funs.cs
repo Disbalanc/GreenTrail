@@ -11,11 +11,20 @@ using System.Windows.Interop;
 using System.Windows.Shell;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Configuration;
+using Microsoft.Win32;
 
 namespace GreenTrail.Source.Funs
 {
     internal class Funs
     {
+        public static void SaveRememberMe()
+        {
+            // Считываем значение флага показа из реестра
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", true);
+            key.SetValue("RememberMe", false);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -183,11 +192,6 @@ namespace GreenTrail.Source.Funs
         /// 
         /// </summary>
         public static void ExportData()
-        {
-
-        }
-
-        public static void Sample()
         {
 
         }

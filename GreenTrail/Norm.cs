@@ -27,5 +27,6 @@ namespace GreenTrail
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contemplation> Contemplation { get; set; }
+        public virtual Type Type { get; set; }
     }
 }
