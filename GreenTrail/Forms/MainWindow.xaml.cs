@@ -167,7 +167,7 @@ namespace GreenTrail.Forms
         private void ExportExel_Click(object sender, RoutedEventArgs e)
         {
             ExportDataWindow exportDataWindow = new ExportDataWindow();
-            exportDataWindow.ExportType = "Exel";
+
             exportDataWindow.Show();
             this.Close();
         }
@@ -175,7 +175,6 @@ namespace GreenTrail.Forms
         private void ExportWord_Click(object sender, RoutedEventArgs e)
         {
             ExportDataWindow exportDataWindow = new ExportDataWindow();
-            exportDataWindow.ExportType = "Word";
             exportDataWindow.Show();
             this.Close();
         }
@@ -183,7 +182,13 @@ namespace GreenTrail.Forms
         private void ExportPDF_Click(object sender, RoutedEventArgs e)
         {
             ExportDataWindow exportDataWindow = new ExportDataWindow();
-            exportDataWindow.ExportType = "PDF";
+            exportDataWindow.Show();
+            this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ExportDataWindow exportDataWindow = new ExportDataWindow();
             exportDataWindow.Show();
             this.Close();
         }

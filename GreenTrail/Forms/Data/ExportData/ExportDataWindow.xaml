@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:GreenTrail.Forms.Data.ExportData"
         xmlns:local="clr-namespace:GreenTrail.Forms.Data.ExportData"
         mc:Ignorable="d"
         Title="ExportDataWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}" MouseDown="Window_MouseDown" WindowStyle="None">
@@ -38,7 +39,31 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ComboBox Margin="10" x:Name="cb_selectTable" ItemsSource="{Binding Tables}" SelectedIndex="0" SelectionChanged="cb_selectTable_SelectionChanged"/>
+
+                <DataGrid Margin="10" Grid.Row="1" x:Name="dg_table"/>
+                <DockPanel Margin="10" Grid.Row="2">
+                    <TextBlock Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">Путь сохранения:</TextBlock>
+                    <TextBox x:Name="tb_path" Margin="10" Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+                    
+
+                <DockPanel Margin="10" Grid.Row="4">
+                    <Button DockPanel.Dock="Right" Content="Обзор..." Click="OnBrowse" />
+                    <ComboBox DockPanel.Dock="Right" Margin="5,0,0,0" SelectedIndex="0" ItemsSource="{Binding Formats}" SelectedItem="{Binding SelectedFormat}" />
+                    <TextBlock Margin="5,0,0,0">Сохранить как:</TextBlock>
+                </DockPanel>
+                <Button Margin="10" Grid.Row="3" DockPanel.Dock="Right" Content="Сохранить" Click="Save" />
+            </Grid>
         </StackPanel>
     </Viewbox>
 </Window>
