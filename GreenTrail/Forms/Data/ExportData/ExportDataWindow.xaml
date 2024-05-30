@@ -59,7 +59,7 @@
 
                 <DockPanel Margin="10" Grid.Row="4">
                     <Button DockPanel.Dock="Right" Content="Обзор..." Click="OnBrowse" />
-                    <ComboBox DockPanel.Dock="Right" Margin="5,0,0,0" SelectedIndex="0" ItemsSource="{Binding Formats}" SelectedItem="{Binding SelectedFormat}" />
+                    <ComboBox DockPanel.Dock="Right" Margin="5,0,0,0" SelectedIndex="0" ItemsSource="{Binding Formats}" SelectedItem="{Binding SelectedFormat}"/>
                     <TextBlock Margin="5,0,0,0">Сохранить как:</TextBlock>
                 </DockPanel>
                 <Button Margin="10" Grid.Row="3" DockPanel.Dock="Right" Content="Сохранить" Click="Save" />

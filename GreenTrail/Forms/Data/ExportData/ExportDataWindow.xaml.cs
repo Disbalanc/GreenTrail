@@ -10,7 +10,6 @@ using System.IO;
 using Newtonsoft.Json;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using DocumentFormat.OpenXml.Spreadsheet;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,25 +18,25 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
+using System.Runtime.CompilerServices;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using static System.Net.WebRequestMethods;
 using System.Drawing;
-using DocumentFormat.OpenXml.Wordprocessing;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml;
 using OfficeOpenXml;
+using static GreenTrail.Forms.Data.ExportData.ExportDataWindow;
+using System.Data;
+using ClosedXML.Excel;
+
 
 namespace GreenTrail.Forms.Data.ExportData
 {
+    
     /// <summary>
     /// Логика взаимодействия для ExportDataWindow.xaml
     /// </summary>
     public partial class ExportDataWindow : Window
     {
+        SaveFileDialogViewModel saveFileDialogViewModel;
         private void MinimizeClick(object sender, RoutedEventArgs e)
         {
             Funs.MinimizeToTaskbar(this);
@@ -74,14 +73,15 @@ namespace GreenTrail.Forms.Data.ExportData
         {
             InitializeComponent();
 
-            DataContext = new SaveFileDialogViewModel();
+            saveFileDialogViewModel = new SaveFileDialogViewModel();
+
+            DataContext = saveFileDialogViewModel;
 
             cb_selectTable.ItemsSource = Tables;
         }
 
         private void OnBrowse(object sender, RoutedEventArgs e)
         {
-            SaveFileDialogViewModel saveFileDialogViewModel = new SaveFileDialogViewModel();
             saveFileDialogViewModel.OnBrowse(dg_table);
         }
         private List<string> Tables = new List<string> { "Пробы", "Пользователи", "Обследования проб", "Мероприятия", "Загрязнения", "Экологические рекомендации" };
@@ -151,7 +151,8 @@ namespace GreenTrail.Forms.Data.ExportData
                 return;
             }
 
-
+            
+            saveFileDialogViewModel.Save(tb_path.Text, dg_table);
         }
 
         public class SaveFileDialogViewModel : INotifyPropertyChanged
@@ -192,14 +193,39 @@ namespace GreenTrail.Forms.Data.ExportData
             {
                 // Создать диалоговое окно сохранения файла
                 var dialog = new SaveFileDialog();
-                dialog.Filter = "Файлы (*.pdf, *.json, *.txt, *.docx, *.xlsx)|*.pdf;*.json;*.txt;*.docx;*.xlsx";
+                dialog.Filter = "Файлы (*.pdf, *.json, *.txt, *.docx, *.doc , *.xls , *.xlsx)|*.pdf;*.json;*.txt;*.doc;*.docx;*.xls;*.xlsx";
+
+                // Установить расширение файла по умолчанию
+                switch (SelectedFormat.ToLower())
+                {
+                    case "pdf":
+                        dialog.DefaultExt = ".pdf";
+                        break;
+                    case "json":
+                        dialog.DefaultExt = ".json";
+                        break;
+                    case "txt":
+                        dialog.DefaultExt = ".txt";
+                        break;
+                    case "doc":
+                    case "docx":
+                        dialog.DefaultExt = ".docx";
+                        break;
+                    case "xls":
+                    case "xlsx":
+                        dialog.DefaultExt = ".xlsx";
+                        break;
+                    case "csv":
+                        dialog.DefaultExt = ".csv";
+                        break;
+                }
 
                 // Показать диалоговое окно и получить выбранный путь к файлу
                 if (dialog.ShowDialog() == true)
                 {
 
                     // Сохранить данные DataGrid в выбранном формате
-                    switch (SelectedFormat)
+                    switch (SelectedFormat.ToLower())
                     {
                         case "pdf":
                             SaveToPdf(dialog.FileName, dataGrid);
@@ -210,18 +236,46 @@ namespace GreenTrail.Forms.Data.ExportData
                         case "txt":
                             SaveToTxt(dialog.FileName, dataGrid);
                             break;
+                        case "doc":
                         case "docx":
                             SaveToDocx(dialog.FileName, dataGrid);
                             break;
+                        case "xls":
                         case "xlsx":
                             SaveToXlsx(dialog.FileName, dataGrid);
                             break;
                         case "csv":
-                            SaveToXlsx(dialog.FileName, dataGrid);
+                            SaveToCsv(dialog.FileName, dataGrid);
                             break;
                     }
                 }
             }
+            public void Save(string filePath, DataGrid dataGrid)
+            {
+                // Сохранить данные DataGrid в выбранном формате
+                switch (_selectedFormat.ToLower())
+                {
+                    case "pdf":
+                        SaveToPdf(filePath, dataGrid);
+                        break;
+                    case "json":
+                        SaveToJson(filePath, dataGrid);
+                        break;
+                    case "txt":
+                        SaveToTxt(filePath, dataGrid);
+                        break;
+                    case "docx":
+                        SaveToDocx(filePath, dataGrid);
+                        break;
+                    case "xlsx":
+                        SaveToXlsx(filePath, dataGrid);
+                        break;
+                    case "csv":
+                        SaveToCsv(filePath, dataGrid);
+                        break;
+                }
+            }
+            
             private void SaveToCsv(string filePath, DataGrid dataGrid)
             {
                 var data = dataGrid.ItemsSource.Cast<object>().ToList();
@@ -331,36 +385,59 @@ namespace GreenTrail.Forms.Data.ExportData
 
             private void SaveToDocx(string filePath, DataGrid dataGrid)
             {
-                // Создать новый документ
-                var document = new Spire.Doc.Document();
-
-                // Добавить заголовки столбцов
-                var table = document.Sections[0].AddTable(true);
-                table.PreferredWidth = new Unit(100, Spire.Doc.UnitType.Percentage);
-                var headerRow = table.Rows[0];
-                foreach (var column in dataGrid.Columns)
+                try
                 {
-                    headerRow.Cells[headerRow.Cells.Count].AddParagraph().AppendText(column.Header.ToString());
-                }
-
-                // Добавить данные строк
-                foreach (var item in dataGrid.Items)
-                {
-                    var properties = item.GetType().GetProperties();
-                    var dataRow = table.AddRow();
-
-                    foreach (var property in properties)
+                    // Создать новый объект рабочей книги
+                    using (XLWorkbook workbook = new XLWorkbook())
                     {
-                        dataRow.Cells[dataRow.Cells.Count].AddParagraph().AppendText(property.GetValue(item).ToString());
-                    }
-                }
+                        // Получить столбцы из DataGrid
+                        var columns = dataGrid.Columns;
 
-                // Сохранить файл
-                document.SaveToFile(filePath, Spire.Doc.FileFormat.Docx);
+                        // Создать лист в рабочей книге
+                        IXLWorksheet worksheet = workbook.Worksheets.Add("Лист1");
+
+                        // Создать строку заголовка таблицы
+                        worksheet.Cell(1, 1).Value = "№";
+                        for (int i = 0; i < columns.Count; i++)
+                        {
+                            worksheet.Cell(1, i + 2).Value = columns[i].Header.ToString();
+                        }
+
+                        // Получить данные из DataGrid
+                        var data = dataGrid.ItemsSource as IEnumerable<object>;
+
+                        // Создать строки данных в таблице
+                        int rowIndex = 2;
+                        foreach (var rowData in data)
+                        {
+                            worksheet.Cell(rowIndex, 1).Value = rowIndex - 1;
+                            int cellIndex = 2;
+                            foreach (var cellData in rowData.GetType().GetProperties())
+                            {
+                                worksheet.Cell(rowIndex, cellIndex).Value = (XLCellValue)cellData.GetValue(rowData);
+                                cellIndex++;
+                            }
+                            rowIndex++;
+                        }
+
+                        // Сохранить рабочую книгу в DOCX-файл
+                        workbook.SaveAs(filePath);
+                    }
+
+                    Console.WriteLine("Данные из DataGrid успешно экспортированы в DOCX-файл.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Ошибка при экспорте данных в DOCX-файл. " + ex.Message);
+                }
             }
 
             private void SaveToXlsx(string filePath, DataGrid dataGrid)
             {
+                // Установить лицензионный контекст
+                ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
+
                 using (var package = new ExcelPackage())
                 {
                     // Добавить новый лист
