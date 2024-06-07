@@ -73,18 +73,22 @@
                                         </ContextMenu>
                                     </Button.ContextMenu>
                                 </Button>
-                                <Button Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50">
+                                <Button Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50" Click="Button_Click_Add">
                                     <StackPanel>
                                         <Image Source="/Source/Image/Assets/img_addData.png" Style="{StaticResource WindowStateStyleImage}"/>
                                         <Label Content="Добавление"/>
                                     </StackPanel>
                                     <Button.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Пробы" Click="AddSample_Click" />
-                                            <MenuItem Header="Регионы" Click="AddRegion_Click" />
-                                            <MenuItem Header="Изучение проб" Click="AddContemplation_Click" />
-                                            <MenuItem Header="Нормы" Click="AddNorm_Click" />
-                                            <MenuItem Header="Пользователи" Click="AddUser_Click" />
+                                            <MenuItem x:Name="MenuAddSample" Visibility="Hidden" Header="Пробы" Click="AddSample_Click" />
+                                            <MenuItem x:Name="MenuAddRegion" Visibility="Hidden" Header="Регионы" Click="AddRegion_Click" />
+                                            <MenuItem x:Name="MenuAddContemplation" Visibility="Hidden" Header="Изучение проб" Click="AddContemplation_Click" />
+                                            <MenuItem x:Name="MenuAddNorm" Visibility="Hidden" Header="Нормы" Click="AddNorm_Click" />
+                                            <MenuItem x:Name="MenuAddUser" Visibility="Hidden" Header="Пользователи" Click="AddUser_Click" />
+                                            
+                                            <MenuItem x:Name="MenuAddEvent" Visibility="Hidden" Header="Мероприятие" Click="AddEvent_Click" />
+                                            <MenuItem x:Name="MenuAddNews" Visibility="Hidden" Header="Новость" Click="AddNews_Click" />
+                                            <MenuItem x:Name="MenuAddRecomendation" Visibility="Hidden" Header="Экологические рекомендации" Click="AddRecomendation_Click" />
                                         </ContextMenu>
                                     </Button.ContextMenu>
                                 </Button>

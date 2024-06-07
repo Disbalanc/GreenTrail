@@ -32,7 +32,62 @@ namespace GreenTrail.Forms.Data.ViewData
         {
             InitializeComponent();
 
+            SwapRoles();
+
             LoadDate();
+        }
+
+        public void SwapRoles()
+        {
+            string currentRole = DataBaseFuns.GetCurrentRole();
+
+            switch (currentRole)
+            {
+                case "Администратор":
+                    ti_Employees.Visibility = Visibility.Visible;
+                    btn_createEmployees.Visibility = Visibility.Visible;
+
+                    ti_Pollution.Visibility = Visibility.Visible;
+
+                    ti_samples.Visibility = Visibility.Visible;
+
+                    ti_Region.Visibility = Visibility.Visible;
+                    btn_createRegion.Visibility = Visibility.Visible;
+
+                    ti_sampleStudies.Visibility = Visibility.Visible;
+
+                    break;
+                case "Лаборант":
+                    ti_Pollution.Visibility = Visibility.Visible;
+                    btn_createPollution.Visibility = Visibility.Visible;
+
+                    ti_samples.Visibility = Visibility.Visible;
+
+                    ti_Region.Visibility = Visibility.Visible;
+
+                    ti_sampleStudies.Visibility = Visibility.Visible;
+                    btn_createContemplation.Visibility = Visibility.Visible;
+
+                    break;
+                case "Эколог":
+                    ti_Pollution.Visibility = Visibility.Visible;
+
+                    ti_samples.Visibility = Visibility.Visible;
+                    btn_createEmployees.Visibility = Visibility.Visible;
+
+                    ti_Region.Visibility = Visibility.Visible;
+                    btn_createRegion.Visibility = Visibility.Visible;
+
+                    ti_news.Visibility = Visibility.Visible;
+                    btn_createNews.Visibility = Visibility.Visible;
+
+                    ti_Events.Visibility = Visibility.Visible;
+                    btn_createEvents.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    
+                    break;
+            }
         }
 
         private void LoadDate()
@@ -68,15 +123,15 @@ namespace GreenTrail.Forms.Data.ViewData
             SortEmployeesComboBox.ItemsSource = _context.Users.Select(x => x.Roles).ToList();
             SortEmployeesComboBox.SelectedIndex = 0;
 
-            SortNewsComboBox.ItemsSource = _context.News.Select(x => x.Users.full_name).ToList();
-            SortNewsComboBox.SelectedIndex = 0;
+            //SortNewsComboBox.ItemsSource = _context.News.Select(x => x.Users.full_name).ToList();
+            //SortNewsComboBox.SelectedIndex = 0;
 
             SortSampleComboBox.ItemsSource = _context.Sample.Select(x => x.Region).ToList();
             SortSampleComboBox.SelectedIndex = 0;
 
             dg_employees.ItemsSource = _context.Users.ToList();
-            dg_events.ItemsSource = _context.Event.ToList();
-            dg_news.ItemsSource = _context.News.ToList();
+            //dg_events.ItemsSource = _context.Event.ToList();
+            //dg_news.ItemsSource = _context.News.ToList();
             dg_region.ItemsSource = _context.Region.ToList();
             dg_sample.ItemsSource = _context.Sample.ToList();
         }
@@ -87,7 +142,6 @@ namespace GreenTrail.Forms.Data.ViewData
             .Select(x => new PollutionData
             {
                 levels = x.Pollution.levels,
-                source = x.Pollution.source,
                 name = x.Region.name,
                 geographicalcoordinates = x.Region.geographical_coordinates
             })
@@ -254,16 +308,16 @@ namespace GreenTrail.Forms.Data.ViewData
 
         private void NewsFilterTextBoxSelectionChanged(object sender, TextChangedEventArgs e)
         {
-            // Получение введенного текста фильтра
-            var filterText = (sender as TextBox).Text;
+            //// Получение введенного текста фильтра
+            //var filterText = (sender as TextBox).Text;
 
-            // Фильтрация данных по введенному тексту
-            var filteredEmployees = _context.News
-                .Where(x => x.heading.Contains(filterText))
-                .ToList();
+            //// Фильтрация данных по введенному тексту
+            //var filteredEmployees = _context.News
+            //    .Where(x => x.heading.Contains(filterText))
+            //    .ToList();
 
-            // Обновление источника данных `DataGrid` отфильтрованными данными
-            dg_news.ItemsSource = filteredEmployees;
+            //// Обновление источника данных `DataGrid` отфильтрованными данными
+            //dg_news.ItemsSource = filteredEmployees;
         }
 
         // Обработчик события изменения сортировки
@@ -283,16 +337,16 @@ namespace GreenTrail.Forms.Data.ViewData
 
         private void EventsFilterTextBoxSelectionChanged(object sender, TextChangedEventArgs e)
         {
-            // Получение введенного текста фильтра
-            var filterText = (sender as TextBox).Text;
+            //// Получение введенного текста фильтра
+            //var filterText = (sender as TextBox).Text;
 
-            // Фильтрация данных по введенному тексту
-            var filteredEmployees = _context.Event
-                .Where(x => x.name.Contains(filterText))
-                .ToList();
+            //// Фильтрация данных по введенному тексту
+            //var filteredEmployees = _context.Event
+            //    .Where(x => x.name.Contains(filterText))
+            //    .ToList();
 
-            // Обновление источника данных `DataGrid` отфильтрованными данными
-            dg_events.ItemsSource = filteredEmployees;
+            //// Обновление источника данных `DataGrid` отфильтрованными данными
+            //dg_events.ItemsSource = filteredEmployees;
         }
 
         private void RegionFilterTextBoxSelectionChanged(object sender, TextChangedEventArgs e)

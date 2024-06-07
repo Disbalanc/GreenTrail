@@ -10,6 +10,7 @@
 namespace GreenTrail
 {
     using System;
+    using System.Configuration;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
@@ -18,9 +19,10 @@ namespace GreenTrail
         private static GreanTrailEntities _context;
         public static GreanTrailEntities GetContext()
         {
-            if (_context == null) _context = new GreanTrailEntities(); 
+            if (_context == null) _context = new GreanTrailEntities();
             return _context;
         }
+
         public GreanTrailEntities()
             : base("name=GreanTrailEntities")
         {

@@ -23,10 +23,11 @@ namespace GreenTrail
         public long id_pollution { get; set; }
         public Nullable<long> id_contemplation { get; set; }
         public string levels { get; set; }
-        public string source { get; set; }
-        public Nullable<System.DateTime> data_time { get; set; }
+        public Nullable<long> id_region { get; set; }
+        public string data_time { get; set; }
     
         public virtual Contemplation Contemplation { get; set; }
+        public virtual Region Region { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Region_Pollution> Region_Pollution { get; set; }
     }

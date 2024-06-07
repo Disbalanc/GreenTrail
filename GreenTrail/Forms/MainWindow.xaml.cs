@@ -35,6 +35,33 @@ namespace GreenTrail.Forms
             scrollBar.Scroll += ScrollBar_Scroll;
 
         }
+
+        public void SwapRoles()
+        {
+            string currentRole = DataBaseFuns.GetCurrentRole();
+
+            switch (currentRole)
+            {
+                case "Администратор":
+                    MenuAddUser.Visibility = Visibility.Visible;
+
+                    break;
+                case "Лаборант":
+                    MenuAddContemplation.Visibility = Visibility.Visible;
+                    MenuAddNorm.Visibility = Visibility.Visible;
+
+                    break;
+                case "Эколог":
+                    MenuAddSample.Visibility = Visibility.Visible;
+                    MenuAddRegion.Visibility = Visibility.Visible;
+                    MenuAddEvent.Visibility = Visibility.Visible;
+                    MenuAddNews.Visibility = Visibility.Visible;
+                    MenuAddRecomendation.Visibility = Visibility.Visible;
+
+                    break;
+            }
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Вычисление высоты пустого пространства
@@ -162,6 +189,61 @@ namespace GreenTrail.Forms
             this.Close();
         }
 
+        private void AddEvent_Click(object sender, RoutedEventArgs e)
+        {
+            AddDataWindow addDataWindow = new AddDataWindow();
+            addDataWindow.table = "Мероприятие";
+            addDataWindow.Show();
+            this.Close();
+        }
+
+        private void AddNews_Click(object sender, RoutedEventArgs e)
+        {
+            AddDataWindow addDataWindow = new AddDataWindow();
+            addDataWindow.table = "Новость";
+            addDataWindow.Show();
+            this.Close();
+        }
+
+        private void AddRecomendation_Click(object sender, RoutedEventArgs e)
+        {
+            AddDataWindow addDataWindow = new AddDataWindow();
+            addDataWindow.table = "Рекомендация";
+            addDataWindow.Show();
+            this.Close();
+        }
+
+        private void Button_Click_Add(object sender, RoutedEventArgs e)
+        {
+            string currentRole = DataBaseFuns.GetCurrentRole();
+
+                    AddDataWindow addDataWindow = new AddDataWindow();
+            switch (currentRole)
+            {
+                case "Администратор":
+                    addDataWindow.table = "Пользователи";
+                    addDataWindow.Show();
+                    this.Close();
+
+                    break;
+                case "Лаборант":
+                    addDataWindow.table = "Изучение пробы";
+                    addDataWindow.Show();
+                    this.Close();
+
+                    break;
+                case "Эколог":
+                    addDataWindow.table = "Образец";
+                    addDataWindow.Show();
+                    this.Close();
+
+                    break;
+                default:
+                    MessageBox.Show("У вас пока нет доступа к добавлению!", "Упс", MessageBoxButton.OK, MessageBoxImage.Information);
+                    break;
+            }
+        }
+
 
         //Экспорт
         private void ExportExel_Click(object sender, RoutedEventArgs e)
@@ -192,5 +274,7 @@ namespace GreenTrail.Forms
             exportDataWindow.Show();
             this.Close();
         }
+
+        
     }
 }

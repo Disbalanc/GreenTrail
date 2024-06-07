@@ -32,6 +32,7 @@
           <Property Name="id_event" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="data_time" Type="datetime" />
+          <Property Name="id_region" Type="bigint" />
         </EntityType>
         <EntityType Name="Event-Region">
           <Key>
@@ -67,8 +68,8 @@
           <Property Name="id_pollution" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_contemplation" Type="bigint" />
           <Property Name="levels" Type="nvarchar" MaxLength="50" />
-          <Property Name="source" Type="nvarchar" MaxLength="50" />
-          <Property Name="data_time" Type="datetime" />
+          <Property Name="id_region" Type="bigint" />
+          <Property Name="data_time" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -184,6 +185,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Event_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="id_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Event-Region_Event">
           <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
           <End Role="Event-Region" Type="Self.Event-Region" Multiplicity="*" />
@@ -241,6 +254,18 @@
             </Principal>
             <Dependent Role="Pollution">
               <PropertyRef Name="id_contemplation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pollution_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Pollution" Type="Self.Pollution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="Pollution">
+              <PropertyRef Name="id_region" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -347,6 +372,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="EcologicalRecommendations" EntitySet="EcologicalRecommendations" />
           </AssociationSet>
+          <AssociationSet Name="FK_Event_Region" Association="Self.FK_Event_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
           <AssociationSet Name="FK_Event-Region_Event" Association="Self.FK_Event-Region_Event">
             <End Role="Event" EntitySet="Event" />
             <End Role="Event-Region" EntitySet="Event-Region" />
@@ -365,6 +394,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Pollution_Contemplation" Association="Self.FK_Pollution_Contemplation">
             <End Role="Contemplation" EntitySet="Contemplation" />
+            <End Role="Pollution" EntitySet="Pollution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pollution_Region" Association="Self.FK_Pollution_Region">
+            <End Role="Region" EntitySet="Region" />
             <End Role="Pollution" EntitySet="Pollution" />
           </AssociationSet>
           <AssociationSet Name="FK_Region-Pollution_Pollution" Association="Self.FK_Region-Pollution_Pollution">
@@ -429,6 +462,8 @@
           <Property Name="id_event" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="data_time" Type="DateTime" Precision="3" />
+          <Property Name="id_region" Type="Int64" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Event_Region" FromRole="Event" ToRole="Region" />
           <NavigationProperty Name="Event_Region" Relationship="Self.FK_Event_Region_Event" FromRole="Event" ToRole="Event_Region" />
         </EntityType>
         <EntityType Name="Event_Region">
@@ -470,9 +505,10 @@
           <Property Name="id_pollution" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_contemplation" Type="Int64" />
           <Property Name="levels" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="source" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="data_time" Type="DateTime" Precision="3" />
+          <Property Name="id_region" Type="Int64" />
+          <Property Name="data_time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Contemplation" Relationship="Self.FK_Pollution_Contemplation" FromRole="Pollution" ToRole="Contemplation" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Pollution_Region" FromRole="Pollution" ToRole="Region" />
           <NavigationProperty Name="Region_Pollution" Relationship="Self.FK_Region_Pollution_Pollution" FromRole="Pollution" ToRole="Region_Pollution" />
         </EntityType>
         <EntityType Name="Region">
@@ -483,7 +519,9 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="geographical_coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="popullation" Type="Int32" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_Event_Region" FromRole="Region" ToRole="Event" />
           <NavigationProperty Name="Event_Region" Relationship="Self.FK_Event_Region_Region" FromRole="Region" ToRole="Event_Region" />
+          <NavigationProperty Name="Pollution" Relationship="Self.FK_Pollution_Region" FromRole="Region" ToRole="Pollution" />
           <NavigationProperty Name="Region_Pollution" Relationship="Self.FK_Region_Pollution_Region" FromRole="Region" ToRole="Region_Pollution" />
           <NavigationProperty Name="Sample" Relationship="Self.FK_Sample_Region" FromRole="Region" ToRole="Sample" />
         </EntityType>
@@ -618,6 +656,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Event_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="id_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Event_Region_Event">
           <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
           <End Role="Event_Region" Type="Self.Event_Region" Multiplicity="*" />
@@ -663,6 +713,18 @@
             </Principal>
             <Dependent Role="Norm">
               <PropertyRef Name="id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pollution_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Pollution" Type="Self.Pollution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="Pollution">
+              <PropertyRef Name="id_region" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -773,6 +835,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="EcologicalRecommendations" EntitySet="EcologicalRecommendations" />
           </AssociationSet>
+          <AssociationSet Name="FK_Event_Region" Association="Self.FK_Event_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
           <AssociationSet Name="FK_Event_Region_Event" Association="Self.FK_Event_Region_Event">
             <End Role="Event" EntitySet="Event" />
             <End Role="Event_Region" EntitySet="Event_Region" />
@@ -788,6 +854,10 @@
           <AssociationSet Name="FK_Norm_Type" Association="Self.FK_Norm_Type">
             <End Role="Type" EntitySet="Type" />
             <End Role="Norm" EntitySet="Norm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pollution_Region" Association="Self.FK_Pollution_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Pollution" EntitySet="Pollution" />
           </AssociationSet>
           <AssociationSet Name="FK_Region_Pollution_Pollution" Association="Self.FK_Region_Pollution_Pollution">
             <End Role="Pollution" EntitySet="Pollution" />
@@ -848,6 +918,7 @@
                 <ScalarProperty Name="id_event" ColumnName="id_event" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="data_time" ColumnName="data_time" />
+                <ScalarProperty Name="id_region" ColumnName="id_region" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -887,7 +958,7 @@
                 <ScalarProperty Name="id_pollution" ColumnName="id_pollution" />
                 <ScalarProperty Name="id_contemplation" ColumnName="id_contemplation" />
                 <ScalarProperty Name="levels" ColumnName="levels" />
-                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="id_region" ColumnName="id_region" />
                 <ScalarProperty Name="data_time" ColumnName="data_time" />
               </MappingFragment>
             </EntityTypeMapping>

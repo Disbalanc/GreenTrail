@@ -18,6 +18,6 @@ namespace GreenTrail
     /// </summary>
     public partial class App : Application
     {
-
+        public static long CurrentUserId { get; set; }
     }
 }
