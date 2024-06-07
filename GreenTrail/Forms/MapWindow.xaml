@@ -6,45 +6,7 @@
         xmlns:local="clr-namespace:GreenTrail.Forms"
         mc:Ignorable="d"
         Title="MapWindow" Height="450" Width="800">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Source/Style/StyleElemets.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-    <Viewbox>
-        <Grid Height="450" Width="800">
-            <StackPanel x:Name="sp_dragMove" VerticalAlignment="Top" Background="{DynamicResource SecondaryColor}" Panel.ZIndex="100">
-
-                <Grid>
-                    <Label Content="GreanTrail: Экологическое слежение" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Center"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
-                        <Button Click="MinimizeClick" Style="{StaticResource WindowStateStyle}">
-                            <Image x:Name="i_minimaze" Source="/Source/Image/Assets/img_minimaze.png" Style="{StaticResource WindowStateStyleImage}"/>
-                        </Button>
-                        <Button Click="MaximizeClick" Style="{StaticResource WindowStateStyle}">
-                            <Image x:Name="i_maximaze" Source="/Source/Image/Assets/img_maximaze.png" Style="{StaticResource WindowStateStyleImage}"/>
-                        </Button>
-                        <Button Click="CloseClick" Style="{StaticResource WindowStateStyle}">
-                            <Image x:Name="i_close" Source="/Source/Image/Assets/img_close.png" Style="{StaticResource WindowStateStyleImage}"/>
-                        </Button>
-                        <Button Click="SettingsClick" Style="{StaticResource WindowStateStyle}">
-                            <Image x:Name="i_settings" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_settings.png"/>
-                        </Button>
-                        <Button Click="LogOutClick" Style="{StaticResource WindowStateStyle}">
-                            <Image x:Name="i_logOut" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_logOut.png"/>
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
-            <Grid Margin="0,40,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="3*"/>
-                </Grid.RowDefinitions>
-                
-            </Grid>
-        </Grid>
-    </Viewbox>
+    <Grid>
+        
+    </Grid>
 </Window>
