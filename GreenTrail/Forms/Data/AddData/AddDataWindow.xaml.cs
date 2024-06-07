@@ -4,6 +4,7 @@ using GreenTrail.Source.Funs;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -141,33 +142,6 @@ namespace GreenTrail.Forms.Data.AddData
                     SampleArticulTextBox.Visibility = Visibility.Visible;
                     SampleArticulTextBlock.Visibility = Visibility.Visible;
                     AddRegionButton.Visibility = Visibility.Visible;
-
-                    ContemplationSampleTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationSampleComboBox.Visibility = Visibility.Collapsed;
-                    ContemplationNormTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationNormComboBox.Visibility = Visibility.Collapsed;
-                    ContemplationResultTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationResultTextBox.Visibility = Visibility.Collapsed;
-                    ContemplationTypeContemplationTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationTypeContemplationTextBox.Visibility = Visibility.Collapsed;
-                    AddNormButton.Visibility = Visibility.Collapsed;
-
-                    UserAddressTextBlock.Visibility = Visibility.Collapsed;
-                    UserAddressTextBox.Visibility = Visibility.Collapsed;
-                    UserDateOfBirthTextBlock.Visibility = Visibility.Collapsed;
-                    UserDateOfBirthTextBox.Visibility = Visibility.Collapsed;
-                    UserEmailTextBlock.Visibility = Visibility.Collapsed;
-                    UserEmailTextBox.Visibility = Visibility.Collapsed;
-                    UserFullNameTextBlock.Visibility = Visibility.Collapsed;
-                    UserFullNameTextBox.Visibility = Visibility.Collapsed;
-                    UserLoginTextBlock.Visibility = Visibility.Collapsed;
-                    UserLoginTextBox.Visibility = Visibility.Collapsed;
-                    UserPassTextBlock.Visibility = Visibility.Collapsed;
-                    UserPassTextBox.Visibility = Visibility.Collapsed;
-                    UserPhoneNumberTextBlock.Visibility = Visibility.Collapsed;
-                    UserPhoneNumberTextBox.Visibility = Visibility.Collapsed;
-                    UserRolesComboBox.Visibility = Visibility.Collapsed;
-                    UserRolesTextBlock.Visibility = Visibility.Collapsed;
                     break;
                 case "Изучение пробы":
                     ContemplationSampleTextBlock.Visibility = Visibility.Visible;
@@ -179,31 +153,6 @@ namespace GreenTrail.Forms.Data.AddData
                     ContemplationTypeContemplationTextBlock.Visibility = Visibility.Visible;
                     ContemplationTypeContemplationTextBox.Visibility = Visibility.Visible;
                     AddNormButton.Visibility = Visibility.Visible;
-
-                    SampleRegionTextBlock.Visibility = Visibility.Collapsed;
-                    SampleRegionComboBox.Visibility = Visibility.Collapsed;
-                    AddRegionButton.Visibility = Visibility.Collapsed;
-                    SampleTypeTextBlock.Visibility = Visibility.Collapsed;
-                    SampleTypeComboBox.Visibility = Visibility.Collapsed;
-                    SampleArticulTextBox.Visibility = Visibility.Collapsed;
-                    SampleArticulTextBlock.Visibility = Visibility.Collapsed;
-
-                    UserAddressTextBlock.Visibility = Visibility.Collapsed;
-                    UserAddressTextBox.Visibility = Visibility.Collapsed;
-                    UserDateOfBirthTextBlock.Visibility = Visibility.Collapsed;
-                    UserDateOfBirthTextBox.Visibility = Visibility.Collapsed;
-                    UserEmailTextBlock.Visibility = Visibility.Collapsed;
-                    UserEmailTextBox.Visibility = Visibility.Collapsed;
-                    UserFullNameTextBlock.Visibility = Visibility.Collapsed;
-                    UserFullNameTextBox.Visibility = Visibility.Collapsed;
-                    UserLoginTextBlock.Visibility = Visibility.Collapsed;
-                    UserLoginTextBox.Visibility = Visibility.Collapsed;
-                    UserPassTextBlock.Visibility = Visibility.Collapsed;
-                    UserPassTextBox.Visibility = Visibility.Collapsed;
-                    UserPhoneNumberTextBlock.Visibility = Visibility.Collapsed;
-                    UserPhoneNumberTextBox.Visibility = Visibility.Collapsed;
-                    UserRolesComboBox.Visibility = Visibility.Collapsed;
-                    UserRolesTextBlock.Visibility = Visibility.Collapsed;
                     break;
                 case "Пользователи":
                     UserAddressTextBlock.Visibility = Visibility.Visible;
@@ -222,62 +171,32 @@ namespace GreenTrail.Forms.Data.AddData
                     UserPhoneNumberTextBox.Visibility = Visibility.Visible;
                     UserRolesComboBox.Visibility = Visibility.Visible;
                     UserRolesTextBlock.Visibility = Visibility.Visible;
-
-                    ContemplationSampleTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationSampleComboBox.Visibility = Visibility.Collapsed;
-                    ContemplationNormTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationNormComboBox.Visibility = Visibility.Collapsed;
-                    AddNormButton.Visibility = Visibility.Collapsed;
-
-                    SampleRegionTextBlock.Visibility = Visibility.Collapsed;
-                    SampleRegionComboBox.Visibility = Visibility.Collapsed;
-                    AddRegionButton.Visibility = Visibility.Collapsed;
-                    SampleTypeTextBlock.Visibility = Visibility.Collapsed;
-                    SampleTypeComboBox.Visibility = Visibility.Collapsed;
-                    SampleArticulTextBox.Visibility = Visibility.Collapsed;
-                    SampleArticulTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationResultTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationResultTextBox.Visibility = Visibility.Collapsed;
-                    ContemplationTypeContemplationTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationTypeContemplationTextBox.Visibility = Visibility.Collapsed;
                     break;
-                default:
-                    UserAddressTextBlock.Visibility = Visibility.Collapsed;
-                    UserAddressTextBox.Visibility = Visibility.Collapsed;
-                    UserDateOfBirthTextBlock.Visibility = Visibility.Collapsed;
-                    UserDateOfBirthTextBox.Visibility = Visibility.Collapsed;
-                    UserEmailTextBlock.Visibility = Visibility.Collapsed;
-                    UserEmailTextBox.Visibility = Visibility.Collapsed;
-                    UserFullNameTextBlock.Visibility = Visibility.Collapsed;
-                    UserFullNameTextBox.Visibility = Visibility.Collapsed;
-                    UserLoginTextBlock.Visibility = Visibility.Collapsed;
-                    UserLoginTextBox.Visibility = Visibility.Collapsed;
-                    UserPassTextBlock.Visibility = Visibility.Collapsed;
-                    UserPassTextBox.Visibility = Visibility.Collapsed;
-                    UserPhoneNumberTextBlock.Visibility = Visibility.Collapsed;
-                    UserPhoneNumberTextBox.Visibility = Visibility.Collapsed;
-                    UserRolesComboBox.Visibility = Visibility.Collapsed;
-                    UserRolesTextBlock.Visibility = Visibility.Collapsed;
+                case "Мероприятие":
+                    tblock_heading.Visibility = Visibility.Visible;
+                    TextBox_heading.Visibility = Visibility.Visible;
+                    TextBlock_text.Visibility = Visibility.Visible;
+                    TextBox_text.Visibility = Visibility.Visible;
+                    tblock_heading.Text = "Название";
 
-                    SampleRegionTextBlock.Visibility = Visibility.Collapsed;
-                    SampleRegionComboBox.Visibility = Visibility.Collapsed;
-                    SampleTypeTextBlock.Visibility = Visibility.Collapsed;
-                    SampleTypeComboBox.Visibility = Visibility.Collapsed;
-                    SampleArticulTextBox.Visibility = Visibility.Collapsed;
-                    SampleArticulTextBlock.Visibility = Visibility.Collapsed;
-                    AddRegionButton.Visibility = Visibility.Collapsed;
+                    Calendar.Visibility = Visibility.Visible;
 
-                    ContemplationSampleTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationSampleComboBox.Visibility = Visibility.Collapsed;
-                    ContemplationNormTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationNormComboBox.Visibility = Visibility.Collapsed;
-                    ContemplationResultTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationResultTextBox.Visibility = Visibility.Collapsed;
-                    ContemplationTypeContemplationTextBlock.Visibility = Visibility.Collapsed;
-                    ContemplationTypeContemplationTextBox.Visibility = Visibility.Collapsed;
-                    AddNormButton.Visibility = Visibility.Collapsed;
+                   
+                    break;
+                case "Новость":
+                    tblock_heading.Visibility = Visibility.Visible;
+                    TextBox_heading.Visibility = Visibility.Visible;
+                    TextBlock_text.Visibility = Visibility.Visible;
+                    TextBox_text.Visibility = Visibility.Visible;
 
-                    AddButton.Visibility = Visibility.Collapsed;
+                    Calendar.Visibility = Visibility.Visible;
+                    break;
+                case "Рекомендация":
+                    tblock_heading.Visibility = Visibility.Visible;
+                    TextBox_heading.Visibility = Visibility.Visible;
+                    TextBlock_text.Visibility = Visibility.Visible;
+                    TextBox_text.Visibility = Visibility.Visible;
+
                     break;
             }
         }
@@ -329,7 +248,7 @@ namespace GreenTrail.Forms.Data.AddData
                         };
                         _context.Sample.Add(sample);
                     }
-                    else { MessageBox.Show("Вы не ввели все данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); }
+                    else { MessageBox.Show("Вы не ввели все данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
 
                     break;
                 case "Изучение пробы":
@@ -343,20 +262,22 @@ namespace GreenTrail.Forms.Data.AddData
                             result = ContemplationResultTextBox.Text, // Временно задано произвольное значение
                             id_norm = (int)ContemplationNormComboBox.SelectedValue
                         };
-
-                        //if (норма - ContemplationResultTextBox.Text)
-                        //{
-                        //    Pollution pollution = new Pollution
-                        //    {
-                        //        id_contemplation = contemplation.id_contemplation,
-                        //        levels = норма - ContemplationResultTextBox.Text,
-                        //        source = ,//пока хз что писать
-                        //        data_time =
-                        //    }
-                        //}
+                        Sample sample = GreanTrailEntities.GetContext().Sample.FirstOrDefault(r => r.articul == (string)SampleRegionComboBox.SelectedItem); 
+                        Norm norma = GreanTrailEntities.GetContext().Norm.FirstOrDefault(r => r.id_norm == (long)ContemplationNormComboBox.SelectedValue && r.id_type == sample.id_type);
+                        if (Convert.ToInt32(norma.norma) < Convert.ToInt32(ContemplationResultTextBox.Text))
+                        {
+                            string v = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+                            Pollution pollution = new Pollution
+                            {
+                                id_contemplation = contemplation.id_contemplation,
+                                levels = (Convert.ToInt32(norma.norma) - Convert.ToInt32(ContemplationResultTextBox.Text)).ToString(),
+                                //id_region = GreanTrailEntities.GetContext().Region.FirstOrDefault(r => r.id_region == sample.id_region).ToString(),
+                                //data_time = v
+                            };
+                        }
                         _context.Contemplation.Add(contemplation);
                     }
-                    else { MessageBox.Show("Вы не ввели все данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); }
+                    else { MessageBox.Show("Вы не ввели все данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
                     break;
                 case "Пользователи":
                     if (UserLoginTextBox.Text !=string.Empty && UserLoginTextBox.Text != string.Empty)
@@ -374,8 +295,48 @@ namespace GreenTrail.Forms.Data.AddData
                         };
                         _context.Users.Add(users);
                     }
-                    else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); }
+                    else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
 
+                    break;
+                case "Мероприятие":
+                    if (UserLoginTextBox.Text != string.Empty && UserLoginTextBox.Text != string.Empty)
+                    {
+                        Event events = new Event
+                        {
+                            name = tblock_heading.Text,
+                            data_time = Calendar.SelectedDate
+                        };
+                        _context.Event.Add(events);
+                    }
+                    else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+                    break;
+                case "Новость":
+                    if (UserLoginTextBox.Text != string.Empty && UserLoginTextBox.Text != string.Empty)
+                    {
+                        News news = new News
+                        {
+                            //id_user = GreanTrailEntities.CurrentUserId,
+                            heading = tblock_heading.Text,
+                            text = TextBox_text.Text,
+                            data_time = Calendar.SelectedDate
+                        };
+                        _context.News.Add(news);
+                    }
+                    else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+                    break;
+                case "Рекомендация":
+                    if (UserLoginTextBox.Text != string.Empty && UserLoginTextBox.Text != string.Empty)
+                    {
+                        EcologicalRecommendations ecologicalRecommendations = new EcologicalRecommendations
+                        {
+                            //id_user = GreanTrailEntities.CurrentUserId,
+                            heading = tblock_heading.Text,
+                            text = TextBox_text.Text,
+
+                        };
+                        _context.EcologicalRecommendations.Add(ecologicalRecommendations);
+                    }
+                    else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
                     break;
             }
             _context.SaveChanges();

@@ -117,21 +117,21 @@ namespace GreenTrail.Forms.Data.ExportData
                                 .Select(ss => new { ss.Sample.articul, ss.Users.full_name, ss.type_contemplation, ss.Norm.name, ss.Norm.norma, ss.result })
                                 .ToList();
                             break;
-                        case "Мероприятия":
-                            data = context.Event
-                                .Select(ep => new { ep.name, ep.data_time })
-                                .ToList();
-                            break;
+                        //case "Мероприятия":
+                        //    data = context.Event
+                        //        .Select(ep => new { ep.name, ep.data_time })
+                        //        .ToList();
+                        //    break;
                         case "Загрязнения":
-                            data = context.Region_Pollution
-                                .Select(p => new { p.Pollution.id_pollution, p.Pollution.levels, p.Pollution.source, p.Region.name, p.Region.geographical_coordinates })
+                            data = context.Pollution
+                                .Select(p => new { p.id_pollution, p.levels, p.Region.name, p.Region.geographical_coordinates })
                                 .ToList();
                             break;
-                        case "Экологические рекомендации":
-                            data = context.EcologicalRecommendations
-                                .Select(er => new { er.heading, er.text, er.Users.full_name })
-                                .ToList();
-                            break;
+                        //case "Экологические рекомендации":
+                        //    data = context.EcologicalRecommendations
+                        //        .Select(er => new { er.heading, er.text, er.Users.full_name })
+                        //        .ToList();
+                        //    break;
                     }
 
                     // Обновить пользовательский интерфейс с загруженными данными

@@ -11,6 +11,7 @@ using System.Windows;
 
 using System.Net;
 using System.Configuration;
+using Microsoft.Win32;
 
 namespace GreenTrail.Source.Funs
 {
@@ -24,6 +25,12 @@ namespace GreenTrail.Source.Funs
                 Users user = GreanTrailEntities.GetContext().Users.FirstOrDefault(u => u.login == username && u.password == password);
                 if (user != null)
                 {
+                    RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", false);
+                    if (key == null)
+                    {
+                        key = Registry.CurrentUser.CreateSubKey("Software\\GreenTrail");
+                    }
+                    key.SetValue("CurrentUserId", user.id_user);
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
                     window.Close();
@@ -52,8 +59,7 @@ namespace GreenTrail.Source.Funs
                     dateOfBirth = dateOfBirth,
                     phoneNumber = phoneNumber,
                     address = address,
-                    password = password,
-                    id_roles = 2,
+                    password = password
                 };
 
                 // Добавление нового пользователя в контекст базы данных
@@ -156,6 +162,19 @@ namespace GreenTrail.Source.Funs
             {
                 MessageBox.Show(ex.ToString(), "Что-то пошло не так(", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        public static string GetCurrentRole()
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", true);
+            if (key != null)
+            {
+                var currentUserId = key.GetValue("CurrentUserId");
+                var user = GreanTrailEntities.GetContext().Users.FirstOrDefault(u => u.id_user == (long)currentUserId);
+                var userRole = GreanTrailEntities.GetContext().Roles.FirstOrDefault(r => r.id_roles == user.id_roles);
+                return userRole.name;
+            }
+            return "0";
         }
     }
 }

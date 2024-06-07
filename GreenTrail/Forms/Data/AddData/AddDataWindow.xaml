@@ -41,6 +41,7 @@
             <StackPanel Margin="10,40,10,0" x:Name="StackPanelMain">
 
                 <TextBlock x:Name="tblock_entity" Text="Сущность: " Style="{StaticResource TextBlockStyle}"/>
+                
                 <TextBlock Name="SampleArticulTextBlock" Text="Артикуль пробы:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
                 <TextBox x:Name="SampleArticulTextBox" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
                 <TextBlock Name="SampleTypeTextBlock" Text="Тип пробы:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
@@ -48,6 +49,12 @@
                 <TextBlock Name="SampleRegionTextBlock" Text="Регион:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
                 <ComboBox Name="SampleRegionComboBox" Visibility="Collapsed" Style="{StaticResource ComboBoxStyle}" />
                 <Button Name="AddRegionButton" Content="Добавить регион" Visibility="Collapsed" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Click="AddRegionButton_Click" />
+
+                <TextBlock x:Name="tblock_heading" Text="Заголовок: " Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox x:Name="TextBox_text" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
+                <TextBlock Name="TextBlock_text" Text="Текст:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox x:Name="TextBox_heading" Visibility="Collapsed" Style="{StaticResource TextBoxInputStyle}"/>
+                <Calendar x:Name="Calendar" Visibility="Collapsed"/>
 
                 <TextBlock Name="ContemplationSampleTextBlock" Text="Образец:" Visibility="Collapsed" Style="{StaticResource TextBlockStyle}"/>
                 <ComboBox Name="ContemplationSampleComboBox" Visibility="Collapsed" Style="{StaticResource ComboBoxStyle}"/>
