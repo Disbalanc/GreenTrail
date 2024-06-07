@@ -34,14 +34,6 @@
           <Property Name="data_time" Type="datetime" />
           <Property Name="id_region" Type="bigint" />
         </EntityType>
-        <EntityType Name="Event-Region">
-          <Key>
-            <PropertyRef Name="id_event_region" />
-          </Key>
-          <Property Name="id_event_region" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_event" Type="bigint" />
-          <Property Name="id_region" Type="bigint" />
-        </EntityType>
         <EntityType Name="News">
           <Key>
             <PropertyRef Name="id_news" />
@@ -69,7 +61,7 @@
           <Property Name="id_contemplation" Type="bigint" />
           <Property Name="levels" Type="nvarchar" MaxLength="50" />
           <Property Name="id_region" Type="bigint" />
-          <Property Name="data_time" Type="nvarchar" MaxLength="50" />
+          <Property Name="data_time" Type="datetime" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -79,14 +71,6 @@
           <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="geographical_coordinates" Type="nvarchar" MaxLength="50" />
           <Property Name="popullation" Type="int" />
-        </EntityType>
-        <EntityType Name="Region-Pollution">
-          <Key>
-            <PropertyRef Name="id_region_pollution" />
-          </Key>
-          <Property Name="id_region_pollution" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_region" Type="bigint" />
-          <Property Name="id_pollution" Type="bigint" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -197,30 +181,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Event-Region_Event">
-          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
-          <End Role="Event-Region" Type="Self.Event-Region" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="id_event" />
-            </Principal>
-            <Dependent Role="Event-Region">
-              <PropertyRef Name="id_event" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Event-Region_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
-          <End Role="Event-Region" Type="Self.Event-Region" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="id_region" />
-            </Principal>
-            <Dependent Role="Event-Region">
-              <PropertyRef Name="id_region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_News_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="News" Type="Self.News" Multiplicity="*" />
@@ -265,30 +225,6 @@
               <PropertyRef Name="id_region" />
             </Principal>
             <Dependent Role="Pollution">
-              <PropertyRef Name="id_region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Region-Pollution_Pollution">
-          <End Role="Pollution" Type="Self.Pollution" Multiplicity="0..1" />
-          <End Role="Region-Pollution" Type="Self.Region-Pollution" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pollution">
-              <PropertyRef Name="id_pollution" />
-            </Principal>
-            <Dependent Role="Region-Pollution">
-              <PropertyRef Name="id_pollution" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Region-Pollution_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
-          <End Role="Region-Pollution" Type="Self.Region-Pollution" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="id_region" />
-            </Principal>
-            <Dependent Role="Region-Pollution">
               <PropertyRef Name="id_region" />
             </Dependent>
           </ReferentialConstraint>
@@ -345,12 +281,10 @@
           <EntitySet Name="Contemplation" EntityType="Self.Contemplation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EcologicalRecommendations" EntityType="Self.EcologicalRecommendations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Event-Region" EntityType="Self.Event-Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Norm" EntityType="Self.Norm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pollution" EntityType="Self.Pollution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Region-Pollution" EntityType="Self.Region-Pollution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sample" EntityType="Self.Sample" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -376,14 +310,6 @@
             <End Role="Region" EntitySet="Region" />
             <End Role="Event" EntitySet="Event" />
           </AssociationSet>
-          <AssociationSet Name="FK_Event-Region_Event" Association="Self.FK_Event-Region_Event">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="Event-Region" EntitySet="Event-Region" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Event-Region_Region" Association="Self.FK_Event-Region_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Event-Region" EntitySet="Event-Region" />
-          </AssociationSet>
           <AssociationSet Name="FK_News_Users" Association="Self.FK_News_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="News" EntitySet="News" />
@@ -399,14 +325,6 @@
           <AssociationSet Name="FK_Pollution_Region" Association="Self.FK_Pollution_Region">
             <End Role="Region" EntitySet="Region" />
             <End Role="Pollution" EntitySet="Pollution" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Region-Pollution_Pollution" Association="Self.FK_Region-Pollution_Pollution">
-            <End Role="Pollution" EntitySet="Pollution" />
-            <End Role="Region-Pollution" EntitySet="Region-Pollution" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Region-Pollution_Region" Association="Self.FK_Region-Pollution_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Region-Pollution" EntitySet="Region-Pollution" />
           </AssociationSet>
           <AssociationSet Name="FK_Sample_Region" Association="Self.FK_Sample_Region">
             <End Role="Region" EntitySet="Region" />
@@ -464,17 +382,6 @@
           <Property Name="data_time" Type="DateTime" Precision="3" />
           <Property Name="id_region" Type="Int64" />
           <NavigationProperty Name="Region" Relationship="Self.FK_Event_Region" FromRole="Event" ToRole="Region" />
-          <NavigationProperty Name="Event_Region" Relationship="Self.FK_Event_Region_Event" FromRole="Event" ToRole="Event_Region" />
-        </EntityType>
-        <EntityType Name="Event_Region">
-          <Key>
-            <PropertyRef Name="id_event_region" />
-          </Key>
-          <Property Name="id_event_region" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_event" Type="Int64" />
-          <Property Name="id_region" Type="Int64" />
-          <NavigationProperty Name="Event" Relationship="Self.FK_Event_Region_Event" FromRole="Event_Region" ToRole="Event" />
-          <NavigationProperty Name="Region" Relationship="Self.FK_Event_Region_Region" FromRole="Event_Region" ToRole="Region" />
         </EntityType>
         <EntityType Name="News">
           <Key>
@@ -506,10 +413,9 @@
           <Property Name="id_contemplation" Type="Int64" />
           <Property Name="levels" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="id_region" Type="Int64" />
-          <Property Name="data_time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="data_time" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Contemplation" Relationship="Self.FK_Pollution_Contemplation" FromRole="Pollution" ToRole="Contemplation" />
           <NavigationProperty Name="Region" Relationship="Self.FK_Pollution_Region" FromRole="Pollution" ToRole="Region" />
-          <NavigationProperty Name="Region_Pollution" Relationship="Self.FK_Region_Pollution_Pollution" FromRole="Pollution" ToRole="Region_Pollution" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -520,20 +426,8 @@
           <Property Name="geographical_coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="popullation" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="Self.FK_Event_Region" FromRole="Region" ToRole="Event" />
-          <NavigationProperty Name="Event_Region" Relationship="Self.FK_Event_Region_Region" FromRole="Region" ToRole="Event_Region" />
           <NavigationProperty Name="Pollution" Relationship="Self.FK_Pollution_Region" FromRole="Region" ToRole="Pollution" />
-          <NavigationProperty Name="Region_Pollution" Relationship="Self.FK_Region_Pollution_Region" FromRole="Region" ToRole="Region_Pollution" />
           <NavigationProperty Name="Sample" Relationship="Self.FK_Sample_Region" FromRole="Region" ToRole="Sample" />
-        </EntityType>
-        <EntityType Name="Region_Pollution">
-          <Key>
-            <PropertyRef Name="id_region_pollution" />
-          </Key>
-          <Property Name="id_region_pollution" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_region" Type="Int64" />
-          <Property Name="id_pollution" Type="Int64" />
-          <NavigationProperty Name="Pollution" Relationship="Self.FK_Region_Pollution_Pollution" FromRole="Region_Pollution" ToRole="Pollution" />
-          <NavigationProperty Name="Region" Relationship="Self.FK_Region_Pollution_Region" FromRole="Region_Pollution" ToRole="Region" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -668,30 +562,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Event_Region_Event">
-          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
-          <End Role="Event_Region" Type="Self.Event_Region" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="id_event" />
-            </Principal>
-            <Dependent Role="Event_Region">
-              <PropertyRef Name="id_event" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Event_Region_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
-          <End Role="Event_Region" Type="Self.Event_Region" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="id_region" />
-            </Principal>
-            <Dependent Role="Event_Region">
-              <PropertyRef Name="id_region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_News_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="News" Type="Self.News" Multiplicity="*" />
@@ -724,30 +594,6 @@
               <PropertyRef Name="id_region" />
             </Principal>
             <Dependent Role="Pollution">
-              <PropertyRef Name="id_region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Region_Pollution_Pollution">
-          <End Role="Pollution" Type="Self.Pollution" Multiplicity="0..1" />
-          <End Role="Region_Pollution" Type="Self.Region_Pollution" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pollution">
-              <PropertyRef Name="id_pollution" />
-            </Principal>
-            <Dependent Role="Region_Pollution">
-              <PropertyRef Name="id_pollution" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Region_Pollution_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
-          <End Role="Region_Pollution" Type="Self.Region_Pollution" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="id_region" />
-            </Principal>
-            <Dependent Role="Region_Pollution">
               <PropertyRef Name="id_region" />
             </Dependent>
           </ReferentialConstraint>
@@ -804,12 +650,10 @@
           <EntitySet Name="Contemplation" EntityType="Self.Contemplation" />
           <EntitySet Name="EcologicalRecommendations" EntityType="Self.EcologicalRecommendations" />
           <EntitySet Name="Event" EntityType="Self.Event" />
-          <EntitySet Name="Event_Region" EntityType="Self.Event_Region" />
           <EntitySet Name="News" EntityType="Self.News" />
           <EntitySet Name="Norm" EntityType="Self.Norm" />
           <EntitySet Name="Pollution" EntityType="Self.Pollution" />
           <EntitySet Name="Region" EntityType="Self.Region" />
-          <EntitySet Name="Region_Pollution" EntityType="Self.Region_Pollution" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="Sample" EntityType="Self.Sample" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -839,14 +683,6 @@
             <End Role="Region" EntitySet="Region" />
             <End Role="Event" EntitySet="Event" />
           </AssociationSet>
-          <AssociationSet Name="FK_Event_Region_Event" Association="Self.FK_Event_Region_Event">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="Event_Region" EntitySet="Event_Region" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Event_Region_Region" Association="Self.FK_Event_Region_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Event_Region" EntitySet="Event_Region" />
-          </AssociationSet>
           <AssociationSet Name="FK_News_Users" Association="Self.FK_News_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="News" EntitySet="News" />
@@ -858,14 +694,6 @@
           <AssociationSet Name="FK_Pollution_Region" Association="Self.FK_Pollution_Region">
             <End Role="Region" EntitySet="Region" />
             <End Role="Pollution" EntitySet="Pollution" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Region_Pollution_Pollution" Association="Self.FK_Region_Pollution_Pollution">
-            <End Role="Pollution" EntitySet="Pollution" />
-            <End Role="Region_Pollution" EntitySet="Region_Pollution" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Region_Pollution_Region" Association="Self.FK_Region_Pollution_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Region_Pollution" EntitySet="Region_Pollution" />
           </AssociationSet>
           <AssociationSet Name="FK_Sample_Region" Association="Self.FK_Sample_Region">
             <End Role="Region" EntitySet="Region" />
@@ -922,15 +750,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Event_Region">
-            <EntityTypeMapping TypeName="GreanTrailModel.Event_Region">
-              <MappingFragment StoreEntitySet="Event-Region">
-                <ScalarProperty Name="id_event_region" ColumnName="id_event_region" />
-                <ScalarProperty Name="id_event" ColumnName="id_event" />
-                <ScalarProperty Name="id_region" ColumnName="id_region" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="News">
             <EntityTypeMapping TypeName="GreanTrailModel.News">
               <MappingFragment StoreEntitySet="News">
@@ -970,15 +789,6 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="geographical_coordinates" ColumnName="geographical_coordinates" />
                 <ScalarProperty Name="popullation" ColumnName="popullation" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Region_Pollution">
-            <EntityTypeMapping TypeName="GreanTrailModel.Region_Pollution">
-              <MappingFragment StoreEntitySet="Region-Pollution">
-                <ScalarProperty Name="id_region_pollution" ColumnName="id_region_pollution" />
-                <ScalarProperty Name="id_region" ColumnName="id_region" />
-                <ScalarProperty Name="id_pollution" ColumnName="id_pollution" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -18,9 +18,7 @@ namespace GreenTrail
         public Region()
         {
             this.Event = new HashSet<Event>();
-            this.Event_Region = new HashSet<Event_Region>();
             this.Pollution = new HashSet<Pollution>();
-            this.Region_Pollution = new HashSet<Region_Pollution>();
             this.Sample = new HashSet<Sample>();
         }
     
@@ -32,11 +30,7 @@ namespace GreenTrail
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Event { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Event_Region> Event_Region { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pollution> Pollution { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Region_Pollution> Region_Pollution { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sample> Sample { get; set; }
     }

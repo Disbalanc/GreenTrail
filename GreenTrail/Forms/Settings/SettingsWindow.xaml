@@ -4,9 +4,91 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenTrail.Forms.Settings"
+        xmlns:themeswitch="https://jamesnet.dev/xaml/presentation/themeswitch"
+        xmlns:james="https://jamesnet.dev/xaml/presentation" xmlns:themeswitch1="clr-namespace:GreenTrail.Source.Style"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="450" Width="800">
+        Title="SettingsWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}" WindowStyle="None" MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Source/Style/StyleElemets.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.ColumnSpan="2" x:Name="sp_dragMove" VerticalAlignment="Top" Background="{DynamicResource SecondaryColor}" Panel.ZIndex="100">
+            <Grid>
+                <Label Content="GreanTrail: Экологическое слежение" FontSize="18" Style="{StaticResource LabelInputStyle}" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
+                    <Button Click="MinimizeClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_minimaze" Source="/Source/Image/Assets/img_minimaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                    <Button Click="MaximizeClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_maximaze" Source="/Source/Image/Assets/img_maximaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                    <Button Click="CloseClick" Style="{StaticResource WindowStateStyle}">
+                        <Image x:Name="i_close" Source="/Source/Image/Assets/img_close.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+
+        <!-- Смена темы -->
+        <Label Grid.Column="0" Grid.Row="1" Content="Тема:" Style="{StaticResource LabelInputStyle}"/>
+        <james:JamesToggleSwitch x:Name="jamesToggleSwitch" Width="100" Height="25" Grid.Column="0" Grid.Row="1" Style="{StaticResource JamesToggleSwitchStyle}" HorizontalAlignment="Right" Click="JamesToggleSwitch_Click"/>
+
+        <!-- Смена пароля -->
+        <Label Grid.Column="0" Grid.Row="2" Content="Пароль:" Style="{StaticResource LabelInputStyle}"/>
+        <Button Grid.Column="1" Grid.Row="2" Margin="20,0,20,4" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Content="Изменить пароль" x:Name="btn_newPass" Click="btn_newPass_Click"/>
+
+        <!-- Смена логина -->
+        <Label Grid.Column="0" Grid.Row="3" Content="Логин:" Style="{StaticResource LabelInputStyle}"/>
+        <TextBox x:Name="tb_login" Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxInputStyle}"/>
+
+        <!-- Смена почты -->
+        <Label Grid.Column="0" Grid.Row="4" Content="Почта:" Style="{StaticResource LabelInputStyle}"/>
+        <TextBox x:Name="tb_email" Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxInputStyle}"/>
+
+        <!-- Дата рождения -->
+        <Label Grid.Column="0" Grid.Row="5" Content="Дата рождения:" Style="{StaticResource LabelInputStyle}"/>
+        <DatePicker x:Name="tb_BirthDate" Grid.Column="1" Grid.Row="5"/>
+
+        <!-- Адрес -->
+        <Label Grid.Column="0" Grid.Row="6" Content="Адрес:" Style="{StaticResource LabelInputStyle}"/>
+        <TextBox x:Name="tb_Address" Grid.Column="1" Grid.Row="6" Style="{StaticResource TextBoxInputStyle}"/>
+
+        <!-- Телефон -->
+        <Label Grid.Column="0" Grid.Row="7" Content="Адрес:" Style="{StaticResource LabelInputStyle}"/>
+        <TextBox x:Name="tb_telephoneNumber" Grid.Column="1" Grid.Row="7" Style="{StaticResource TextBoxInputStyle}"/>
+
+        <!-- Картинка профиля -->
+        <Label Grid.Column="0" Grid.Row="9" Content="Картинка профиля:" Style="{StaticResource LabelInputStyle}"/>
+        <Image x:Name="image" Stretch="Uniform" Grid.Column="1" Grid.Row="9" Width="100" Height="100" />
+        <Button Grid.Column="1" Grid.Row="9" Content="Load Photo" Click="LoadPhotoButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,0" Width="100" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}"/>
+
+        <!-- Смена full_name -->
+        <Label Grid.Column="0" Grid.Row="8" Content="Полное имя:" Style="{StaticResource LabelInputStyle}"/>
+        <TextBox x:Name="tb_full_name"  Grid.Column="1" Grid.Row="8" Style="{StaticResource TextBoxInputStyle}"/>
+
+        <Button Grid.ColumnSpan="2" Grid.Row="11" Margin="20,2,20,4" Content="Сохранить изменения" x:Name="btn_save" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Click="btn_save_Click"/>
     </Grid>
 </Window>

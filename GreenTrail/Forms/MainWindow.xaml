@@ -51,19 +51,19 @@
                                 <Button Click="DataEcologicalClick" Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50">
                                     <StackPanel>
                                         <Image Source="/Source/Image/Assets/img_dataEcological.png" Style="{StaticResource WindowStateStyleImage}"/>
-                                        <Label Content="Данные экологии"/>
+                                        <Label Content="Данные экологии" Style="{StaticResource LabelInputStyle}"/>
                                     </StackPanel>
                                 </Button>
                                 <Button Click="MapClick" Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50">
                                     <StackPanel>
                                         <Image Source="/Source/Image/Assets/img_map.png" Style="{StaticResource WindowStateStyleImage}"/>
-                                        <Label Content="Карта"/>
+                                        <Label Content="Карта" Style="{StaticResource LabelInputStyle}"/>
                                     </StackPanel>
                                 </Button>
                                 <Button Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50" Click="Button_Click">
                                     <StackPanel>
                                         <Image Source="/Source/Image/Assets/img_export.png" Style="{StaticResource WindowStateStyleImage}"/>
-                                        <Label Content="Экспорт репортов"/>
+                                        <Label Content="Экспорт репортов" Style="{StaticResource LabelInputStyle}"/>
                                     </StackPanel>
                                     <Button.ContextMenu>
                                         <ContextMenu>
@@ -76,19 +76,18 @@
                                 <Button Style="{StaticResource ButtonSecandaryWelcomeInputStyle}" Width="125" Height="50" Click="Button_Click_Add">
                                     <StackPanel>
                                         <Image Source="/Source/Image/Assets/img_addData.png" Style="{StaticResource WindowStateStyleImage}"/>
-                                        <Label Content="Добавление"/>
+                                        <Label Content="Добавление" Style="{StaticResource LabelInputStyle}"/>
                                     </StackPanel>
                                     <Button.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem x:Name="MenuAddSample" Visibility="Hidden" Header="Пробы" Click="AddSample_Click" />
-                                            <MenuItem x:Name="MenuAddRegion" Visibility="Hidden" Header="Регионы" Click="AddRegion_Click" />
-                                            <MenuItem x:Name="MenuAddContemplation" Visibility="Hidden" Header="Изучение проб" Click="AddContemplation_Click" />
-                                            <MenuItem x:Name="MenuAddNorm" Visibility="Hidden" Header="Нормы" Click="AddNorm_Click" />
-                                            <MenuItem x:Name="MenuAddUser" Visibility="Hidden" Header="Пользователи" Click="AddUser_Click" />
-                                            
-                                            <MenuItem x:Name="MenuAddEvent" Visibility="Hidden" Header="Мероприятие" Click="AddEvent_Click" />
-                                            <MenuItem x:Name="MenuAddNews" Visibility="Hidden" Header="Новость" Click="AddNews_Click" />
-                                            <MenuItem x:Name="MenuAddRecomendation" Visibility="Hidden" Header="Экологические рекомендации" Click="AddRecomendation_Click" />
+                                            <MenuItem x:Name="MenuAddSample" Visibility="Collapsed" Header="Пробы" Click="AddSample_Click" />
+                                            <MenuItem x:Name="MenuAddRegion" Visibility="Collapsed" Header="Регионы" Click="AddRegion_Click" />
+                                            <MenuItem x:Name="MenuAddContemplation" Visibility="Collapsed" Header="Изучение проб" Click="AddContemplation_Click" />
+                                            <MenuItem x:Name="MenuAddNorm" Visibility="Collapsed" Header="Нормы" Click="AddNorm_Click" />
+                                            <MenuItem x:Name="MenuAddUser" Visibility="Collapsed" Header="Пользователи" Click="AddUser_Click" />
+                                            <MenuItem x:Name="MenuAddEvent" Visibility="Collapsed" Header="Мероприятие" Click="AddEvent_Click" />
+                                            <MenuItem x:Name="MenuAddNews" Visibility="Collapsed" Header="Новость" Click="AddNews_Click" />
+                                            <MenuItem x:Name="MenuAddRecomendation" Visibility="Collapsed" Header="Экологические рекомендации" Click="AddRecomendation_Click" />
                                         </ContextMenu>
                                     </Button.ContextMenu>
                                 </Button>

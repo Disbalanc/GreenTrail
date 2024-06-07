@@ -42,9 +42,9 @@
                     </StackPanel>
             </Grid>
         </StackPanel>
-            <TabControl Grid.Row="1" Margin="0,10,0,0">
-                <TabItem x:Name="ti_Employees" Visibility="Hidden" Header="Сотрудники" Background="{DynamicResource SecondaryColor}">
-                    <Grid Background="{DynamicResource PrimaryColor}" Width="800" Height="380">
+            <TabControl Grid.Row="1" Margin="0,10,0,0" Background="{DynamicResource PrimaryColor}">
+                <TabItem x:Name="ti_Employees" Visibility="Collapsed" Header="Сотрудники" Background="{DynamicResource SecondaryColor}">
+                    <Grid Visibility="Collapsed" x:Name="dg_Employees" Background="{DynamicResource PrimaryColor}" Width="800" Height="380">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="7*"/>
@@ -90,10 +90,10 @@
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Visibility="Hidden" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createEmployees" Content="Создать пробу" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                        <Button Visibility="Collapsed" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createEmployees" Content="Создать пробу" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
                     </Grid>
                 </TabItem>
-                <TabItem Visibility="Hidden" x:Name="ti_samples" Header="Пробы" Background="{DynamicResource SecondaryColor}">
+                <TabItem Visibility="Collapsed" x:Name="ti_samples" Header="Пробы" Background="{DynamicResource SecondaryColor}">
                     <Grid Background="{DynamicResource PrimaryColor}" Width="800" Height="380">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -114,10 +114,10 @@
                                 <DataGridTextColumn Header="Координаты региона" Binding="{Binding Region.geographical_coordinates}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createSamle" Content="Создать пробу" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                        <Button Visibility="Collapsed" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createSamle" Content="Создать пробу" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
                     </Grid>
                 </TabItem>
-                <TabItem Visibility="Hidden" x:Name="ti_sampleStudies" Header="Изучения проб" Background="{DynamicResource SecondaryColor}">
+                <TabItem Visibility="Collapsed" x:Name="ti_sampleStudies" Header="Изучения проб" Background="{DynamicResource SecondaryColor}">
                     <Grid Background="{DynamicResource PrimaryColor}" Width="800" Height="380">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -141,10 +141,10 @@
                                 <DataGridTextColumn Header="Результат" Binding="{Binding result}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Visibility="Hidden" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="3" x:Name="btn_createContemplation" Content="Создать Иследование" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                        <Button Visibility="Collapsed" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="3" x:Name="btn_createContemplation" Content="Создать Иследование" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
                     </Grid>
                 </TabItem>
-                <TabItem Visibility="Hidden" x:Name="ti_Pollution" Header="Загрязнения" Background="{DynamicResource SecondaryColor}">
+                <TabItem Visibility="Collapsed" x:Name="ti_Pollution" Header="Загрязнения" Background="{DynamicResource SecondaryColor}">
                     <Grid Background="{DynamicResource PrimaryColor}" Width="800" Height="380">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -170,10 +170,10 @@
                                 <DataGridTextColumn Header="Координаты региона" Binding="{Binding Region.geographical_coordinates}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Visibility="Hidden" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="3" x:Name="btn_createPollution" Content="Создать загрязнение" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                        <Button Visibility="Collapsed" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="3" x:Name="btn_createPollution" Content="Создать загрязнение" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
                     </Grid>
                 </TabItem>
-                <TabItem Visibility="Hidden" x:Name="ti_news" Header="Новости" Background="{DynamicResource SecondaryColor}">
+                <TabItem Visibility="Collapsed" x:Name="ti_news" Header="Новости" Background="{DynamicResource SecondaryColor}">
                     <Grid Background="{DynamicResource SecondaryColor}" Width="800" Height="380">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -194,10 +194,10 @@
                                 <DataGridTextColumn Header="Редактор" Binding="{Binding Users.full_name}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Visibility="Hidden" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createNews" Content="Создать новость" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                        <Button Visibility="Collapsed" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createNews" Content="Создать новость" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
                     </Grid>
                 </TabItem>
-                <TabItem Visibility="Hidden" x:Name="ti_Events" Header="Мероприятия" Background="{DynamicResource SecondaryColor}">
+                <TabItem Visibility="Collapsed" x:Name="ti_Events" Header="Мероприятия" Background="{DynamicResource SecondaryColor}">
                     <Grid Background="{DynamicResource SecondaryColor}" Width="800" Height="380">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -217,10 +217,10 @@
                                 <DataGridTextColumn Header="Местоположение" Binding="{Binding Region.geographical_coordinates}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Visibility="Hidden" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createEvents" Content="Создать мероприятие" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                        <Button Visibility="Collapsed" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createEvents" Content="Создать мероприятие" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
                     </Grid>
                 </TabItem>
-                <TabItem Visibility="Hidden" x:Name="ti_Region" Header="Регионы" Background="{DynamicResource SecondaryColor}">
+                <TabItem Visibility="Collapsed" x:Name="ti_Region" Header="Регионы" Background="{DynamicResource SecondaryColor}">
                     <Grid Background="{DynamicResource SecondaryColor}" Width="800" Height="380">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -238,10 +238,9 @@
                                 <DataGridTextColumn Header="Местоположение" Binding="{Binding geographical_coordinates}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Visibility="Hidden" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createRegion" Content="Создать регион" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
+                        <Button Visibility="Collapsed" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}" Grid.Row="2" x:Name="btn_createRegion" Content="Создать регион" FontSize="20" Padding="10" VerticalContentAlignment="Bottom" Height="50" VerticalAlignment="Bottom" Margin="150,0"/>
                     </Grid>
                 </TabItem>
-
             </TabControl>
         </Grid>
     </Viewbox>

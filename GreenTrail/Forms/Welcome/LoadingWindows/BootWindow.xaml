@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenTrail.Forms.Welcome.LoadingWindows"
         mc:Ignorable="d"
-            Title="Экран загрузки" Height="300" Width="400" WindowStartupLocation="CenterScreen" Background="{DynamicResource PrimaryColor}">
+            Title="Экран загрузки" Height="300" Width="400" WindowStartupLocation="CenterScreen" Background="{DynamicResource PrimaryColor}" ResizeMode="NoResize" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

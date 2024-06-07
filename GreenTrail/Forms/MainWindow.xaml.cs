@@ -34,6 +34,7 @@ namespace GreenTrail.Forms
             // Обработчик события прокрутки для ScrollBar
             scrollBar.Scroll += ScrollBar_Scroll;
 
+            SwapRoles();
         }
 
         public void SwapRoles()
@@ -57,7 +58,6 @@ namespace GreenTrail.Forms
                     MenuAddEvent.Visibility = Visibility.Visible;
                     MenuAddNews.Visibility = Visibility.Visible;
                     MenuAddRecomendation.Visibility = Visibility.Visible;
-
                     break;
             }
         }
@@ -138,7 +138,7 @@ namespace GreenTrail.Forms
         private void DataEcologicalClick(object sender, RoutedEventArgs e)
         {
             ViewDataWindow viewDataWindow = new ViewDataWindow();
-            viewDataWindow.ShowDialog();
+            viewDataWindow.Show();
             this.Close();
         }
 
@@ -242,6 +242,7 @@ namespace GreenTrail.Forms
                     MessageBox.Show("У вас пока нет доступа к добавлению!", "Упс", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
             }
+            this.Close();
         }
 
 
@@ -249,7 +250,6 @@ namespace GreenTrail.Forms
         private void ExportExel_Click(object sender, RoutedEventArgs e)
         {
             ExportDataWindow exportDataWindow = new ExportDataWindow();
-
             exportDataWindow.Show();
             this.Close();
         }

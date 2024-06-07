@@ -14,19 +14,11 @@ namespace GreenTrail
     
     public partial class Event
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Event()
-        {
-            this.Event_Region = new HashSet<Event_Region>();
-        }
-    
         public long id_event { get; set; }
         public string name { get; set; }
         public Nullable<System.DateTime> data_time { get; set; }
         public Nullable<long> id_region { get; set; }
     
         public virtual Region Region { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Event_Region> Event_Region { get; set; }
     }
 }

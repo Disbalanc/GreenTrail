@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Configuration;
 using Microsoft.Win32;
+using GreenTrail.Properties;
 
 namespace GreenTrail.Source.Funs
 {
@@ -188,12 +189,12 @@ namespace GreenTrail.Source.Funs
             return ComputeSHA256Hash(otp.ToString());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static void ExportData()
+        public static void RememberUserId(long userId)
         {
-
+            // сохранить ID пользователя в настройках приложения или в файле
+            // например, используя Settings.Default.UserId
+            Settings.Default.UserId = userId;
+            Settings.Default.Save();
         }
     }
 }

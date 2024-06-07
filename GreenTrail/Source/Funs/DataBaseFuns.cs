@@ -12,6 +12,7 @@ using System.Windows;
 using System.Net;
 using System.Configuration;
 using Microsoft.Win32;
+using GreenTrail.Properties;
 
 namespace GreenTrail.Source.Funs
 {
@@ -25,12 +26,8 @@ namespace GreenTrail.Source.Funs
                 Users user = GreanTrailEntities.GetContext().Users.FirstOrDefault(u => u.login == username && u.password == password);
                 if (user != null)
                 {
-                    RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", false);
-                    if (key == null)
-                    {
-                        key = Registry.CurrentUser.CreateSubKey("Software\\GreenTrail");
-                    }
-                    key.SetValue("CurrentUserId", user.id_user);
+                    // запомнить ID пользователя
+                    Funs.RememberUserId(user.id_user);
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
                     window.Close();
@@ -50,6 +47,16 @@ namespace GreenTrail.Source.Funs
         {
             try
             {
+                if (GreanTrailEntities.GetContext().Users.FirstOrDefault(r => r.email == email) != null)
+                {
+                    MessageBox.Show("Почта уже существует!", "Упс!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+                if (GreanTrailEntities.GetContext().Users.FirstOrDefault(r => r.login == login) != null)
+                {
+                    MessageBox.Show("Логин не оригинальный!)", "Упс!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
                 // Создание нового объекта пользователя
                 Users user = new Users
                 {
@@ -134,6 +141,30 @@ namespace GreenTrail.Source.Funs
         {
             try
             {
+                if (email == string.Empty)
+                {
+                    using (GreanTrailEntities db = new GreanTrailEntities())
+                    {
+                        // Поиск пользователя по электронной почте
+                        var user = GreanTrailEntities.GetContext().Users.FirstOrDefault(u => u.id_user == Settings.Default.UserId);
+
+                        // Если пользователь не найден, выходим из метода
+                        if (user == null)
+                        {
+                            return;
+                        }
+
+                        // Генерация нового пароля
+                        string newPassword = pass;
+
+                        // Установка нового пароля для пользователя
+                        user.password = newPassword;
+
+                        // Сохранение изменений в базе данных
+                        db.SaveChanges();
+                        return;
+                    }
+                }
                 using (GreanTrailEntities db = new GreanTrailEntities())
                 {
                     // Поиск пользователя по электронной почте
@@ -166,15 +197,14 @@ namespace GreenTrail.Source.Funs
 
         public static string GetCurrentRole()
         {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", true);
-            if (key != null)
-            {
-                var currentUserId = key.GetValue("CurrentUserId");
-                var user = GreanTrailEntities.GetContext().Users.FirstOrDefault(u => u.id_user == (long)currentUserId);
-                var userRole = GreanTrailEntities.GetContext().Roles.FirstOrDefault(r => r.id_roles == user.id_roles);
-                return userRole.name;
-            }
-            return "0";
+            var user = GreanTrailEntities.GetContext().Users.FirstOrDefault(u => u.id_user == Settings.Default.UserId);
+            var userRole = GreanTrailEntities.GetContext().Roles.FirstOrDefault(r => r.id_roles == user.id_roles);
+            if(userRole == null) return "0";
+            return userRole.name;
+        }
+        public static Users GetCurrentUser()
+        {
+            return GreanTrailEntities.GetContext().Users.FirstOrDefault(u => u.id_user == Settings.Default.UserId);
         }
     }
 }

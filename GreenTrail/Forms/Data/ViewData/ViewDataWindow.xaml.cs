@@ -46,6 +46,7 @@ namespace GreenTrail.Forms.Data.ViewData
                 case "Администратор":
                     ti_Employees.Visibility = Visibility.Visible;
                     btn_createEmployees.Visibility = Visibility.Visible;
+                    dg_Employees.Visibility = Visibility.Visible;
 
                     ti_Pollution.Visibility = Visibility.Visible;
 
@@ -83,9 +84,6 @@ namespace GreenTrail.Forms.Data.ViewData
 
                     ti_Events.Visibility = Visibility.Visible;
                     btn_createEvents.Visibility = Visibility.Visible;
-                    break;
-                default:
-                    
                     break;
             }
         }
@@ -137,11 +135,11 @@ namespace GreenTrail.Forms.Data.ViewData
         }
 
         // Получение данных о загрязнениях из БД
-        private List<PollutionData> pollutionData = _context.Region_Pollution
+        private List<PollutionData> pollutionData = _context.Pollution
             .ToList()
             .Select(x => new PollutionData
             {
-                levels = x.Pollution.levels,
+                levels = x.levels,
                 name = x.Region.name,
                 geographicalcoordinates = x.Region.geographical_coordinates
             })

@@ -10,6 +10,7 @@ using System.Windows;
 using GreenTrail.Forms.Welcome;
 using System.Windows.Threading;
 using System.Windows.Controls;
+using System.ComponentModel;
 
 namespace GreenTrail
 {

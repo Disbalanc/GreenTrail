@@ -1,5 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:james="https://jamesnet.dev/xaml/presentation"
+                    xmlns:style="clr-namespace:GreenTrail.Source.Style">
 
     <!-- WindowState Image -->
     <Style x:Key="WindowStateStyleImage" TargetType="Image">
@@ -141,7 +143,7 @@
     <Style x:Key="LabelInputStyle" TargetType="Label">
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontFamily" Value="Inter"/>
-        <Setter Property="Foreground" Value="{DynamicResource Gray1}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Text0}"/>
     </Style>
 
     <!-- Secendary Button  -->
@@ -226,5 +228,215 @@
         <Setter Property="Foreground" Value="{DynamicResource Gray1}" />
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Margin" Value="10,10,10,0"/>
+    </Style>
+
+    <!-- Setting Window  -->
+    <!-- TextBox -->
+    <Style  x:Key="TextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="#FFFFFF" />
+        <Setter Property="BorderBrush" Value="#CCCCCC" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="5" />
+    </Style>
+    
+    <!-- ComboBox  -->
+    <Brush x:Key="ComboBox.Static.Background">#FFFFFF</Brush>
+    <Brush x:Key="ComboBox.Static.Border">#CCCCCC</Brush>
+    <Brush x:Key="DisabledForegroundBrush">#AAAAAA</Brush>
+    <ControlTemplate x:Key="ComboBoxEditableTextBox" TargetType="TextBox">
+        <!-- your template here -->
+    </ControlTemplate>
+    <ControlTemplate x:Key="CBCustomToggleButton" TargetType="ToggleButton">
+        <!-- your template here -->
+    </ControlTemplate>
+
+    <Style x:Key="SettingCB" TargetType="ComboBox">
+        <Setter Property="Background" Value="#FFFFFF" />
+        <Setter Property="BorderBrush" Value="#CCCCCC" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <ToggleButton Name="ToggleButton"
+                                  Template="{StaticResource CBCustomToggleButton}" />
+                        <ContentPresenter Name="ContentSite"
+                                      Content="{TemplateBinding ComboBox.SelectionBoxItem}"
+                                      ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        <TextBox x:Name="PART_EditableTextBox"
+                             Style="{x:Null}"
+                             Template="{StaticResource ComboBoxEditableTextBox}"
+                             HorizontalAlignment="Left"
+                             Margin="3,3,23,3"
+                             Focusable="True"
+                             Background="Transparent"
+                             Visibility="Hidden"
+                             IsReadOnly="{TemplateBinding IsReadOnly}" />
+                        <Popup Name="Popup"
+                           Placement="Bottom"
+                           IsOpen="{TemplateBinding IsDropDownOpen}"
+                           AllowsTransparency="True"
+                           Focusable="False"
+                           PopupAnimation="Slide">
+                            <Grid Name="DropDown"
+                              SnapsToDevicePixels="True"
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <Border x:Name="DropDownBorder"
+                                    BorderBrush="{StaticResource ComboBox.Static.Border}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{StaticResource ComboBox.Static.Background}" />
+                                <ScrollViewer Margin="4,6,4,6"
+                                          SnapsToDevicePixels="True">
+                                    <StackPanel IsItemsHost="True"
+                                            KeyboardNavigation.DirectionalNavigation="Contained" />
+                                </ScrollViewer>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEditable"
+                             Value="True">
+                            <Setter TargetName="PART_EditableTextBox"
+                                Property="Visibility"
+                                Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                             Value="False">
+                            <Setter TargetName="PART_EditableTextBox"
+                                Property="Foreground"
+                                Value="{StaticResource DisabledForegroundBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type Grid}" x:Key="RoundGridStyle">
+        <Setter Property="Width" Value="130" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Clip">
+            <Setter.Value>
+                <RectangleGeometry Rect="0,0,130,50">
+                    <RectangleGeometry.RadiusX>25</RectangleGeometry.RadiusX>
+                    <RectangleGeometry.RadiusY>25</RectangleGeometry.RadiusY>
+                </RectangleGeometry>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Border}" x:Key="BaseColorStyle">
+        <Setter Property="Background" Value="#8cbcfa"/>
+        <Setter Property="CornerRadius" Value="25"/>
+        <Setter Property="Visibility" Value="Visible"/>
+    </Style>
+
+    <Style TargetType="{x:Type Ellipse}" x:Key="CircleStyle" >
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="8, 0, 8, 0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Fill" Value="#ffb15f"/>
+    </Style>
+
+    <Style TargetType="{x:Type Image}" x:Key="BaseImageStyle" >
+        <Setter Property="Stretch" Value="None" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style TargetType="{x:Type Image}" x:Key="StartImageStyle" 
+       BasedOn="{StaticResource BaseImageStyle}">
+        <Setter Property="Width" Value="72"/>
+        <Setter Property="Height" Value="47"/>
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="Stretch" Value="None"/>
+    </Style>
+
+    <Style TargetType="{x:Type Image}" x:Key="CloudImageStyle" 
+       BasedOn="{StaticResource BaseImageStyle}">
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
+    <Style TargetType="{x:Type james:JamesToggleSwitch}" x:Key="JamesToggleSwitchStyle">
+        <Setter Property="Width" Value="130" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type james:JamesToggleSwitch}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="SlideOut">
+                            <james:ThickItem TargetName="cloud1" Duration="0:0:0.5" Property="Margin" To="183,-58,0,-50"/>
+                            <james:ThickItem TargetName="cloud2" Duration="0:0:0.5" Property="Margin" To="175,-24,0,-50"/>
+                            <james:ThickItem TargetName="cloud3" Duration="0:0:0.5" Property="Margin" To="-140,0,0,0"/>
+                            <james:ThickItem TargetName="cloud4" Duration="0:0:0.5" Property="Margin" To="-139,-33,0,-50"/>
+                            <james:ValueItem TargetName="cloud1" Duration="0:0:0.5" Property="Opacity" To="0"/>
+                            <james:ValueItem TargetName="cloud2" Duration="0:0:0.5" Property="Opacity" To="0"/>
+                            <james:ValueItem TargetName="cloud3" Duration="0:0:0.5" Property="Opacity" To="0"/>
+                            <james:ValueItem TargetName="cloud4" Duration="0:0:0.5" Property="Opacity" To="0"/>
+                        </Storyboard>
+                        <Storyboard x:Key="SlideIn">
+                            <james:ThickItem TargetName="cloud1" Duration="0:0:0.5" Property="Margin" To="53,12,0,0"/>
+                            <james:ThickItem TargetName="cloud2" Duration="0:0:0.5" Property="Margin" To="45,26,0,0"/>
+                            <james:ThickItem TargetName="cloud3" Duration="0:0:0.5" Property="Margin" To="-10,34,0,0"/>
+                            <james:ThickItem TargetName="cloud4" Duration="0:0:0.5" Property="Margin" To="-9,27,0,0" />
+                            <james:ValueItem TargetName="cloud1" Duration="0:0:0.5" Property="Opacity" To="0.5"/>
+                            <james:ValueItem TargetName="cloud2" Duration="0:0:0.5" Property="Opacity" To="1.0"/>
+                            <james:ValueItem TargetName="cloud3" Duration="0:0:0.5" Property="Opacity" To="1.0"/>
+                            <james:ValueItem TargetName="cloud4" Duration="0:0:0.5" Property="Opacity" To="0.5"/>
+                        </Storyboard>
+                        <Storyboard x:Key="StarsIn">
+                            <james:ValueItem TargetName="galaxy" Duration="0:0:0.5" Property="Opacity" To="0"/>
+                            <james:ThickItem TargetName="galaxy" Duration="0:0:0.5" Property="Margin" To="0,-50,0,0"/>
+                            <james:ThickItem TargetName="circle" Duration="0:0:0.5" Property="Margin" To="8,0,0,0" Mode="CubicEaseInOut"/>
+                            <james:ColorItem TargetName="circle" Duration="0:0:0.5" Property="(Fill).(SolidColorBrush.Color)" To="#ffb15f"/>
+                            <james:ColorItem TargetName="border" Duration="0:0:0.5" Property="(Background).(SolidColorBrush.Color)" To="#8cbcfa"/>
+                        </Storyboard>
+                        <Storyboard x:Key="StarsOut">
+                            <james:ValueItem TargetName="galaxy" Duration="0:0:0.5" Property="Opacity" To="1"/>
+                            <james:ThickItem TargetName="galaxy" Duration="0:0:0.5" Property="Margin" To="0"/>
+                            <james:ThickItem TargetName="circle" Duration="0:0:0.5" Property="Margin" To="82,0,0,0" Mode="CubicEaseInOut"/>
+                            <james:ColorItem TargetName="circle" Duration="0:0:0.5" Property="(Fill).(SolidColorBrush.Color)" To="#e6b91b"/>
+                            <james:ColorItem TargetName="border" Duration="0:0:0.5" Property="(Background).(SolidColorBrush.Color)" To="#191c25"/>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <Viewbox>
+                            <Grid Style="{StaticResource RoundGridStyle}">
+                                <Border x:Name="border" Style="{StaticResource BaseColorStyle}"/>
+                                <Image x:Name="galaxy" Style="{StaticResource StartImageStyle}"/>
+
+                                <Image x:Name="cloud1" Style="{StaticResource CloudImageStyle}" Opacity="0.5" Margin="53,12,0,0"/>
+                                <Image x:Name="cloud2" Style="{StaticResource CloudImageStyle}" Opacity="1.0" Margin="45,26,0,0"/>
+                                <Image x:Name="cloud3" Style="{StaticResource CloudImageStyle}" Opacity="1.0" Margin="0,34,0,0"/>
+                                <Image x:Name="cloud4" Style="{StaticResource CloudImageStyle}" Opacity="0.5" Margin="-9,27,0,0"/>
+
+                                <Ellipse x:Name="circle" Style="{StaticResource CircleStyle}"/>
+                            </Grid>
+                        </Viewbox>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource SlideOut}"/>
+                                <BeginStoryboard Storyboard="{StaticResource StarsOut}"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource SlideIn}"/>
+                                <BeginStoryboard Storyboard="{StaticResource StarsIn}"/>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>
