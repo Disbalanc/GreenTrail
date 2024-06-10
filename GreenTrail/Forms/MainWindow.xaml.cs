@@ -2,11 +2,15 @@
 using GreenTrail.Forms.Data.ExportData;
 using GreenTrail.Forms.Data.ViewData;
 using GreenTrail.Forms.Settings;
+using GreenTrail.Forms.ViewModel;
 using GreenTrail.Source.Funs;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,6 +37,8 @@ namespace GreenTrail.Forms
             InitializeComponent();
             // Обработчик события прокрутки для ScrollBar
             scrollBar.Scroll += ScrollBar_Scroll;
+
+            DataContext = new MainWindowViewModel();
 
             SwapRoles();
         }

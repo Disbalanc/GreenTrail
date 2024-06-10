@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenTrail.Forms"
+        xmlns:viewModel="clr-namespace:GreenTrail.Forms.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}" MouseDown="Window_MouseDown" WindowStyle="None" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" PreviewMouseWheel="Window_PreviewMouseWheel">
     <Window.Resources>
@@ -96,16 +97,41 @@
 
                         <StackPanel Margin="0,20,0,0">
                             <Label Content="Экологические новости" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Left"/>
-
+                            <ListBox Background="{StaticResource SecondaryColor}" x:Name="newsListBox" ItemsSource="{Binding NewsViewModels}"
+             HorizontalContentAlignment="Stretch"
+             VerticalContentAlignment="Stretch">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <viewModel:NewsUserControl DataContext="{Binding}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </StackPanel>
 
                         <StackPanel Margin="0,30,0,0">
                             <Label Content="Экологические мероприятия" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Left"/>
-
+                            <ListBox Background="{StaticResource SecondaryColor}" x:Name="eventListBox" ItemsSource="{Binding EventViewModels}"
+             HorizontalContentAlignment="Stretch"
+             VerticalContentAlignment="Stretch">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <viewModel:EventUserControls DataContext="{Binding}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </StackPanel>
+
                         <StackPanel Margin="0,20,0,0">
                             <Label Content="Экологические Советы" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Left"/>
-
+                            <ListBox Background="{StaticResource SecondaryColor}" x:Name="EcologicalRecommendationsListBox" ItemsSource="{Binding EcologicalRecommendationsViewModels}"
+             HorizontalContentAlignment="Stretch"
+             VerticalContentAlignment="Stretch">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <viewModel:EcologicalRecommendationsUserControls DataContext="{Binding}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

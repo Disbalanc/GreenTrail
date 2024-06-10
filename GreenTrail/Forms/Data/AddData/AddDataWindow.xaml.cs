@@ -354,5 +354,12 @@ namespace GreenTrail.Forms.Data.AddData
             // Установка максимального значения прокрутки
             scrollBar.Maximum = StackPanelMain.ActualHeight - scrollBar.ViewportSize - emptySpaceHeight;
         }
+
+        private void BackClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
     }
 }

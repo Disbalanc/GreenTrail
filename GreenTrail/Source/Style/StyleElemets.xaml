@@ -439,4 +439,10 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="EventListBoxStyle" TargetType="ListBox">
+        <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+    </Style>
 </ResourceDictionary>

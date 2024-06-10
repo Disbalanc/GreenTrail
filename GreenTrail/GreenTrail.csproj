@@ -328,12 +328,26 @@
     <Compile Include="Forms\Data\ViewData\ViewDataWindow.xaml.cs">
       <DependentUpon>ViewDataWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MainWindowViewModelBase.cs" />
     <Compile Include="Forms\MapWindow.xaml.cs">
       <DependentUpon>MapWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\Settings\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ViewModel\EcologicalRecommendationsUserControls.xaml.cs">
+      <DependentUpon>EcologicalRecommendationsUserControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ViewModel\EcologicalRecommendationsViewModels.cs" />
+    <Compile Include="Forms\ViewModel\EventsUserControl.xaml.cs">
+      <DependentUpon>EventsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ViewModel\EventViewModels.cs" />
+    <Compile Include="Forms\ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="Forms\ViewModel\NewsUserControl.xaml.cs">
+      <DependentUpon>NewsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ViewModel\NewsViewModel.cs" />
     <Compile Include="Forms\Welcome\ForgotPasswprdPage\NewPasswordPage.xaml.cs">
       <DependentUpon>NewPasswordPage.xaml</DependentUpon>
     </Compile>
@@ -420,6 +434,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Settings\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\ViewModel\EcologicalRecommendationsUserControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\ViewModel\EventsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\ViewModel\NewsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -577,6 +603,7 @@
       <DependentUpon>GreanTrailModel.edmx</DependentUpon>
       <LastGenOutput>GreanTrailModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Source\Image\Assets\img_back.png" />
     <Resource Include="Source\Image\App\cloud.png" />
     <Resource Include="Source\Image\App\logo.png" />
     <Resource Include="Source\Image\App\stars.png" />

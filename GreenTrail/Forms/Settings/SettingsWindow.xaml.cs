@@ -24,9 +24,39 @@ using System.IO;
 using System.Data.SqlClient;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.Data.Entity;
+using GreenTrail.Forms.ViewModel;
 
 namespace GreenTrail.Forms.Settings
 {
+    public class ThemeManager
+    {
+        public static event PropertyChangedEventHandler ThemeChanged;
+
+        public static void SwitchTheme(bool isDarkTheme)
+        {
+            // Clear the current theme resources
+            var appResources = Application.Current.Resources;
+            appResources.MergedDictionaries.Clear();
+
+            // Load the new theme resources
+            if (isDarkTheme)
+            {
+                var darkThemeResourceDictionary = new ResourceDictionary();
+                darkThemeResourceDictionary.Source = new Uri("/Source/Theme/DarkTheme.xaml", UriKind.Relative);
+                appResources.MergedDictionaries.Add(darkThemeResourceDictionary);
+            }
+            else
+            {
+                var lightThemeResourceDictionary = new ResourceDictionary();
+                lightThemeResourceDictionary.Source = new Uri("/Source/Theme/LigthTheme.xaml", UriKind.Relative);
+                appResources.MergedDictionaries.Add(lightThemeResourceDictionary);
+            }
+
+            // Raise the ThemeChanged event
+            ThemeChanged?.Invoke(null, new PropertyChangedEventArgs("Theme"));
+        }
+    }
+
     /// <summary>
     /// Логика взаимодействия для SettingsWindow.xaml
     /// </summary>
@@ -81,20 +111,14 @@ namespace GreenTrail.Forms.Settings
         {
             var user = DataBaseFuns.GetCurrentUser();
 
-            // Check if the image is empty
-            if (photoBytes == null || photoBytes.Length == 0)
-            {
-                MessageBox.Show("Please select an image");
-                return;
-            }
-
             // Check if the data is identical to the data in the database
             if (tb_login.Text == user.login &&
                 tb_email.Text == user.email &&
                 tb_BirthDate.Text == user.dateOfBirth &&
                 tb_Address.Text == user.address &&
                 tb_telephoneNumber.Text == user.phoneNumber &&
-                tb_full_name.Text == user.full_name && user.image == Convert.ToBase64String(photoBytes))
+                tb_full_name.Text == user.full_name && 
+                user.image == Convert.ToBase64String(photoBytes))
             {
                 MessageBox.Show("No changes in data");
                 return;
@@ -137,21 +161,10 @@ namespace GreenTrail.Forms.Settings
                     using (MemoryStream stream = new MemoryStream(imageData))
                     {
                         stream.Position = 0;
-                        BitmapImage bitmapImage = new BitmapImage();
-                        bitmapImage.BeginInit();
-                        bitmapImage.StreamSource = stream;
-                        bitmapImage.EndInit();
+                        BitmapDecoder decoder = new PngBitmapDecoder(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                        BitmapFrame frame = decoder.Frames[0];
 
-                        // Создаем объект BitmapEncoder
-                        PngBitmapEncoder encoder = new PngBitmapEncoder();
-                        encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
-
-                        // Создаем файл на диск
-                        string filePath = @"C:\Users\Zaooo\Downloads\image.jpg";
-                        using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            encoder.Save(fileStream);
-                        }
+                        image.Source = frame;
                     }
                 }
                 else
@@ -160,29 +173,20 @@ namespace GreenTrail.Forms.Settings
                 }
             }
         }
-
         private void JamesToggleSwitch_Click(object sender, RoutedEventArgs e)
         {
             switch (jamesToggleSwitch.IsChecked)
             {
                 case true:
                     {
-                        // Load the Dark theme
-                        var appResources = Application.Current.Resources;
-                        appResources.MergedDictionaries.Clear();
-                        var darkThemeResourceDictionary = new ResourceDictionary();
-                        darkThemeResourceDictionary.Source = new Uri("/Source/Theme/DarkTheme.xaml", UriKind.Relative);
-                        appResources.MergedDictionaries.Add(darkThemeResourceDictionary);
+                        // Switch to Dark theme
+                        ThemeManager.SwitchTheme(true);
                         break;
                     }
                 case false:
                     {
-                        // Load the Light theme
-                        var appResources = Application.Current.Resources;
-                        appResources.MergedDictionaries.Clear();
-                        var lightThemeResourceDictionary = new ResourceDictionary();
-                        lightThemeResourceDictionary.Source = new Uri("/Source/Theme/LigthTheme.xaml", UriKind.Relative);
-                        appResources.MergedDictionaries.Add(lightThemeResourceDictionary);
+                        // Switch to Light theme
+                        ThemeManager.SwitchTheme(false);
                         break;
                     }
             }
