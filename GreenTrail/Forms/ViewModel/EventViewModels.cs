@@ -10,7 +10,8 @@ namespace GreenTrail.Forms.ViewModel
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public string Autor { get; set; }
+        public string RegionCoordinates { get; set; }
+        public string RegionName { get; set; }
         public DateTime Date { get; set; }
     }
 }

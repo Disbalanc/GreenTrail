@@ -280,7 +280,5 @@ namespace GreenTrail.Forms
             exportDataWindow.Show();
             this.Close();
         }
-
-        
     }
 }

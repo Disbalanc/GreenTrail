@@ -606,6 +606,11 @@
       <DependentUpon>GreanTrailModel.edmx</DependentUpon>
       <LastGenOutput>GreanTrailModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Source\Image\Assets\event.png" />
+    <Resource Include="Source\Image\Assets\pollution.png" />
+    <Resource Include="Source\Image\Assets\sample.png" />
+    <Resource Include="Source\Image\Assets\studied_sample.png" />
+    <Resource Include="Source\Image\Assets\blue_marker.png" />
     <Resource Include="Source\Image\Assets\img_back.png" />
     <Resource Include="Source\Image\App\cloud.png" />
     <Resource Include="Source\Image\App\logo.png" />

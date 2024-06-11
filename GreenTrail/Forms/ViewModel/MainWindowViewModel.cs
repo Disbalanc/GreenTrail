@@ -46,7 +46,9 @@ namespace GreenTrail.Forms.ViewModel
                     {
                         Id = item.id_event,
                         Name = item.name,
-                        Date = (DateTime)item.data_time
+                        Date = (DateTime)item.data_time,
+                        RegionName = item.Region.name,
+                        RegionCoordinates = item.Region.geographical_coordinates
                     });
                 }
 

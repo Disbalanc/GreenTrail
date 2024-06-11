@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GreenTrail.Forms"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         mc:Ignorable="d"
-        Title="MapWindow" Height="450" Width="800">
+        Title="MapWindow" Height="450" Width="800" Background="{DynamicResource PrimaryColor}"  WindowStyle="None">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,7 +20,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="12*"/>
             </Grid.RowDefinitions>
-            <StackPanel x:Name="sp_dragMove" VerticalAlignment="Center" Background="{DynamicResource SecondaryColor}" Panel.ZIndex="100" Height="34">
+            <StackPanel x:Name="sp_dragMove"  VerticalAlignment="Center" Background="{DynamicResource SecondaryColor}" Panel.ZIndex="100" Height="34" MouseDown="sp_dragMove_MouseDown">
 
                 <Grid>
                     <Button Click="BackClick" Style="{StaticResource WindowStateStyle}" HorizontalAlignment="Left" Margin="30,0,10,0">

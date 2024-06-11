@@ -14,22 +14,22 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" 
-                   Text="{Binding Title}" 
+                   Text="{Binding Name}" 
                    FontSize="18" 
                    FontWeight="Bold" 
                    Foreground="{StaticResource Text1}" 
                    Margin="10,10,10,5"/>
         <TextBlock Grid.Column="0" Grid.Row="1" 
-                   Text="{Binding Text}" 
-                   FontSize="14" 
-                   Foreground="{StaticResource Text0}" 
-                   Margin="10,5,10,5" 
-                   TextWrapping="Wrap"/>
-        <TextBlock Grid.Column="0" Grid.Row="2" 
-                   Text="{Binding Autor}" 
-                   FontSize="12" 
-                   Foreground="{StaticResource Gray1}" 
-                   Margin="10,5,10,10"/>
+            Text="{Binding RegionName}" 
+            FontSize="12" 
+            Foreground="{StaticResource Gray1}" 
+            Margin="10,5,10,10"/>
+        <TextBlock Grid.Column="0" Grid.Row="1" 
+    Text="{Binding RegionCoordinates}" 
+    FontSize="12" 
+    Foreground="{StaticResource Gray1}" 
+    Margin="10,5,10,10" HorizontalAlignment="Right"/>
+
         <TextBlock Grid.Column="0" Grid.Row="2" 
            Text="{Binding Date}" 
            FontSize="12" 
