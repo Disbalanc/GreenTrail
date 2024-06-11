@@ -4,9 +4,53 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenTrail.Forms"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         mc:Ignorable="d"
         Title="MapWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Source/Style/StyleElemets.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Viewbox>
+        <Grid Height="450" Width="800">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="12*"/>
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="sp_dragMove" VerticalAlignment="Center" Background="{DynamicResource SecondaryColor}" Panel.ZIndex="100" Height="34">
+
+                <Grid>
+                    <Button Click="BackClick" Style="{StaticResource WindowStateStyle}" HorizontalAlignment="Left" Margin="30,0,10,0">
+                        <Image x:Name="i_back" Source="/Source/Image/Assets/img_back.png" Style="{StaticResource WindowStateStyleImage}"/>
+                    </Button>
+                    <Label Content="GreanTrail: Экологическое слежение" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
+                        <Button Click="MinimizeClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_minimaze" Source="/Source/Image/Assets/img_minimaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                        </Button>
+                        <Button Click="MaximizeClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_maximaze" Source="/Source/Image/Assets/img_maximaze.png" Style="{StaticResource WindowStateStyleImage}"/>
+                        </Button>
+                        <Button Click="CloseClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_close" Source="/Source/Image/Assets/img_close.png" Style="{StaticResource WindowStateStyleImage}"/>
+                        </Button>
+                        <Button Click="SettingsClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_settings" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_settings.png"/>
+                        </Button>
+                        <Button Click="LogOutClick" Style="{StaticResource WindowStateStyle}">
+                            <Image x:Name="i_logOut" Style="{StaticResource WindowStateStyleImage}" Source="/Source/Image/Assets/img_logOut.png"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+                <m:Map Grid.Row="1" x:Name="myMap" Mode="Road" ZoomLevel="10" Center="56.4185,61.9329">
+                    <m:Map.CredentialsProvider>
+                        <m:ApplicationIdCredentialsProvider ApplicationId="1UmrVJDK1N97FZ6Kq9kK~sEN4QKO9OaUTOwuSdKyR1Q~Ah8XCDz1Txx7VwqXG-k0fJ6kItJ8tyOfEPwKkYLjBU8Lt4lH9-q3iwTd6-fYQADi" />
+                    </m:Map.CredentialsProvider>
+                </m:Map>
+        </Grid>
+    </Viewbox>
 </Window>
