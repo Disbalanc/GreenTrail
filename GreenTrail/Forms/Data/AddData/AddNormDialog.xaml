@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenTrail.Forms.Data.AddData"
         mc:Ignorable="d"
-             Title="Добавление нормы" Height="250" Width="400" Background="{DynamicResource PrimaryColor}" ResizeMode="NoResize">
+             Title="Добавление нормы" Height="400" Width="400" Background="{DynamicResource PrimaryColor}" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,17 +15,17 @@
     </Window.Resources>
     <Grid>
         <StackPanel Margin="10">
-            <TextBlock Text="Название:" />
-            <TextBox Name="NameTextBox" />
+            <TextBlock Text="Название:" Style="{StaticResource TextBlockStyle}"/>
+            <TextBox Name="NameTextBox" Style="{StaticResource TextBoxInputStyle}"/>
 
-            <TextBlock Text="Норма:" />
-            <TextBox Name="NormaTextBox" />
+            <TextBlock Text="Норма:" Style="{StaticResource TextBlockStyle}"/>
+            <TextBox Name="NormaTextBox" Style="{StaticResource TextBoxInputStyle}"/>
             
-            <TextBlock Text="Тип нормы:" />
-            <ComboBox Name="TypeNormComboBox" />
+            <TextBlock Text="Тип нормы:" Style="{StaticResource TextBlockStyle}"/>
+            <ComboBox Name="TypeNormComboBox" Margin="10,0,10,0"/>
 
-            <Button Name="OkButton" Content="OK" Margin="10,0,0,0" Click="OkButton_Click" />
-            <Button Name="CancelButton" Content="Отмена" Margin="10,0,0,0" Click="CancelButton_Click" />
+            <Button Name="OkButton" Content="OK" Margin="10,10,0,10" Click="OkButton_Click" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}"/>
+            <Button Name="CancelButton" Content="Отмена" Margin="10,0,0,0" Click="CancelButton_Click" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}"/>
         </StackPanel>
     </Grid>
 </Window>

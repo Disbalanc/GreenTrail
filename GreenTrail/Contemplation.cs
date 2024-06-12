@@ -23,9 +23,9 @@ namespace GreenTrail
         public long id_contemplation { get; set; }
         public Nullable<long> id_sample { get; set; }
         public Nullable<long> id_user { get; set; }
-        public string type_contemplation { get; set; }
         public string result { get; set; }
         public Nullable<long> id_norm { get; set; }
+        public Nullable<System.DateTime> date_contemplation { get; set; }
     
         public virtual Norm Norm { get; set; }
         public virtual Sample Sample { get; set; }

@@ -36,6 +36,7 @@ namespace GreenTrail
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Norm> Norm { get; set; }
+        public virtual DbSet<Notification> Notification { get; set; }
         public virtual DbSet<Pollution> Pollution { get; set; }
         public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }

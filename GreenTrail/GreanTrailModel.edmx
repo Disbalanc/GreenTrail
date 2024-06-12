@@ -12,9 +12,9 @@
           <Property Name="id_contemplation" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_sample" Type="bigint" />
           <Property Name="id_user" Type="bigint" />
-          <Property Name="type_contemplation" Type="nvarchar" MaxLength="50" />
           <Property Name="result" Type="nvarchar" MaxLength="50" />
           <Property Name="id_norm" Type="bigint" />
+          <Property Name="date_contemplation" Type="datetime" />
         </EntityType>
         <EntityType Name="EcologicalRecommendations">
           <Key>
@@ -53,6 +53,16 @@
           <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="norma" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="id_notification" />
+          </Key>
+          <Property Name="id_notification" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RowId" Type="int" />
+          <Property Name="ChangeType" Type="nvarchar" MaxLength="10" />
+          <Property Name="Changet" Type="datetime" />
+        </EntityType>
         <EntityType Name="Pollution">
           <Key>
             <PropertyRef Name="id_pollution" />
@@ -88,6 +98,7 @@
           <Property Name="id_user" Type="bigint" />
           <Property Name="articul" Type="nvarchar" MaxLength="50" />
           <Property Name="id_type" Type="bigint" />
+          <Property Name="date_sample" Type="datetime" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -283,6 +294,7 @@
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Norm" EntityType="Self.Norm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pollution" EntityType="Self.Pollution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -355,9 +367,9 @@
           <Property Name="id_contemplation" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_sample" Type="Int64" />
           <Property Name="id_user" Type="Int64" />
-          <Property Name="type_contemplation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="result" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="id_norm" Type="Int64" />
+          <Property Name="date_contemplation" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Norm" Relationship="Self.FK_Contemplation_Norm" FromRole="Contemplation" ToRole="Norm" />
           <NavigationProperty Name="Sample" Relationship="Self.FK_Contemplation_Sample" FromRole="Contemplation" ToRole="Sample" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Contemplation_Users" FromRole="Contemplation" ToRole="Users" />
@@ -405,6 +417,16 @@
           <NavigationProperty Name="Contemplation" Relationship="Self.FK_Contemplation_Norm" FromRole="Norm" ToRole="Contemplation" />
           <NavigationProperty Name="Type" Relationship="Self.FK_Norm_Type" FromRole="Norm" ToRole="Type" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="id_notification" />
+          </Key>
+          <Property Name="id_notification" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RowId" Type="Int32" />
+          <Property Name="ChangeType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Changet" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="Pollution">
           <Key>
             <PropertyRef Name="id_pollution" />
@@ -446,6 +468,7 @@
           <Property Name="id_user" Type="Int64" />
           <Property Name="articul" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="id_type" Type="Int64" />
+          <Property Name="date_sample" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Contemplation" Relationship="Self.FK_Contemplation_Sample" FromRole="Sample" ToRole="Contemplation" />
           <NavigationProperty Name="Region" Relationship="Self.FK_Sample_Region" FromRole="Sample" ToRole="Region" />
           <NavigationProperty Name="Type" Relationship="Self.FK_Sample_Type" FromRole="Sample" ToRole="Type" />
@@ -652,6 +675,7 @@
           <EntitySet Name="Event" EntityType="Self.Event" />
           <EntitySet Name="News" EntityType="Self.News" />
           <EntitySet Name="Norm" EntityType="Self.Norm" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" />
           <EntitySet Name="Pollution" EntityType="Self.Pollution" />
           <EntitySet Name="Region" EntityType="Self.Region" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
@@ -724,9 +748,9 @@
                 <ScalarProperty Name="id_contemplation" ColumnName="id_contemplation" />
                 <ScalarProperty Name="id_sample" ColumnName="id_sample" />
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="type_contemplation" ColumnName="type_contemplation" />
                 <ScalarProperty Name="result" ColumnName="result" />
                 <ScalarProperty Name="id_norm" ColumnName="id_norm" />
+                <ScalarProperty Name="date_contemplation" ColumnName="date_contemplation" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -771,6 +795,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Notification">
+            <EntityTypeMapping TypeName="GreanTrailModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="id_notification" ColumnName="id_notification" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+                <ScalarProperty Name="ChangeType" ColumnName="ChangeType" />
+                <ScalarProperty Name="Changet" ColumnName="Changet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Pollution">
             <EntityTypeMapping TypeName="GreanTrailModel.Pollution">
               <MappingFragment StoreEntitySet="Pollution">
@@ -808,6 +843,7 @@
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
                 <ScalarProperty Name="articul" ColumnName="articul" />
                 <ScalarProperty Name="id_type" ColumnName="id_type" />
+                <ScalarProperty Name="date_sample" ColumnName="date_sample" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

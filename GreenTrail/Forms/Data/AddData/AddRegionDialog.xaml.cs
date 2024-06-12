@@ -28,12 +28,11 @@ namespace GreenTrail.Forms.Data.AddData
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-
             // Создание нового региона
             Region region = new Region
             {
                 name = NameTextBox.Text,
-                geographical_coordinates = GeographicalCoordinatesTextBox.Text
+                geographical_coordinates = $"{GeographicalCoordinateslatitudeTextBox.Text};{GeographicalCoordinateslongitudeTextBox.Text}"
             };
 
             // Добавление региона в БД

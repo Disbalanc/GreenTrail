@@ -5,7 +5,7 @@
              StartupUri="/Forms/Welcome/LoadingWindows/BootWindow.xaml" >
 
     <Application.Resources>
-    <ResourceDictionary>
+        <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!-- подключение файла цветовой темы -->
                 <ResourceDictionary Source="/Source/Theme/LigthTheme.xaml"/>

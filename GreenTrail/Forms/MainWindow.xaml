@@ -19,6 +19,7 @@
             <StackPanel x:Name="sp_dragMove" VerticalAlignment="Top" Background="{DynamicResource SecondaryColor}" Panel.ZIndex="100">
                 
                 <Grid>
+                    
                     <Label Content="GreanTrail: Экологическое слежение" FontSize="18" Foreground="{DynamicResource Text0}" HorizontalAlignment="Center"/>
                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
                     <Button Click="MinimizeClick" Style="{StaticResource WindowStateStyle}">
@@ -42,6 +43,7 @@
             <Grid Margin="0,40,0,0">
                 <ScrollBar x:Name="scrollBar" HorizontalAlignment="Right" Margin="0,10,0,0" Style="{StaticResource ScrollBar}"/>
 
+                    <Image x:Name="i_user" Style="{StaticResource WindowStateStyleImage}" HorizontalAlignment="Left" Margin="20,40,0,0" Width="60" Height="60" VerticalAlignment="Top"/>
                 <StackPanel x:Name="StackPanelMain">
                     <!-- Элементы -->
                     <Image Height="200" Width="600" Margin="0,20,0,0" Source="/Source/Image/App/img_MainWin.png"/>
@@ -82,10 +84,10 @@
                                     <Button.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem x:Name="MenuAddSample" Visibility="Collapsed" Header="Пробы" Click="AddSample_Click" />
-                                            <MenuItem x:Name="MenuAddRegion" Visibility="Collapsed" Header="Регионы" Click="AddRegion_Click" />
                                             <MenuItem x:Name="MenuAddContemplation" Visibility="Collapsed" Header="Изучение проб" Click="AddContemplation_Click" />
-                                            <MenuItem x:Name="MenuAddNorm" Visibility="Collapsed" Header="Нормы" Click="AddNorm_Click" />
                                             <MenuItem x:Name="MenuAddUser" Visibility="Collapsed" Header="Пользователи" Click="AddUser_Click" />
+                                            <MenuItem x:Name="MenuAddNorm" Visibility="Collapsed" Header="Нормы" Click="AddNorm_Click" />
+                                            <MenuItem x:Name="MenuAddRegion" Visibility="Collapsed" Header="Регионы" Click="AddRegion_Click" />
                                             <MenuItem x:Name="MenuAddEvent" Visibility="Collapsed" Header="Мероприятие" Click="AddEvent_Click" />
                                             <MenuItem x:Name="MenuAddNews" Visibility="Collapsed" Header="Новость" Click="AddNews_Click" />
                                             <MenuItem x:Name="MenuAddRecomendation" Visibility="Collapsed" Header="Экологические рекомендации" Click="AddRecomendation_Click" />

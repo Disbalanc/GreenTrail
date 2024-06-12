@@ -94,7 +94,9 @@ namespace GreenTrail.Forms.Data.AddData
         StackPanelMain.Margin = new Thickness(0, -_verticalOffset, 0, 0);
     }
 
-    public AddDataWindow()
+        private GreanTrailEntities greanTrailEntities = GreanTrailEntities.GetContext();
+
+        public AddDataWindow()
         {
             InitializeComponent();
 
@@ -105,32 +107,6 @@ namespace GreenTrail.Forms.Data.AddData
         private void Entity_SelectionChanged()
         {
             tblock_entity.Text = $"Сущность: {table}";
-
-            // Заполнение выпадающего списка регионов
-            SampleRegionComboBox.ItemsSource = _context.Region.ToList();
-            SampleRegionComboBox.DisplayMemberPath = "name";
-            SampleRegionComboBox.SelectedValuePath = "id_region";
-
-            // Заполнение выпадающего списка проб
-            ContemplationSampleComboBox.ItemsSource = _context.Sample.ToList();
-            ContemplationSampleComboBox.DisplayMemberPath = "name";
-            ContemplationSampleComboBox.SelectedValuePath = "id_sample";
-            
-            // Заполнение выпадающего списка Тип проб
-            SampleTypeComboBox.ItemsSource = _context.Type.ToList();
-            SampleTypeComboBox.DisplayMemberPath = "name";
-            SampleTypeComboBox.SelectedValuePath = "id_type";
-
-            // Заполнение выпадающего списка норм
-            ContemplationNormComboBox.ItemsSource = _context.Norm.ToList();
-            ContemplationNormComboBox.DisplayMemberPath = "name";
-            ContemplationNormComboBox.SelectedValuePath = "id_norm";
-
-            // Заполнение выпадающего списка ролей
-            UserRolesComboBox.ItemsSource = _context.Users.ToList();
-            UserRolesComboBox.DisplayMemberPath = "name";
-            UserRolesComboBox.SelectedValuePath = "id_roles";
-
             // Отображение и скрытие элементов управления в зависимости от выбранной сущности
             switch (table)
             {
@@ -142,6 +118,9 @@ namespace GreenTrail.Forms.Data.AddData
                     SampleArticulTextBox.Visibility = Visibility.Visible;
                     SampleArticulTextBlock.Visibility = Visibility.Visible;
                     AddRegionButton.Visibility = Visibility.Visible;
+
+                    SampleTypeComboBox.ItemsSource = greanTrailEntities.Type.Select(r => r.name).ToList();
+                    SampleRegionComboBox.ItemsSource = greanTrailEntities.Region.Select(r => r.name).ToList();
                     break;
                 case "Изучение пробы":
                     ContemplationSampleTextBlock.Visibility = Visibility.Visible;
@@ -150,9 +129,10 @@ namespace GreenTrail.Forms.Data.AddData
                     ContemplationNormComboBox.Visibility = Visibility.Visible;
                     ContemplationResultTextBlock.Visibility = Visibility.Visible;
                     ContemplationResultTextBox.Visibility = Visibility.Visible;
-                    ContemplationTypeContemplationTextBlock.Visibility = Visibility.Visible;
-                    ContemplationTypeContemplationTextBox.Visibility = Visibility.Visible;
                     AddNormButton.Visibility = Visibility.Visible;
+
+                    ContemplationSampleComboBox.ItemsSource = greanTrailEntities.Sample.Select(r => r.articul).ToList();
+                    ContemplationNormComboBox.ItemsSource = greanTrailEntities.Norm.Select(r => r.name).ToList();
                     break;
                 case "Пользователи":
                     UserAddressTextBlock.Visibility = Visibility.Visible;
@@ -171,6 +151,8 @@ namespace GreenTrail.Forms.Data.AddData
                     UserPhoneNumberTextBox.Visibility = Visibility.Visible;
                     UserRolesComboBox.Visibility = Visibility.Visible;
                     UserRolesTextBlock.Visibility = Visibility.Visible;
+
+                    UserRolesComboBox.ItemsSource = greanTrailEntities.Roles.Select(r => r.name).ToList();
                     break;
                 case "Мероприятие":
                     tblock_heading.Visibility = Visibility.Visible;
@@ -180,23 +162,18 @@ namespace GreenTrail.Forms.Data.AddData
                     tblock_heading.Text = "Название";
 
                     Calendar.Visibility = Visibility.Visible;
-
-                   
                     break;
                 case "Новость":
                     tblock_heading.Visibility = Visibility.Visible;
                     TextBox_heading.Visibility = Visibility.Visible;
                     TextBlock_text.Visibility = Visibility.Visible;
                     TextBox_text.Visibility = Visibility.Visible;
-
-                    Calendar.Visibility = Visibility.Visible;
                     break;
                 case "Рекомендация":
                     tblock_heading.Visibility = Visibility.Visible;
                     TextBox_heading.Visibility = Visibility.Visible;
                     TextBlock_text.Visibility = Visibility.Visible;
                     TextBox_text.Visibility = Visibility.Visible;
-
                     break;
             }
         }
@@ -210,9 +187,7 @@ namespace GreenTrail.Forms.Data.AddData
             addRegionDialog.ShowDialog();
 
             // Заполнение выпадающего списка регионов
-            SampleRegionComboBox.ItemsSource = _context.Region.ToList();
-            SampleRegionComboBox.DisplayMemberPath = "name";
-            SampleRegionComboBox.SelectedValuePath = "id_region";
+            SampleRegionComboBox.ItemsSource = greanTrailEntities.Region.Select(r => r.name).ToList();
         }
 
         private void AddNormButton_Click(object sender, RoutedEventArgs e)
@@ -224,124 +199,127 @@ namespace GreenTrail.Forms.Data.AddData
             addNormDialog.ShowDialog();
 
             // Заполнение выпадающего списка норм
-            ContemplationNormComboBox.ItemsSource = _context.Norm.ToList();
-            ContemplationNormComboBox.DisplayMemberPath = "name";
-            ContemplationNormComboBox.SelectedValuePath = "id_norm";
+            ContemplationNormComboBox.ItemsSource = greanTrailEntities.Norm.Select(r => r.name).ToList();
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            // Получение выбранной сущности
-            string selectedEntity = table;
-
-            switch (selectedEntity)
+            if (areAllFieldsFilled)
             {
-                case "Образец":
-                    if (SampleArticulTextBox.Text != string.Empty && SampleRegionComboBox.SelectedItem != null && SampleTypeComboBox.SelectedItem != null)
-                    {
-                        Sample sample = new Sample
+                // Получение выбранной сущности
+                string selectedEntity = table;
+                var currentUser = DataBaseFuns.GetCurrentUser();
+                switch (selectedEntity)
+                {
+                    case "Образец":
+                        if (SampleArticulTextBox.Text != string.Empty && SampleRegionComboBox.SelectedItem != null && SampleTypeComboBox.SelectedItem != null)
                         {
-                            id_region = (int)SampleRegionComboBox.SelectedValue,
-                            id_user = 1, // Взять из текущего пользователя
-                            articul = SampleArticulTextBox.Text,
-                            id_type = (int)SampleTypeComboBox.SelectedValue
-                        };
-                        _context.Sample.Add(sample);
-                    }
-                    else { MessageBox.Show("Вы не ввели все данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
-
-                    break;
-                case "Изучение пробы":
-                    if (ContemplationTypeContemplationTextBox.Text != string.Empty && ContemplationSampleComboBox.SelectedItem != null && ContemplationResultTextBox.Text != string.Empty && ContemplationNormComboBox.SelectedItem != null)
-                    {
-                        Contemplation contemplation = new Contemplation
-                        {
-                            id_sample = (int)ContemplationSampleComboBox.SelectedValue,
-                            id_user = 1, // Взять из текущего пользователя
-                            type_contemplation = ContemplationTypeContemplationTextBox.Text,
-                            result = ContemplationResultTextBox.Text, // Временно задано произвольное значение
-                            id_norm = (int)ContemplationNormComboBox.SelectedValue
-                        };
-                        Sample sample = GreanTrailEntities.GetContext().Sample.FirstOrDefault(r => r.articul == (string)SampleRegionComboBox.SelectedItem); 
-                        Norm norma = GreanTrailEntities.GetContext().Norm.FirstOrDefault(r => r.id_norm == (long)ContemplationNormComboBox.SelectedValue && r.id_type == sample.id_type);
-                        if (Convert.ToInt32(norma.norma) < Convert.ToInt32(ContemplationResultTextBox.Text))
-                        {
-                            string v = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
-                            Pollution pollution = new Pollution
+                            Sample sample = new Sample
                             {
-                                id_contemplation = contemplation.id_contemplation,
-                                levels = (Convert.ToInt32(norma.norma) - Convert.ToInt32(ContemplationResultTextBox.Text)).ToString(),
-                                //id_region = GreanTrailEntities.GetContext().Region.FirstOrDefault(r => r.id_region == sample.id_region).ToString(),
-                                //data_time = v
+                                id_region = (int)SampleRegionComboBox.SelectedValue + 1,
+                                id_user = currentUser.id_user, // Взять из текущего пользователя
+                                articul = SampleArticulTextBox.Text,
+                                id_type = (int)SampleTypeComboBox.SelectedValue + 1,
+                                date_sample = DateTime.Now
                             };
+                            _context.Sample.Add(sample);
                         }
-                        _context.Contemplation.Add(contemplation);
-                    }
-                    else { MessageBox.Show("Вы не ввели все данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
-                    break;
-                case "Пользователи":
-                    if (UserLoginTextBox.Text !=string.Empty && UserLoginTextBox.Text != string.Empty)
-                    {
-                        Users users = new Users
-                        {
-                            full_name = UserFullNameTextBox.Text,
-                            login = UserLoginTextBox.Text,
-                            password = Funs.ComputeSHA256Hash(UserPassTextBox.Text),
-                            id_roles = (int)UserRolesComboBox.SelectedValue,
-                            dateOfBirth = UserDateOfBirthTextBox.Text,
-                            phoneNumber = UserPhoneNumberTextBox.Text,
-                            address = UserAddressTextBox.Text,
-                            email = UserEmailTextBox.Text,
-                        };
-                        _context.Users.Add(users);
-                    }
-                    else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+                        else { MessageBox.Show("Вы не ввели все данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
 
-                    break;
-                case "Мероприятие":
-                    if (UserLoginTextBox.Text != string.Empty && UserLoginTextBox.Text != string.Empty)
-                    {
-                        Event events = new Event
+                        break;
+                    case "Изучение пробы":
+                        if (ContemplationSampleComboBox.SelectedItem != null && ContemplationResultTextBox.Text != string.Empty && ContemplationNormComboBox.SelectedItem != null)
                         {
-                            name = tblock_heading.Text,
-                            data_time = Calendar.SelectedDate
-                        };
-                        _context.Event.Add(events);
-                    }
-                    else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
-                    break;
-                case "Новость":
-                    if (UserLoginTextBox.Text != string.Empty && UserLoginTextBox.Text != string.Empty)
-                    {
-                        News news = new News
+                            Contemplation contemplation = new Contemplation
+                            {
+                                id_sample = (int)ContemplationSampleComboBox.SelectedIndex + 1,
+                                id_user = currentUser.id_user, // Взять из текущего пользователя
+                                result = ContemplationResultTextBox.Text, // Временно задано произвольное значение
+                                id_norm = (int)ContemplationNormComboBox.SelectedIndex + 1,
+                                date_contemplation = DateTime.Now
+                            };
+                            Sample sample = greanTrailEntities.Sample.FirstOrDefault(r => r.articul == (string)ContemplationSampleComboBox.SelectedItem);
+                            Norm norma = greanTrailEntities.Norm.FirstOrDefault(r => r.id_norm == (long)ContemplationNormComboBox.SelectedIndex + 1 && r.id_type == sample.id_type);
+                            Region region = greanTrailEntities.Region.FirstOrDefault(r => r.id_region == sample.id_region);
+                            if (Convert.ToInt32(norma.norma) < Convert.ToInt32(ContemplationResultTextBox.Text))
+                            {
+                                Pollution pollution = new Pollution
+                                {
+                                    id_contemplation = contemplation.id_contemplation,
+                                    levels = (Convert.ToInt32(ContemplationResultTextBox.Text) - Convert.ToInt32(norma.norma)).ToString(),
+                                    id_region = region.id_region,
+                                    data_time = DateTime.Now,
+                                };
+                                _context.Pollution.Add(pollution);
+                            }
+                            _context.Contemplation.Add(contemplation);
+                        }
+                        else { MessageBox.Show("Вы не ввели все данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+                        break;
+                    case "Пользователи":
+                        if (UserLoginTextBox.Text != string.Empty && UserLoginTextBox.Text != string.Empty)
                         {
-                            //id_user = GreanTrailEntities.CurrentUserId,
-                            heading = tblock_heading.Text,
-                            text = TextBox_text.Text,
-                            data_time = Calendar.SelectedDate
-                        };
-                        _context.News.Add(news);
-                    }
-                    else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
-                    break;
-                case "Рекомендация":
-                    if (UserLoginTextBox.Text != string.Empty && UserLoginTextBox.Text != string.Empty)
-                    {
-                        EcologicalRecommendations ecologicalRecommendations = new EcologicalRecommendations
-                        {
-                            //id_user = GreanTrailEntities.CurrentUserId,
-                            heading = tblock_heading.Text,
-                            text = TextBox_text.Text,
+                            Users users = new Users
+                            {
+                                full_name = UserFullNameTextBox.Text,
+                                login = UserLoginTextBox.Text,
+                                password = Funs.ComputeSHA256Hash(UserPassTextBox.Text),
+                                id_roles = (int)UserRolesComboBox.SelectedIndex + 1,
+                                dateOfBirth = UserDateOfBirthTextBox.Text,
+                                phoneNumber = UserPhoneNumberTextBox.Text,
+                                address = UserAddressTextBox.Text,
+                                email = UserEmailTextBox.Text,
+                            };
+                            _context.Users.Add(users);
+                        }
+                        else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
 
-                        };
-                        _context.EcologicalRecommendations.Add(ecologicalRecommendations);
-                    }
-                    else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
-                    break;
+                        break;
+                    case "Мероприятие":
+                        if (UserLoginTextBox.Text != string.Empty && UserLoginTextBox.Text != string.Empty)
+                        {
+                            Event events = new Event
+                            {
+                                name = tblock_heading.Text,
+                                data_time = Calendar.SelectedDate
+                            };
+                            _context.Event.Add(events);
+                        }
+                        else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+                        break;
+                    case "Новость":
+                        if (UserLoginTextBox.Text != string.Empty && UserLoginTextBox.Text != string.Empty)
+                        {
+                            News news = new News
+                            {
+                                id_user = currentUser.id_user,
+                                heading = tblock_heading.Text,
+                                text = TextBox_text.Text,
+                                data_time = DateTime.Now,
+                            };
+                            _context.News.Add(news);
+                        }
+                        else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+                        break;
+                    case "Рекомендация":
+                        if (UserLoginTextBox.Text != string.Empty && UserLoginTextBox.Text != string.Empty)
+                        {
+                            EcologicalRecommendations ecologicalRecommendations = new EcologicalRecommendations
+                            {
+                                id_user = currentUser.id_user,
+                                heading = tblock_heading.Text,
+                                text = TextBox_text.Text,
+
+                            };
+                            _context.EcologicalRecommendations.Add(ecologicalRecommendations);
+                        }
+                        else { MessageBox.Show("Вы не ввели все обязательные данные!", "Erorr", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+                        break;
+                }
+                _context.SaveChanges();
+                // Вывод сообщения об успешном добавлении
+                MessageBox.Show("Данные успешно добавлены в базу данных.");
             }
-            _context.SaveChanges();
-            // Вывод сообщения об успешном добавлении
-            MessageBox.Show("Данные успешно добавлены в базу данных.");
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -360,6 +338,21 @@ namespace GreenTrail.Forms.Data.AddData
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+        private bool areAllFieldsFilled = true;
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if(textBox.Name == "UserEmailTextBox" && !Funs.ValidateEmail(textBox.Text))
+            {
+                l_pb_errorEmail.Visibility = Visibility.Visible;
+                areAllFieldsFilled = false;
+            }
+            else
+            {
+                // Если электронная почта правильная, скрываем сообщение об ошибке
+                l_pb_errorEmail.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

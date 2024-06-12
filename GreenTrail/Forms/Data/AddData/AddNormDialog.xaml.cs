@@ -26,6 +26,9 @@ namespace GreenTrail.Forms.Data.AddData
         public AddNormDialog()
         {
             InitializeComponent();
+
+
+            TypeNormComboBox.ItemsSource = _context.Type.Select(x => x.name).ToList();
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
@@ -36,7 +39,7 @@ namespace GreenTrail.Forms.Data.AddData
             {
                 name = NameTextBox.Text,
                 norma = NormaTextBox.Text,
-                id_norm = (int)TypeNormComboBox.SelectedIndex
+                id_norm = (int)TypeNormComboBox.SelectedIndex+1
             };
 
             // Добавление региона в БД

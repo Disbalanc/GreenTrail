@@ -150,7 +150,9 @@ namespace GreenTrail.Forms
 
                     // Add tooltip to display information on hover
                     ToolTip tooltip = new ToolTip();
-                    tooltip.Content = $"Загрязнение №: {item.id_pollution}\nуровень загрязнения: {item.levels}\nТип пробы: {item.Contemplation.Sample.Type.name}\n Найденный элемент: {item.Contemplation.type_contemplation}";
+                    tooltip.Content = $"Загрязнение №: {item.id_pollution}\nуровень загрязнения: {item.levels}" +
+                        $"\nТип пробы: {item.Contemplation.Sample.Type.name}" +
+                        $"\n Найденный элемент: {item.Contemplation.Norm.name}";
                     pollutionPin.ToolTip = tooltip;
 
                     myMap.Children.Add(pollutionPin);

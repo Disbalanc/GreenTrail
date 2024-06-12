@@ -26,6 +26,7 @@ using OfficeOpenXml;
 using static GreenTrail.Forms.Data.ExportData.ExportDataWindow;
 using System.Data;
 using ClosedXML.Excel;
+using System.Windows.Controls.Primitives;
 
 
 namespace GreenTrail.Forms.Data.ExportData
@@ -37,6 +38,7 @@ namespace GreenTrail.Forms.Data.ExportData
     public partial class ExportDataWindow : Window
     {
         SaveFileDialogViewModel saveFileDialogViewModel;
+        private double _verticalOffset;
         private void MinimizeClick(object sender, RoutedEventArgs e)
         {
             Funs.MinimizeToTaskbar(this);
@@ -69,9 +71,51 @@ namespace GreenTrail.Forms.Data.ExportData
             this.Close();
         }
 
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            // Вычисление высоты пустого пространства
+            double emptySpaceHeight = scrollBar.ActualHeight - scrollBar.ViewportSize;
+
+            // Установка максимального значения прокрутки
+            scrollBar.Maximum = StackPanelMain.ActualHeight - scrollBar.ViewportSize - emptySpaceHeight;
+        }
+
+        private void ScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            // Обновление вертикального смещения
+            _verticalOffset = e.NewValue;
+
+            // Применение вертикального смещения к контенту
+            StackPanelMain.Margin = new Thickness(0, -_verticalOffset, 0, 0);
+        }
+
+        private void Window_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            // Обновление вертикального смещения
+            _verticalOffset -= e.Delta / 5;
+
+            // Ограничение вертикального смещения максимальным и минимальным значениями
+            _verticalOffset = Math.Min(Math.Max(_verticalOffset, scrollBar.Minimum), scrollBar.Maximum);
+
+            // Применение вертикального смещения к StackPanel
+            StackPanelMain.Margin = new Thickness(0, -_verticalOffset, 0, 0);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Вычисление высоты пустого пространства
+            double emptySpaceHeight = scrollBar.ActualHeight - scrollBar.ViewportSize;
+
+            // Установка максимального значения прокрутки
+            scrollBar.Maximum = StackPanelMain.ActualHeight - scrollBar.ViewportSize - emptySpaceHeight;
+        }
+
         public ExportDataWindow()
         {
             InitializeComponent();
+
+            // Обработчик события прокрутки для ScrollBar
+            scrollBar.Scroll += ScrollBar_Scroll;
 
             saveFileDialogViewModel = new SaveFileDialogViewModel();
 
@@ -84,7 +128,7 @@ namespace GreenTrail.Forms.Data.ExportData
         {
             saveFileDialogViewModel.OnBrowse(dg_table);
         }
-        private List<string> Tables = new List<string> { "Пробы", "Пользователи", "Обследования проб", "Мероприятия", "Загрязнения", "Экологические рекомендации" };
+        private List<string> Tables = new List<string> { "Пробы", "Пользователи", "Обследования проб", "Мероприятия", "Загрязнения", "Экологические рекомендации","Нормы", "Регионы" };
 
 
         private void cb_selectTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -104,7 +148,7 @@ namespace GreenTrail.Forms.Data.ExportData
                     {
                         case "Пробы":
                             data = context.Sample
-                                .Select(s => new { s.articul, typeName = s.Type.name, regionName = s.Region.name, full_name = s.Users.full_name })
+                                .Select(s => new { s.articul, typeName = s.Type.name, regionName = s.Region.name, full_name = s.Users.full_name,s.date_sample })
                                 .ToList();
                             break;
                         case "Пользователи":
@@ -114,24 +158,49 @@ namespace GreenTrail.Forms.Data.ExportData
                             break;
                         case "Обследования проб":
                             data = context.Contemplation
-                                .Select(ss => new { ss.Sample.articul, ss.Users.full_name, ss.type_contemplation, ss.Norm.name, ss.Norm.norma, ss.result })
+                                .Select(ss => new {
+                                    Articul = ss.Sample.articul,
+                                    FullName = ss.Users.full_name,
+                                    SampleType = ss.Sample.Type.name,
+                                    NormName = ss.Norm.name,
+                                    Norma = ss.Norm.norma,
+                                    Result = ss.result,
+                                    ss.date_contemplation,
+                                })
                                 .ToList();
                             break;
-                        //case "Мероприятия":
-                        //    data = context.Event
-                        //        .Select(ep => new { ep.name, ep.data_time })
-                        //        .ToList();
-                        //    break;
+                        case "Мероприятия":
+                            data = context.Event
+                                .Select(ep => new { ep.name, ep.data_time })
+                                .ToList();
+                            break;
                         case "Загрязнения":
                             data = context.Pollution
                                 .Select(p => new { p.id_pollution, p.levels, p.Region.name, p.Region.geographical_coordinates })
                                 .ToList();
                             break;
-                        //case "Экологические рекомендации":
-                        //    data = context.EcologicalRecommendations
-                        //        .Select(er => new { er.heading, er.text, er.Users.full_name })
-                        //        .ToList();
-                        //    break;
+                        case "Экологические рекомендации":
+                            data = context.EcologicalRecommendations
+                                .Select(er => new { er.heading, er.text, er.Users.full_name })
+                                .ToList();
+                            break;
+                        case "Нормы":
+                            data = context.Norm
+                                .Select(er => new {
+                                    erName = er.name,
+                                    norma = er.norma,
+                                    typeName = er.Type.name
+                                })
+                                .ToList();
+                            break;
+                        case "Регионы":
+                            data = context.Region
+                                .Select(er => new {
+                                    erName = er.name,
+                                    norma = er.geographical_coordinates
+                                })
+                                .ToList();
+                            break;
                     }
 
                     // Обновить пользовательский интерфейс с загруженными данными
@@ -151,8 +220,22 @@ namespace GreenTrail.Forms.Data.ExportData
                 return;
             }
 
-            
+            string directoryPath = @"C:\GreenTrail\Export";
+            if (tb_path.Text.Contains(directoryPath))
+            {
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+            }
             saveFileDialogViewModel.Save(tb_path.Text, dg_table);
+        }
+
+        private void BackClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
         }
 
         public class SaveFileDialogViewModel : INotifyPropertyChanged
@@ -278,97 +361,120 @@ namespace GreenTrail.Forms.Data.ExportData
             
             private void SaveToCsv(string filePath, DataGrid dataGrid)
             {
-                var data = dataGrid.ItemsSource.Cast<object>().ToList();
-
-                // Создать объект StringBuilder для построения содержимого CSV
-                var csv = new StringBuilder();
-
-                // Добавить заголовки столбцов
-                foreach (var column in dataGrid.Columns)
+                try
                 {
-                    csv.Append(column.Header + ",");
-                }
-                csv.AppendLine();
+                    var data = dataGrid.ItemsSource.Cast<object>().ToList();
 
-                // Добавить данные строк
-                foreach (var item in data)
-                {
-                    var properties = item.GetType().GetProperties();
+                    // Создать объект StringBuilder для построения содержимого CSV
+                    var csv = new StringBuilder();
 
-                    foreach (var property in properties)
+                    // Добавить заголовки столбцов
+                    foreach (var column in dataGrid.Columns)
                     {
-                        csv.Append(property.GetValue(item) + ",");
+                        csv.Append(column.Header + ",");
                     }
                     csv.AppendLine();
-                }
 
-                // Сохранить содержимое CSV в файл
-                System.IO.File.WriteAllText(filePath, csv.ToString());
+                    // Добавить данные строк
+                    foreach (var item in data)
+                    {
+                        var properties = item.GetType().GetProperties();
+
+                        foreach (var property in properties)
+                        {
+                            csv.Append(property.GetValue(item) + ",");
+                        }
+                        csv.AppendLine();
+                    }
+                    // Сохранить содержимое CSV в файл
+                    System.IO.File.WriteAllText(filePath, csv.ToString());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Упс", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
 
             private void SaveToPdf(string filePath, DataGrid dataGrid)
             {
-                var data = dataGrid.ItemsSource.Cast<object>().ToList();
-
-                // Создать объект Document для генерации PDF
-                var document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 25, 25, 25, 25);
-                var writer = PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
-                document.Open();
-
-                // Добавить заголовки столбцов
-                var table = new PdfPTable(dataGrid.Columns.Count);
-                foreach (var column in dataGrid.Columns)
+                try
                 {
-                    table.AddCell(new PdfPCell(new Phrase(column.Header.ToString())));
-                }
+                    var data = dataGrid.ItemsSource.Cast<object>().ToList();
 
-                // Добавить данные строк
-                foreach (var item in data)
-                {
-                    var properties = item.GetType().GetProperties();
+                    // Создать объект Document для генерации PDF
+                    var document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 25, 25, 25, 25);
+                    var writer = PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
+                    document.Open();
 
-                    foreach (var property in properties)
+                    // Добавить заголовки столбцов
+                    var table = new PdfPTable(dataGrid.Columns.Count);
+                    foreach (var column in dataGrid.Columns)
                     {
-                        table.AddCell(new PdfPCell(new Phrase(property.GetValue(item).ToString())));
+                        table.AddCell(new PdfPCell(new Phrase(column.Header.ToString())));
                     }
+
+                    // Добавить данные строк
+                    foreach (var item in data)
+                    {
+                        var properties = item.GetType().GetProperties();
+
+                        foreach (var property in properties)
+                        {
+                            object value = property.GetValue(item);
+                            string stringValue = value != null ? value.ToString() : string.Empty;
+                            table.AddCell(new PdfPCell(new Phrase(stringValue)));
+                        }
+                    }
+
+                    // Добавить таблицу в документ
+                    document.Add(table);
+
+                    // Закрыть документ
+                    document.Close();
+                }catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,"Упс",MessageBoxButton.OK,MessageBoxImage.Error);
                 }
-
-                // Добавить таблицу в документ
-                document.Add(table);
-
-                // Закрыть документ
-                document.Close();
+                
             }
 
             private void SaveToTxt(string filePath, DataGrid dataGrid)
             {
-                // Получить данные DataGrid
-                var data = dataGrid.ItemsSource.Cast<object>().ToList();
-
-                // Создать объект StringBuilder для построения содержимого TXT
-                var txt = new StringBuilder();
-
-                // Добавить заголовки столбцов
-                foreach (var column in dataGrid.Columns)
+                try
                 {
-                    txt.Append(column.Header + "\t");
-                }
-                txt.AppendLine();
+                    // Получить данные DataGrid
+                    var data = dataGrid.ItemsSource.Cast<object>().ToList();
 
-                // Добавить данные строк
-                foreach (var item in data)
-                {
-                    var properties = item.GetType().GetProperties();
+                    // Создать объект StringBuilder для построения содержимого TXT
+                    var txt = new StringBuilder();
 
-                    foreach (var property in properties)
+                    // Добавить заголовки столбцов
+                    foreach (var column in dataGrid.Columns)
                     {
-                        txt.Append(property.GetValue(item) + "\t");
+                        txt.Append(column.Header + "\t");
                     }
                     txt.AppendLine();
-                }
 
-                // Сохранить содержимое TXT в файл
-                System.IO.File.WriteAllText(filePath, txt.ToString());
+                    // Добавить данные строк
+                    foreach (var item in data)
+                    {
+                        var properties = item.GetType().GetProperties();
+
+                        foreach (var property in properties)
+                        {
+                            txt.Append(property.GetValue(item) + "\t");
+                        }
+                        txt.AppendLine();
+                    }
+
+                    // Сохранить содержимое TXT в файл
+                    System.IO.File.WriteAllText(filePath, txt.ToString());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Упс", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                
             }
 
             private void SaveToJson(string filePath, DataGrid dataGrid)
@@ -434,44 +540,44 @@ namespace GreenTrail.Forms.Data.ExportData
 
             private void SaveToXlsx(string filePath, DataGrid dataGrid)
             {
-                // Установить лицензионный контекст
-                ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
-
-
-                using (var package = new ExcelPackage())
+                try
                 {
-                    // Добавить новый лист
-                    var worksheet = package.Workbook.Worksheets.Add("Лист1");
+                    // Установить лицензионный контекст
+                    ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
-                    // Добавить заголовки столбцов
-                    for (int i = 0; i < dataGrid.Columns.Count; i++)
+
+                    using (var package = new ExcelPackage())
                     {
-                        worksheet.Cells[1, i + 1].Value = dataGrid.Columns[i].Header;
-                    }
+                        // Добавить новый лист
+                        var worksheet = package.Workbook.Worksheets.Add("Лист1");
 
-                    // Добавить данные строк
-                    for (int i = 0; i < dataGrid.Items.Count; i++)
-                    {
-                        var item = dataGrid.Items[i];
-                        var properties = item.GetType().GetProperties();
-
-                        for (int j = 0; j < properties.Length; j++)
+                        // Добавить заголовки столбцов
+                        for (int i = 0; i < dataGrid.Columns.Count; i++)
                         {
-                            worksheet.Cells[i + 2, j + 1].Value = properties[j].GetValue(item);
+                            worksheet.Cells[1, i + 1].Value = dataGrid.Columns[i].Header;
                         }
-                    }
 
-                    // Сохранить файл
-                    package.SaveAs(new FileInfo(filePath));
+                        // Добавить данные строк
+                        for (int i = 0; i < dataGrid.Items.Count; i++)
+                        {
+                            var item = dataGrid.Items[i];
+                            var properties = item.GetType().GetProperties();
+
+                            for (int j = 0; j < properties.Length; j++)
+                            {
+                                worksheet.Cells[i + 2, j + 1].Value = properties[j].GetValue(item);
+                            }
+                        }
+
+                        // Сохранить файл
+                        package.SaveAs(new FileInfo(filePath));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Упс", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-        }
-
-        private void BackClick(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
         }
     }
 }

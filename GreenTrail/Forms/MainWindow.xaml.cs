@@ -51,12 +51,15 @@ namespace GreenTrail.Forms
             {
                 case "Администратор":
                     MenuAddUser.Visibility = Visibility.Visible;
-
+                    MenuAddEvent.Visibility = Visibility.Visible;
+                    MenuAddNews.Visibility = Visibility.Visible;
+                    MenuAddRegion.Visibility = Visibility.Visible;
+                    MenuAddRecomendation.Visibility = Visibility.Visible;
                     break;
                 case "Лаборант":
                     MenuAddContemplation.Visibility = Visibility.Visible;
                     MenuAddNorm.Visibility = Visibility.Visible;
-
+                    MenuAddRecomendation.Visibility = Visibility.Visible;
                     break;
                 case "Эколог":
                     MenuAddSample.Visibility = Visibility.Visible;
@@ -75,6 +78,12 @@ namespace GreenTrail.Forms
 
             // Установка максимального значения прокрутки
             scrollBar.Maximum = StackPanelMain.ActualHeight - scrollBar.ViewportSize - emptySpaceHeight;
+
+            //var context = new GreanTrailEntities();
+            //var service = new NotificationService(context, 10000); // poll every 10 seconds
+            //service.Start();
+
+            i_user.Source = DataBaseFuns.LoadImage();
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)

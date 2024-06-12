@@ -13,11 +13,39 @@ using System.Net;
 using System.Configuration;
 using Microsoft.Win32;
 using GreenTrail.Properties;
+using System.IO;
+using System.Windows.Media.Imaging;
+using System.Windows.Controls;
 
 namespace GreenTrail.Source.Funs
 {
     internal class DataBaseFuns
     {
+
+        internal static BitmapFrame LoadImage()
+        {
+            using (GreanTrailEntities dbContext = new GreanTrailEntities())
+            {
+                var user = DataBaseFuns.GetCurrentUser();
+
+                if (user.image != null)
+                {
+                    byte[] imageData = Convert.FromBase64String(user.image);
+                    using (MemoryStream stream = new MemoryStream(imageData))
+                    {
+                        stream.Position = 0;
+                        BitmapDecoder decoder = new PngBitmapDecoder(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                        BitmapFrame frame = decoder.Frames[0];
+
+                        return frame;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 
         public static void AuthenticateUser(string username, string password,Window window)
         {

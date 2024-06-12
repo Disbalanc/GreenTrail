@@ -1,7 +1,11 @@
-﻿using Microsoft.Win32;
+﻿using DocumentFormat.OpenXml.Drawing;
+using GreenTrail.Forms.Settings;
+using GreenTrail.Source.Funs;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,6 +67,7 @@ namespace GreenTrail.Forms.Welcome.LoadingWindows
                         }
                         if (bool.Parse((string)key.GetValue("RememberMe")))
                         {
+                            
 
                             MainWindow mainWindow = new MainWindow();
                             mainWindow.Show();
@@ -87,6 +92,11 @@ namespace GreenTrail.Forms.Welcome.LoadingWindows
                 }
                 this.Close();
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Settings.ThemeManager.InitializeTheme();
         }
     }
 }

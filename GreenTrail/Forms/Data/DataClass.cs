@@ -12,17 +12,18 @@ namespace GreenTrail.Forms.Data
 
     public class PollutionData
     {
+        public long id { get; set; }
         public string levels { get; set; }
         public string source { get; set; }
-        public string name { get; set; }
         public string geographicalcoordinates { get; set; }
     }
 
     public class StudyData
     {
         public string fullname { get; set; }
-        public int idsample { get; set; }
-        public string typecontemplation { get; set; }
+        public string articulSample { get; set; }
+        public string region { get; set; }
+        public string type { get; set; }
         public string name { get; set; }
         public double result { get; set; }
     }

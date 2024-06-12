@@ -230,14 +230,37 @@
         <Setter Property="Margin" Value="10,10,10,0"/>
     </Style>
 
-    <!-- Setting Window  -->
-    <!-- TextBox -->
-    <Style  x:Key="TextBoxStyle" TargetType="TextBox">
-        <Setter Property="Background" Value="#FFFFFF" />
-        <Setter Property="BorderBrush" Value="#CCCCCC" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="5" />
+    <!-- TextBox  -->
+    <Style x:Key="TextBoxStyle" TargetType="TextBox">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AdditionalColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Gray1}" />
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Inter"/>
+        <Setter Property="Padding" Value="10,0,0,0"/>
+        <Setter Property="Margin" Value="25,0,25,10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource Text1}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentColor}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
+
+    <!-- Setting Window  -->
     
     <!-- ComboBox  -->
     <Brush x:Key="ComboBox.Static.Background">#FFFFFF</Brush>

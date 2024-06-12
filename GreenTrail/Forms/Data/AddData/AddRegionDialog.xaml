@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenTrail.Forms.Data.AddData"
         mc:Ignorable="d"
-         Title="Добавление региона" Height="250" Width="400" Background="{DynamicResource PrimaryColor}" ResizeMode="NoResize">
+         Title="Добавление региона" Height="400" Width="400" Background="{DynamicResource PrimaryColor}" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,14 +15,23 @@
     </Window.Resources>
     <Grid>
         <StackPanel Margin="10">
-            <TextBlock Text="Название:" />
-            <TextBox Name="NameTextBox" />
+            <TextBlock Text="Название:" Margin="10,0,10,0" Style="{StaticResource TextBlockStyle}"/>
+            <TextBox Name="NameTextBox" Margin="10,0,10,10" Style="{StaticResource TextBoxInputStyle}"/>
 
-            <TextBlock Text="Географические координаты:" />
-            <TextBox Name="GeographicalCoordinatesTextBox" />
+            <TextBlock Text="Географические координаты:" Margin="10,0,10,0" Style="{StaticResource TextBlockStyle}"/>
+            <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+                <TextBlock Text="latitude:" Margin="20,0,10,0" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox Name="GeographicalCoordinateslatitudeTextBox" Margin="25,0,10,10" MinWidth="100" Style="{StaticResource TextBoxInputStyle}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+                <TextBlock Text="longitude:" Margin="20,0,10,0" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox Name="GeographicalCoordinateslongitudeTextBox" Margin="10,0,10,10" MinWidth="100" Style="{StaticResource TextBoxInputStyle}"/>
+            </StackPanel>
+            
+            
 
-            <Button Name="OkButton" Content="OK" Margin="10,0,0,0" Click="OkButton_Click" />
-            <Button Name="CancelButton" Content="Отмена" Margin="10,0,0,0" Click="CancelButton_Click" />
+            <Button Name="OkButton" Content="OK" Margin="10,0,0,10" Click="OkButton_Click" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}"/>
+            <Button Name="CancelButton" Content="Отмена" Margin="10,0,0,0" Click="CancelButton_Click" Style="{StaticResource ButtonPrimeryWelcomeInputStyle}"/>
         </StackPanel>
     </Grid>
 </Window>

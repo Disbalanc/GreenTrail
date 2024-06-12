@@ -28,12 +28,18 @@ using GreenTrail.Forms.ViewModel;
 
 namespace GreenTrail.Forms.Settings
 {
-    public class ThemeManager
+    public static class ThemeManager
     {
+        private const string ThemeSettingKey = "Theme";
+
         public static event PropertyChangedEventHandler ThemeChanged;
 
         public static void SwitchTheme(bool isDarkTheme)
         {
+            // Store the theme preference in settings
+            Properties.Settings.Default[ThemeSettingKey] = isDarkTheme;
+            Properties.Settings.Default.Save();
+
             // Clear the current theme resources
             var appResources = Application.Current.Resources;
             appResources.MergedDictionaries.Clear();
@@ -54,6 +60,15 @@ namespace GreenTrail.Forms.Settings
 
             // Raise the ThemeChanged event
             ThemeChanged?.Invoke(null, new PropertyChangedEventArgs("Theme"));
+        }
+
+        public static void InitializeTheme()
+        {
+            // Load the theme preference from settings
+            bool isDarkTheme = (bool)Properties.Settings.Default[ThemeSettingKey];
+
+            // Apply the theme
+            SwitchTheme(isDarkTheme);
         }
     }
 
@@ -82,11 +97,16 @@ namespace GreenTrail.Forms.Settings
             this.Close();
         }
 
+        private const string ThemeSettingKey = "Theme";
+
         public SettingsWindow()
         {
             InitializeComponent();
 
-            
+            // Load the theme preference from settings
+            bool isDarkTheme = (bool)Properties.Settings.Default[ThemeSettingKey];
+
+            jamesToggleSwitch.IsChecked = isDarkTheme;
 
             var user = DataBaseFuns.GetCurrentUser();
 
@@ -97,7 +117,7 @@ namespace GreenTrail.Forms.Settings
             tb_telephoneNumber.Text = user.phoneNumber;
             tb_full_name.Text = user.full_name;
 
-            LoadImage();
+            image.Source = DataBaseFuns.LoadImage();
         }
 
         private void btn_newPass_Click(object sender, RoutedEventArgs e)
@@ -149,30 +169,7 @@ namespace GreenTrail.Forms.Settings
             MessageBox.Show("Изменения внесены в базу");
         }
 
-        private void LoadImage()
-        {
-            using (GreanTrailEntities dbContext = new GreanTrailEntities())
-            {
-                var user = DataBaseFuns.GetCurrentUser();
-
-                if (user.image != null)
-                {
-                    byte[] imageData = Convert.FromBase64String(user.image);
-                    using (MemoryStream stream = new MemoryStream(imageData))
-                    {
-                        stream.Position = 0;
-                        BitmapDecoder decoder = new PngBitmapDecoder(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
-                        BitmapFrame frame = decoder.Frames[0];
-
-                        image.Source = frame;
-                    }
-                }
-                else
-                {
-                    image.Source = null;
-                }
-            }
-        }
+        
         private void JamesToggleSwitch_Click(object sender, RoutedEventArgs e)
         {
             switch (jamesToggleSwitch.IsChecked)
@@ -220,6 +217,5 @@ namespace GreenTrail.Forms.Settings
                 }
             }
         }
-
     }
 }

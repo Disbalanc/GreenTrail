@@ -25,6 +25,7 @@ namespace GreenTrail
         public Nullable<long> id_user { get; set; }
         public string articul { get; set; }
         public Nullable<long> id_type { get; set; }
+        public Nullable<System.DateTime> date_sample { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contemplation> Contemplation { get; set; }
