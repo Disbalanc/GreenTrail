@@ -332,7 +332,6 @@
     <Compile Include="Forms\Data\ViewData\ViewDataWindow.xaml.cs">
       <DependentUpon>ViewDataWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MainWindowViewModelBase.cs" />
     <Compile Include="Forms\MapWindow.xaml.cs">
       <DependentUpon>MapWindow.xaml</DependentUpon>
     </Compile>

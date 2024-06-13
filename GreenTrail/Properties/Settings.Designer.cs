@@ -46,5 +46,29 @@ namespace GreenTrail.Properties {
                 this["Theme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("greantrail@mail.ru")]
+        public string mailApp {
+            get {
+                return ((string)(this["mailApp"]));
+            }
+            set {
+                this["mailApp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Fe(GR~FMjnF6,PiR")]
+        public string passwordMailApp {
+            get {
+                return ((string)(this["passwordMailApp"]));
+            }
+            set {
+                this["passwordMailApp"] = value;
+            }
+        }
     }
 }

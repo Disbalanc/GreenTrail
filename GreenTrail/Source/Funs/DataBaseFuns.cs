@@ -134,13 +134,17 @@ namespace GreenTrail.Source.Funs
             
         }
 
+        private const string mailApp = "mailApp";
+        private const string passwordMailApp = "passwordMailApp";
+
         public static void SendOTP(string email, string OTP)
         {
             // Настройте учетную запись SMTP и учетные данные
             string smtpHost = "smtp.mail.ru";
             int smtpPort = 587;
-            string smtpUsername = ConfigurationManager.AppSettings["mailApp"];
-            string smtpPassword = ConfigurationManager.AppSettings["passwordMailApp"];
+
+            string smtpUsername = Properties.Settings.Default[mailApp].ToString();
+            string smtpPassword = Properties.Settings.Default[passwordMailApp].ToString();
 
             // Создание SMTP-клиента
             using (SmtpClient client = new SmtpClient(smtpHost, smtpPort))

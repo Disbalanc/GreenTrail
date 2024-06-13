@@ -211,14 +211,19 @@ namespace GreenTrail.Forms.Welcome
         {
             UpdateSubmitButtonState();
         }
-
+        
         private void btn_forgotPass_Click(object sender, RoutedEventArgs e)
         {
-            // Создаем новую страницу ForgotPass
             ForgotPasswordPage forgotPass = new ForgotPasswordPage();
-
-            // Загружаем страницу в фрейм
+            forgotPass.GoBack += ForgotPass_GoBack;
             this.Content = forgotPass;
+        }
+
+        private void ForgotPass_GoBack(object sender, EventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close(); // закрыть текущее окно
         }
     }
 }

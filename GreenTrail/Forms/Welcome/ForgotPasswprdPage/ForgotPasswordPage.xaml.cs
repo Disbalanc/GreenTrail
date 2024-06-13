@@ -1,6 +1,7 @@
 ﻿using GreenTrail.Source.Funs;
 using System;
 using System.Collections.Generic;
+using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,13 +84,14 @@ namespace GreenTrail.Forms.Welcome.ForgotPasswprdPage
                 }
             }
         }
+
+        public event EventHandler GoBack;
         private void btn_LoginWin_Click(object sender, RoutedEventArgs e)
         {
-            // Создаем новую страницу Login
-            LoginWindow login = new LoginWindow();
-
-            // Отображаем страницу Login в основном окне
-            this.Content = login;
+            if (GoBack != null)
+            {
+                GoBack(this, EventArgs.Empty);
+            }
         }
 
         public static string OTP;

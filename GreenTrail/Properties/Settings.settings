@@ -8,5 +8,11 @@
     <Setting Name="Theme" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="mailApp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">greantrail@mail.ru</Value>
+    </Setting>
+    <Setting Name="passwordMailApp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Fe(GR~FMjnF6,PiR</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

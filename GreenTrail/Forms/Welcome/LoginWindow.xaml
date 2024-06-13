@@ -32,6 +32,7 @@
                     </Button>
                 </StackPanel>
             </StackPanel>
+            
             <Image Source="/Source/Image/App/flowertree_welcome_window.png" Height="150" Width="200" Margin="0,13,160,83"/>
             <StackPanel Margin="20,40,20,20">
                 <Label Content="С возвращением" FontSize="24" Foreground="{DynamicResource Text0}" Margin="24,0,0,10"/>
@@ -48,7 +49,7 @@
                     </Button>
                 </StackPanel>
 
-               
+
 
                 <Grid Margin="24,25,24,0">
                     <CheckBox Foreground="{DynamicResource Gray1}" Content="Запомнить пароль"  x:Name="cb_rememberMe" VerticalAlignment="Center" />
