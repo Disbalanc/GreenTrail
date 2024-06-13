@@ -33,12 +33,12 @@ namespace GreenTrail.Forms.Welcome.LoadingWindows
             InitializeComponent();
 
             // Считываем значение флага показа из реестра
-            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", false);
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", true);
             if (key != null)
             {
-                
                 hasShownAboutAppWindow = bool.Parse((string)key.GetValue("HasShownAboutAppWindow"));
             }
+
                 // Создаем и запускаем таймер
                 DispatcherTimer timer = new DispatcherTimer();
                 timer.Interval = TimeSpan.FromMilliseconds(0.5);
@@ -61,14 +61,9 @@ namespace GreenTrail.Forms.Welcome.LoadingWindows
                     RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", true);
                     if (key != null)
                     {
-                        if (key == null)
-                        {
-                            key = Registry.CurrentUser.CreateSubKey("Software\\GreenTrail");
-                        }
+                        if (hasShownAboutAppWindow) key.SetValue("RememberMe", false);
                         if (bool.Parse((string)key.GetValue("RememberMe")))
                         {
-                            
-
                             MainWindow mainWindow = new MainWindow();
                             mainWindow.Show();
                             this.Close();

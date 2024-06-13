@@ -384,9 +384,6 @@
     <Compile Include="Norm.cs">
       <DependentUpon>GreanTrailModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Notification.cs">
-      <DependentUpon>GreanTrailModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Pollution.cs">
       <DependentUpon>GreanTrailModel.tt</DependentUpon>
     </Compile>
@@ -403,9 +400,6 @@
     <Compile Include="Source\Funs\Funs.cs" />
     <Compile Include="Source\Funs\NotificationService.cs" />
     <Compile Include="Source\Style\ThemeSwitch.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>GreanTrailModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Type.cs">
       <DependentUpon>GreanTrailModel.tt</DependentUpon>
     </Compile>

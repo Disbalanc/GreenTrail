@@ -25,7 +25,7 @@ namespace GreenTrail
         public long id_region { get; set; }
         public string name { get; set; }
         public string geographical_coordinates { get; set; }
-        public Nullable<int> popullation { get; set; }
+        public Nullable<int> population { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Event { get; set; }

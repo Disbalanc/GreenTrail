@@ -30,8 +30,8 @@ namespace GreenTrail
         public Nullable<long> id_roles { get; set; }
         public string dateOfBirth { get; set; }
         public string phoneNumber { get; set; }
-        public string address { get; set; }
         public string email { get; set; }
+        public string address { get; set; }
         public string image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

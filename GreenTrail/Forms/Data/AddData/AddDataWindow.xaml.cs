@@ -246,7 +246,7 @@ namespace GreenTrail.Forms.Data.AddData
                                 Pollution pollution = new Pollution
                                 {
                                     id_contemplation = contemplation.id_contemplation,
-                                    levels = (Convert.ToInt32(ContemplationResultTextBox.Text) - Convert.ToInt32(norma.norma)).ToString(),
+                                    levels = Convert.ToInt32(ContemplationResultTextBox.Text) - Convert.ToInt32(norma.norma),
                                     id_region = region.id_region,
                                     data_time = DateTime.Now,
                                 };

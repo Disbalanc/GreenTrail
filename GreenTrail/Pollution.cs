@@ -16,7 +16,7 @@ namespace GreenTrail
     {
         public long id_pollution { get; set; }
         public Nullable<long> id_contemplation { get; set; }
-        public string levels { get; set; }
+        public Nullable<double> levels { get; set; }
         public Nullable<long> id_region { get; set; }
         public Nullable<System.DateTime> data_time { get; set; }
     

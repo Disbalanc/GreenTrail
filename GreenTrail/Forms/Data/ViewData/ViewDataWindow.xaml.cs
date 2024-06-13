@@ -165,7 +165,7 @@ namespace GreenTrail.Forms.Data.ViewData
             .Select(x => new PollutionData
             {
                 id = x.id_pollution,
-                levels = x.levels,
+                levels = x.levels.ToString(),
                 source = x.Region.name,
                 geographicalcoordinates = x.Region.geographical_coordinates
             })
