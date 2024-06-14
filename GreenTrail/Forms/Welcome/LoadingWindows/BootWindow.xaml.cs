@@ -38,9 +38,9 @@ namespace GreenTrail.Forms.Welcome.LoadingWindows
             {
                 hasShownAboutAppWindow = bool.Parse((string)key.GetValue("HasShownAboutAppWindow"));
             }
-
-                // Создаем и запускаем таймер
-                DispatcherTimer timer = new DispatcherTimer();
+            
+            // Создаем и запускаем таймер
+            DispatcherTimer timer = new DispatcherTimer();
                 timer.Interval = TimeSpan.FromMilliseconds(0.5);
                 timer.Tick += Timer_Tick;
                 timer.Start();
@@ -81,6 +81,8 @@ namespace GreenTrail.Forms.Welcome.LoadingWindows
                 }
                 else
                 {
+                    RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", true);
+                    key.SetValue("RememberMe", false);
                     AboutAppWindow aboutAppWindow = new AboutAppWindow();
                     aboutAppWindow.Show();
                 }
