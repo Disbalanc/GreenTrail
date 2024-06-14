@@ -27,9 +27,9 @@ namespace GreenTrail
         public Nullable<long> id_norm { get; set; }
         public Nullable<System.DateTime> date_contemplation { get; set; }
     
+        public virtual Users Users { get; set; }
         public virtual Norm Norm { get; set; }
         public virtual Sample Sample { get; set; }
-        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pollution> Pollution { get; set; }
     }

@@ -12,7 +12,7 @@
           <Property Name="id_contemplation" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_sample" Type="bigint" />
           <Property Name="id_user" Type="bigint" />
-          <Property Name="result" Type="nvarchar" MaxLength="50" />
+          <Property Name="result" Type="varchar" MaxLength="50" />
           <Property Name="id_norm" Type="bigint" />
           <Property Name="date_contemplation" Type="datetime" />
         </EntityType>
@@ -22,15 +22,15 @@
           </Key>
           <Property Name="id_recommendations" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_user" Type="bigint" />
-          <Property Name="heading" Type="nvarchar" MaxLength="50" />
-          <Property Name="text" Type="nvarchar(max)" />
+          <Property Name="heading" Type="varchar" MaxLength="50" />
+          <Property Name="text" Type="text" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="id_event" />
           </Key>
           <Property Name="id_event" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="data_time" Type="datetime" />
           <Property Name="id_region" Type="bigint" />
         </EntityType>
@@ -40,8 +40,8 @@
           </Key>
           <Property Name="id_news" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_user" Type="bigint" />
-          <Property Name="heading" Type="nvarchar" MaxLength="50" />
-          <Property Name="text" Type="nvarchar(max)" />
+          <Property Name="heading" Type="varchar" MaxLength="50" />
+          <Property Name="text" Type="text" />
           <Property Name="data_time" Type="datetime" />
         </EntityType>
         <EntityType Name="Norm">
@@ -50,18 +50,8 @@
           </Key>
           <Property Name="id_norm" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_type" Type="bigint" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" />
-          <Property Name="norma" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Notification">
-          <Key>
-            <PropertyRef Name="id_notification" />
-          </Key>
-          <Property Name="id_notification" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TableName" Type="nvarchar" MaxLength="50" />
-          <Property Name="RowId" Type="int" />
-          <Property Name="ChangeType" Type="nvarchar" MaxLength="10" />
-          <Property Name="Changet" Type="datetime" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="norma" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Pollution">
           <Key>
@@ -69,7 +59,7 @@
           </Key>
           <Property Name="id_pollution" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_contemplation" Type="bigint" />
-          <Property Name="levels" Type="nvarchar" MaxLength="50" />
+          <Property Name="levels" Type="float" />
           <Property Name="id_region" Type="bigint" />
           <Property Name="data_time" Type="datetime" />
         </EntityType>
@@ -78,16 +68,16 @@
             <PropertyRef Name="id_region" />
           </Key>
           <Property Name="id_region" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" />
-          <Property Name="geographical_coordinates" Type="nvarchar" MaxLength="50" />
-          <Property Name="popullation" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="geographical_coordinates" Type="varchar" MaxLength="100" />
+          <Property Name="population" Type="int" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="id_roles" />
           </Key>
           <Property Name="id_roles" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Sample">
           <Key>
@@ -96,42 +86,104 @@
           <Property Name="id_sample" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_region" Type="bigint" />
           <Property Name="id_user" Type="bigint" />
-          <Property Name="articul" Type="nvarchar" MaxLength="50" />
+          <Property Name="articul" Type="varchar" MaxLength="50" />
           <Property Name="id_type" Type="bigint" />
           <Property Name="date_sample" Type="datetime" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
             <PropertyRef Name="id_type" />
           </Key>
           <Property Name="id_type" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="id_user" />
           </Key>
           <Property Name="id_user" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="full_name" Type="nvarchar(max)" />
-          <Property Name="login" Type="nvarchar(max)" />
-          <Property Name="password" Type="nvarchar(max)" />
+          <Property Name="full_name" Type="varchar" MaxLength="50" />
+          <Property Name="login" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar(max)" />
           <Property Name="id_roles" Type="bigint" />
-          <Property Name="dateOfBirth" Type="nvarchar" MaxLength="50" />
-          <Property Name="phoneNumber" Type="nvarchar" MaxLength="11" />
-          <Property Name="address" Type="nvarchar" MaxLength="50" />
-          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="dateOfBirth" Type="varchar" MaxLength="50" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="11" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
           <Property Name="image" Type="nvarchar(max)" />
         </EntityType>
+        <Association Name="FK__Contempla__id_us__339FAB6E">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Contemplation" Type="Self.Contemplation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Contemplation">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ecologica__id_us__3864608B">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="EcologicalRecommendations" Type="Self.EcologicalRecommendations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="EcologicalRecommendations">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News__id_user__3587F3E0">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Norm__id_type__3493CFA7">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Norm" Type="Self.Norm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="Norm">
+              <PropertyRef Name="id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sample__id_regio__367C1819">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Sample" Type="Self.Sample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="Sample">
+              <PropertyRef Name="id_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sample__id_type__37703C52">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Sample" Type="Self.Sample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="Sample">
+              <PropertyRef Name="id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Contemplation_Norm">
           <End Role="Norm" Type="Self.Norm" Multiplicity="0..1" />
           <End Role="Contemplation" Type="Self.Contemplation" Multiplicity="*" />
@@ -156,30 +208,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contemplation_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="Contemplation" Type="Self.Contemplation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="Contemplation">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EcologicalRecommendations_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="EcologicalRecommendations" Type="Self.EcologicalRecommendations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="EcologicalRecommendations">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Event_Region">
           <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
           <End Role="Event" Type="Self.Event" Multiplicity="*" />
@@ -189,30 +217,6 @@
             </Principal>
             <Dependent Role="Event">
               <PropertyRef Name="id_region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_News_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="News" Type="Self.News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="News">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Norm_Type">
-          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
-          <End Role="Norm" Type="Self.Norm" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Type">
-              <PropertyRef Name="id_type" />
-            </Principal>
-            <Dependent Role="Norm">
-              <PropertyRef Name="id_type" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -237,30 +241,6 @@
             </Principal>
             <Dependent Role="Pollution">
               <PropertyRef Name="id_region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Sample_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
-          <End Role="Sample" Type="Self.Sample" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="id_region" />
-            </Principal>
-            <Dependent Role="Sample">
-              <PropertyRef Name="id_region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Sample_Type">
-          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
-          <End Role="Sample" Type="Self.Sample" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Type">
-              <PropertyRef Name="id_type" />
-            </Principal>
-            <Dependent Role="Sample">
-              <PropertyRef Name="id_type" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -294,14 +274,36 @@
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Norm" EntityType="Self.Norm" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pollution" EntityType="Self.Pollution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sample" EntityType="Self.Sample" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Contempla__id_us__339FAB6E" Association="Self.FK__Contempla__id_us__339FAB6E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Contemplation" EntitySet="Contemplation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ecologica__id_us__3864608B" Association="Self.FK__Ecologica__id_us__3864608B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EcologicalRecommendations" EntitySet="EcologicalRecommendations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News__id_user__3587F3E0" Association="Self.FK__News__id_user__3587F3E0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Norm__id_type__3493CFA7" Association="Self.FK__Norm__id_type__3493CFA7">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Norm" EntitySet="Norm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sample__id_regio__367C1819" Association="Self.FK__Sample__id_regio__367C1819">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Sample" EntitySet="Sample" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sample__id_type__37703C52" Association="Self.FK__Sample__id_type__37703C52">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Sample" EntitySet="Sample" />
+          </AssociationSet>
           <AssociationSet Name="FK_Contemplation_Norm" Association="Self.FK_Contemplation_Norm">
             <End Role="Norm" EntitySet="Norm" />
             <End Role="Contemplation" EntitySet="Contemplation" />
@@ -310,25 +312,9 @@
             <End Role="Sample" EntitySet="Sample" />
             <End Role="Contemplation" EntitySet="Contemplation" />
           </AssociationSet>
-          <AssociationSet Name="FK_Contemplation_Users" Association="Self.FK_Contemplation_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Contemplation" EntitySet="Contemplation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EcologicalRecommendations_Users" Association="Self.FK_EcologicalRecommendations_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="EcologicalRecommendations" EntitySet="EcologicalRecommendations" />
-          </AssociationSet>
           <AssociationSet Name="FK_Event_Region" Association="Self.FK_Event_Region">
             <End Role="Region" EntitySet="Region" />
             <End Role="Event" EntitySet="Event" />
-          </AssociationSet>
-          <AssociationSet Name="FK_News_Users" Association="Self.FK_News_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="News" EntitySet="News" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Norm_Type" Association="Self.FK_Norm_Type">
-            <End Role="Type" EntitySet="Type" />
-            <End Role="Norm" EntitySet="Norm" />
           </AssociationSet>
           <AssociationSet Name="FK_Pollution_Contemplation" Association="Self.FK_Pollution_Contemplation">
             <End Role="Contemplation" EntitySet="Contemplation" />
@@ -337,14 +323,6 @@
           <AssociationSet Name="FK_Pollution_Region" Association="Self.FK_Pollution_Region">
             <End Role="Region" EntitySet="Region" />
             <End Role="Pollution" EntitySet="Pollution" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sample_Region" Association="Self.FK_Sample_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Sample" EntitySet="Sample" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sample_Type" Association="Self.FK_Sample_Type">
-            <End Role="Type" EntitySet="Type" />
-            <End Role="Sample" EntitySet="Sample" />
           </AssociationSet>
           <AssociationSet Name="FK_Sample_Users" Association="Self.FK_Sample_Users">
             <End Role="Users" EntitySet="Users" />
@@ -367,12 +345,12 @@
           <Property Name="id_contemplation" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_sample" Type="Int64" />
           <Property Name="id_user" Type="Int64" />
-          <Property Name="result" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="result" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="id_norm" Type="Int64" />
           <Property Name="date_contemplation" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Contempla__id_us__339FAB6E" FromRole="Contemplation" ToRole="Users" />
           <NavigationProperty Name="Norm" Relationship="Self.FK_Contemplation_Norm" FromRole="Contemplation" ToRole="Norm" />
           <NavigationProperty Name="Sample" Relationship="Self.FK_Contemplation_Sample" FromRole="Contemplation" ToRole="Sample" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_Contemplation_Users" FromRole="Contemplation" ToRole="Users" />
           <NavigationProperty Name="Pollution" Relationship="Self.FK_Pollution_Contemplation" FromRole="Contemplation" ToRole="Pollution" />
         </EntityType>
         <EntityType Name="EcologicalRecommendations">
@@ -381,16 +359,16 @@
           </Key>
           <Property Name="id_recommendations" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_user" Type="Int64" />
-          <Property Name="heading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_EcologicalRecommendations_Users" FromRole="EcologicalRecommendations" ToRole="Users" />
+          <Property Name="heading" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Ecologica__id_us__3864608B" FromRole="EcologicalRecommendations" ToRole="Users" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="id_event" />
           </Key>
           <Property Name="id_event" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="data_time" Type="DateTime" Precision="3" />
           <Property Name="id_region" Type="Int64" />
           <NavigationProperty Name="Region" Relationship="Self.FK_Event_Region" FromRole="Event" ToRole="Region" />
@@ -401,10 +379,10 @@
           </Key>
           <Property Name="id_news" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_user" Type="Int64" />
-          <Property Name="heading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="heading" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="data_time" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_News_Users" FromRole="News" ToRole="Users" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__News__id_user__3587F3E0" FromRole="News" ToRole="Users" />
         </EntityType>
         <EntityType Name="Norm">
           <Key>
@@ -412,20 +390,10 @@
           </Key>
           <Property Name="id_norm" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_type" Type="Int64" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="norma" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="norma" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Contemplation" Relationship="Self.FK_Contemplation_Norm" FromRole="Norm" ToRole="Contemplation" />
-          <NavigationProperty Name="Type" Relationship="Self.FK_Norm_Type" FromRole="Norm" ToRole="Type" />
-        </EntityType>
-        <EntityType Name="Notification">
-          <Key>
-            <PropertyRef Name="id_notification" />
-          </Key>
-          <Property Name="id_notification" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RowId" Type="Int32" />
-          <Property Name="ChangeType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Changet" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Type" Relationship="Self.FK__Norm__id_type__3493CFA7" FromRole="Norm" ToRole="Type" />
         </EntityType>
         <EntityType Name="Pollution">
           <Key>
@@ -433,7 +401,7 @@
           </Key>
           <Property Name="id_pollution" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_contemplation" Type="Int64" />
-          <Property Name="levels" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="levels" Type="Double" />
           <Property Name="id_region" Type="Int64" />
           <Property Name="data_time" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Contemplation" Relationship="Self.FK_Pollution_Contemplation" FromRole="Pollution" ToRole="Contemplation" />
@@ -444,19 +412,19 @@
             <PropertyRef Name="id_region" />
           </Key>
           <Property Name="id_region" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="geographical_coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="popullation" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="geographical_coordinates" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="population" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="Self.FK_Event_Region" FromRole="Region" ToRole="Event" />
           <NavigationProperty Name="Pollution" Relationship="Self.FK_Pollution_Region" FromRole="Region" ToRole="Pollution" />
-          <NavigationProperty Name="Sample" Relationship="Self.FK_Sample_Region" FromRole="Region" ToRole="Sample" />
+          <NavigationProperty Name="Sample" Relationship="Self.FK__Sample__id_regio__367C1819" FromRole="Region" ToRole="Sample" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="id_roles" />
           </Key>
           <Property Name="id_roles" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
         </EntityType>
         <EntityType Name="Sample">
@@ -466,53 +434,55 @@
           <Property Name="id_sample" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_region" Type="Int64" />
           <Property Name="id_user" Type="Int64" />
-          <Property Name="articul" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="articul" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="id_type" Type="Int64" />
           <Property Name="date_sample" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Contemplation" Relationship="Self.FK_Contemplation_Sample" FromRole="Sample" ToRole="Contemplation" />
-          <NavigationProperty Name="Region" Relationship="Self.FK_Sample_Region" FromRole="Sample" ToRole="Region" />
-          <NavigationProperty Name="Type" Relationship="Self.FK_Sample_Type" FromRole="Sample" ToRole="Type" />
+          <NavigationProperty Name="Region" Relationship="Self.FK__Sample__id_regio__367C1819" FromRole="Sample" ToRole="Region" />
+          <NavigationProperty Name="Type" Relationship="Self.FK__Sample__id_type__37703C52" FromRole="Sample" ToRole="Type" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Sample_Users" FromRole="Sample" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
             <PropertyRef Name="id_type" />
           </Key>
           <Property Name="id_type" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Norm" Relationship="Self.FK_Norm_Type" FromRole="Type" ToRole="Norm" />
-          <NavigationProperty Name="Sample" Relationship="Self.FK_Sample_Type" FromRole="Type" ToRole="Sample" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Norm" Relationship="Self.FK__Norm__id_type__3493CFA7" FromRole="Type" ToRole="Norm" />
+          <NavigationProperty Name="Sample" Relationship="Self.FK__Sample__id_type__37703C52" FromRole="Type" ToRole="Sample" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="id_user" />
           </Key>
           <Property Name="id_user" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="full_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="full_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="id_roles" Type="Int64" />
-          <Property Name="dateOfBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="phoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dateOfBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Contemplation" Relationship="Self.FK_Contemplation_Users" FromRole="Users" ToRole="Contemplation" />
-          <NavigationProperty Name="EcologicalRecommendations" Relationship="Self.FK_EcologicalRecommendations_Users" FromRole="Users" ToRole="EcologicalRecommendations" />
-          <NavigationProperty Name="News" Relationship="Self.FK_News_Users" FromRole="Users" ToRole="News" />
+          <NavigationProperty Name="Contemplation" Relationship="Self.FK__Contempla__id_us__339FAB6E" FromRole="Users" ToRole="Contemplation" />
+          <NavigationProperty Name="EcologicalRecommendations" Relationship="Self.FK__Ecologica__id_us__3864608B" FromRole="Users" ToRole="EcologicalRecommendations" />
+          <NavigationProperty Name="News" Relationship="Self.FK__News__id_user__3587F3E0" FromRole="Users" ToRole="News" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
           <NavigationProperty Name="Sample" Relationship="Self.FK_Sample_Users" FromRole="Users" ToRole="Sample" />
         </EntityType>
+        <Association Name="FK__Contempla__id_us__339FAB6E">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Contemplation" Type="Self.Contemplation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Contemplation">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Contemplation_Norm">
           <End Role="Norm" Type="Self.Norm" Multiplicity="0..1" />
           <End Role="Contemplation" Type="Self.Contemplation" Multiplicity="*" />
@@ -537,18 +507,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contemplation_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="Contemplation" Type="Self.Contemplation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="Contemplation">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Pollution_Contemplation">
           <End Role="Contemplation" Type="Self.Contemplation" Multiplicity="0..1" />
           <End Role="Pollution" Type="Self.Pollution" Multiplicity="*" />
@@ -561,7 +519,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EcologicalRecommendations_Users">
+        <Association Name="FK__Ecologica__id_us__3864608B">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="EcologicalRecommendations" Type="Self.EcologicalRecommendations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -585,7 +543,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_News_Users">
+        <Association Name="FK__News__id_user__3587F3E0">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="News" Type="Self.News" Multiplicity="*" />
           <ReferentialConstraint>
@@ -597,7 +555,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Norm_Type">
+        <Association Name="FK__Norm__id_type__3493CFA7">
           <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
           <End Role="Norm" Type="Self.Norm" Multiplicity="*" />
           <ReferentialConstraint>
@@ -621,7 +579,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sample_Region">
+        <Association Name="FK__Sample__id_regio__367C1819">
           <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
           <End Role="Sample" Type="Self.Sample" Multiplicity="*" />
           <ReferentialConstraint>
@@ -645,7 +603,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sample_Type">
+        <Association Name="FK__Sample__id_type__37703C52">
           <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
           <End Role="Sample" Type="Self.Sample" Multiplicity="*" />
           <ReferentialConstraint>
@@ -675,14 +633,16 @@
           <EntitySet Name="Event" EntityType="Self.Event" />
           <EntitySet Name="News" EntityType="Self.News" />
           <EntitySet Name="Norm" EntityType="Self.Norm" />
-          <EntitySet Name="Notification" EntityType="Self.Notification" />
           <EntitySet Name="Pollution" EntityType="Self.Pollution" />
           <EntitySet Name="Region" EntityType="Self.Region" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="Sample" EntityType="Self.Sample" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Type" EntityType="Self.Type" />
           <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__Contempla__id_us__339FAB6E" Association="Self.FK__Contempla__id_us__339FAB6E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Contemplation" EntitySet="Contemplation" />
+          </AssociationSet>
           <AssociationSet Name="FK_Contemplation_Norm" Association="Self.FK_Contemplation_Norm">
             <End Role="Norm" EntitySet="Norm" />
             <End Role="Contemplation" EntitySet="Contemplation" />
@@ -691,15 +651,11 @@
             <End Role="Sample" EntitySet="Sample" />
             <End Role="Contemplation" EntitySet="Contemplation" />
           </AssociationSet>
-          <AssociationSet Name="FK_Contemplation_Users" Association="Self.FK_Contemplation_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Contemplation" EntitySet="Contemplation" />
-          </AssociationSet>
           <AssociationSet Name="FK_Pollution_Contemplation" Association="Self.FK_Pollution_Contemplation">
             <End Role="Contemplation" EntitySet="Contemplation" />
             <End Role="Pollution" EntitySet="Pollution" />
           </AssociationSet>
-          <AssociationSet Name="FK_EcologicalRecommendations_Users" Association="Self.FK_EcologicalRecommendations_Users">
+          <AssociationSet Name="FK__Ecologica__id_us__3864608B" Association="Self.FK__Ecologica__id_us__3864608B">
             <End Role="Users" EntitySet="Users" />
             <End Role="EcologicalRecommendations" EntitySet="EcologicalRecommendations" />
           </AssociationSet>
@@ -707,11 +663,11 @@
             <End Role="Region" EntitySet="Region" />
             <End Role="Event" EntitySet="Event" />
           </AssociationSet>
-          <AssociationSet Name="FK_News_Users" Association="Self.FK_News_Users">
+          <AssociationSet Name="FK__News__id_user__3587F3E0" Association="Self.FK__News__id_user__3587F3E0">
             <End Role="Users" EntitySet="Users" />
             <End Role="News" EntitySet="News" />
           </AssociationSet>
-          <AssociationSet Name="FK_Norm_Type" Association="Self.FK_Norm_Type">
+          <AssociationSet Name="FK__Norm__id_type__3493CFA7" Association="Self.FK__Norm__id_type__3493CFA7">
             <End Role="Type" EntitySet="Type" />
             <End Role="Norm" EntitySet="Norm" />
           </AssociationSet>
@@ -719,7 +675,7 @@
             <End Role="Region" EntitySet="Region" />
             <End Role="Pollution" EntitySet="Pollution" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sample_Region" Association="Self.FK_Sample_Region">
+          <AssociationSet Name="FK__Sample__id_regio__367C1819" Association="Self.FK__Sample__id_regio__367C1819">
             <End Role="Region" EntitySet="Region" />
             <End Role="Sample" EntitySet="Sample" />
           </AssociationSet>
@@ -727,7 +683,7 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sample_Type" Association="Self.FK_Sample_Type">
+          <AssociationSet Name="FK__Sample__id_type__37703C52" Association="Self.FK__Sample__id_type__37703C52">
             <End Role="Type" EntitySet="Type" />
             <End Role="Sample" EntitySet="Sample" />
           </AssociationSet>
@@ -795,17 +751,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Notification">
-            <EntityTypeMapping TypeName="GreanTrailModel.Notification">
-              <MappingFragment StoreEntitySet="Notification">
-                <ScalarProperty Name="id_notification" ColumnName="id_notification" />
-                <ScalarProperty Name="TableName" ColumnName="TableName" />
-                <ScalarProperty Name="RowId" ColumnName="RowId" />
-                <ScalarProperty Name="ChangeType" ColumnName="ChangeType" />
-                <ScalarProperty Name="Changet" ColumnName="Changet" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Pollution">
             <EntityTypeMapping TypeName="GreanTrailModel.Pollution">
               <MappingFragment StoreEntitySet="Pollution">
@@ -823,7 +768,7 @@
                 <ScalarProperty Name="id_region" ColumnName="id_region" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="geographical_coordinates" ColumnName="geographical_coordinates" />
-                <ScalarProperty Name="popullation" ColumnName="popullation" />
+                <ScalarProperty Name="population" ColumnName="population" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -847,17 +792,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="GreanTrailModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Type">
             <EntityTypeMapping TypeName="GreanTrailModel.Type">
               <MappingFragment StoreEntitySet="Type">
@@ -876,8 +810,8 @@
                 <ScalarProperty Name="id_roles" ColumnName="id_roles" />
                 <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
                 <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
-                <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="image" ColumnName="image" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -16,6 +16,7 @@ namespace GreenTrail
     public partial class GreanTrailEntities : DbContext
     {
         private static GreanTrailEntities _context;
+
         public static GreanTrailEntities GetContext()
         {
             if (_context == null) _context = new GreanTrailEntities();
@@ -36,12 +37,10 @@ namespace GreenTrail
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Norm> Norm { get; set; }
-        public virtual DbSet<Notification> Notification { get; set; }
         public virtual DbSet<Pollution> Pollution { get; set; }
         public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Sample> Sample { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Type> Type { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }

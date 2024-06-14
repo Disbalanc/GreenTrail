@@ -61,7 +61,6 @@ namespace GreenTrail.Forms.Welcome.LoadingWindows
                     RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\GreenTrail", true);
                     if (key != null)
                     {
-                        if (hasShownAboutAppWindow) key.SetValue("RememberMe", false);
                         if (bool.Parse((string)key.GetValue("RememberMe")))
                         {
                             MainWindow mainWindow = new MainWindow();

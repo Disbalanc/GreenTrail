@@ -101,7 +101,7 @@ namespace GreenTrail.Forms
 
                     myMap.Children.Add(eventPin);
                 }
-
+               
                 foreach (var item in sample)
                 {
                     // Создайте маркер для новостей
